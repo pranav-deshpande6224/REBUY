@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80836629544",
+    "project_id": "resell-fe91e",
+    "storage_bucket": "resell-fe91e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80836629544:android:b4e4f6e646dfea489a911d",
+        "android_client_info": {
+          "package_name": "com.iitjodhpur.resell"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyaGa8wBM4d46FhRMjqrtIbXq6nLAXoco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
