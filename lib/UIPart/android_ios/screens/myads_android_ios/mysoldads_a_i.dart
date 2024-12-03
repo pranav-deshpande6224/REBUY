@@ -342,7 +342,10 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                     final soldItemState = ref.watch(showSoldAdsProvider);
                     return soldItemState.when(
                       data: (soldAdState) {
-                        return scrollView(soldAdState);
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: scrollView(soldAdState),
+                        );
                       },
                       error: (error, stack) =>
                           Center(child: Text('Error: $error')),

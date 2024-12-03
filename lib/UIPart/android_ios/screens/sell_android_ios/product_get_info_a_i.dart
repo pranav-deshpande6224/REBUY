@@ -445,16 +445,13 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 resetFields();
                 Navigator.of(popContext).pop();
                 if (context.mounted) {
-                  if(Platform.isAndroid){
+                  if (Platform.isAndroid) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctx) => const AdUploadedAI()));
-
-                  }else if(Platform.isIOS){
+                        builder: (ctx) => const AdUploadedAI()));
+                  } else if (Platform.isIOS) {
                     Navigator.of(context).push(CupertinoPageRoute(
-                      builder: (ctx) => const AdUploadedAI()));
-
+                        builder: (ctx) => const AdUploadedAI()));
                   }
-                  
                 }
               });
             } catch (e) {
@@ -1432,6 +1429,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               ),
               Expanded(
                 child: CupertinoTextField(
+                  readOnly: true,
                   onTap: () async {
                     FocusScope.of(context).unfocus();
                     final selectedBrand =
@@ -1611,7 +1609,11 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 const SizedBox(
                   height: 20,
                 ),
-                imageContainer()
+                imageContainer(),
+                const SizedBox(
+                  height: 50,
+                ),
+                getButton()
               ],
             ),
           ),

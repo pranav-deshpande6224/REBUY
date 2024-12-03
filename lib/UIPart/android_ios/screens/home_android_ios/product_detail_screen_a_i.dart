@@ -104,7 +104,11 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
             style: GoogleFonts.lato(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: CupertinoColors.activeBlue,
+              color: Platform.isAndroid
+                  ? Colors.blue
+                  : Platform.isIOS
+                      ? CupertinoColors.activeBlue
+                      : Colors.white,
             ),
           ),
           Text(
@@ -123,7 +127,11 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
             style: GoogleFonts.lato(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: CupertinoColors.activeBlue,
+              color: Platform.isAndroid
+                  ? Colors.blue
+                  : Platform.isIOS
+                      ? CupertinoColors.activeBlue
+                      : Colors.white,
             ),
           ),
           Text(
@@ -142,7 +150,11 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
             style: GoogleFonts.lato(
               fontWeight: FontWeight.w600,
               fontSize: 20,
-              color: CupertinoColors.activeBlue,
+              color: Platform.isAndroid
+                  ? Colors.blue
+                  : Platform.isIOS
+                      ? CupertinoColors.activeBlue
+                      : Colors.white,
             ),
           ),
           Text(

@@ -511,7 +511,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     '₹ ${ad.price.toInt()}',
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 22,
+                                      fontSize: 18,
                                       color: Colors
                                           .green[700], // Cool color for price
                                     ),
@@ -521,7 +521,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
-                                      fontSize: 17,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       color: Colors
                                           .black87, // Darker color for title
@@ -533,7 +533,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       color: Colors
                                           .black87, // Subtle color for posted-by text
                                     ),
@@ -554,7 +554,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: Platform.isAndroid
-              ? 0.74
+              ? 0.72
               : Platform.isIOS
                   ? 0.75
                   : 0.75,
@@ -603,8 +603,8 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
       Platform.isIOS
           ? refreshIos()
           : Platform.isAndroid
-              ? const SizedBox()
-              : const SizedBox(),
+              ? const SliverToBoxAdapter(child: SizedBox())
+              : const SliverToBoxAdapter(child: SizedBox()),
       const SliverToBoxAdapter(
         child: SizedBox(
           height: 10,

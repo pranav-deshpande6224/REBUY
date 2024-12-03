@@ -336,9 +336,9 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                         ? CupertinoListTile(
                             onTap: () {
                               if (index == 0) {
+                                moveToSoldAds();
                               } else if (index == 1) {
-                              } else if (index == 2) {
-                              } else if (index == 3) {
+                                Share.share("hello");
                               } else {
                                 showCupertinoDialog(
                                   context: context,
