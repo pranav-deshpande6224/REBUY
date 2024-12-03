@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:resell/Authentication/IOS_Files/Screens/auth/email_verification.dart';
 import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
@@ -60,14 +59,14 @@ class _SignUpState extends ConsumerState<SignUp> {
   @override
   void dispose() {
     fnameFocusNode.dispose();
-    //lnameFocusNode.dispose();
+    
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _fnameController.dispose();
-    // _lnameController.dispose();
+    
     _confirmPasswordController.dispose();
     super.dispose();
   }
@@ -199,16 +198,7 @@ class _SignUpState extends ConsumerState<SignUp> {
     confirmPasswordFocusNode.unfocus();
   }
 
-  navigateToEmailVerification(BuildContext context) {
-    Navigator.push(
-      context,
-      CupertinoPageRoute(
-        builder: (ctx) => EmailVerification(
-          email: _emailController.text,
-        ),
-      ),
-    );
-  }
+ 
 
   SizedBox getTextField(String textGiven, TextEditingController controller,
       IconData data, TextInputType type, FocusNode focusNode, String error) {

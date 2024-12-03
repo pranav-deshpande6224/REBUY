@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,11 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:resell/Authentication/Android_Files/auth_screens/email_verification_android.dart';
-import 'package:resell/Authentication/IOS_Files/Models/new_user.dart';
-import 'package:resell/Authentication/IOS_Files/Screens/auth/email_verification.dart';
-import 'package:resell/UIPart/Android_Files/screens/bottom_nav_android.dart';
-import 'package:resell/UIPart/IOS_Files/screens/bottom_nav_bar.dart';
+import 'package:resell/Authentication/android_ios/Models/new_user.dart';
+import 'package:resell/Authentication/android_ios/screens/email_verification_a_i.dart';
+import 'package:resell/UIPart/android_ios/screens/bottom_nav_a_i.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthHandler {
@@ -44,7 +41,6 @@ class AuthHandler {
                     style: GoogleFonts.roboto(),
                   ),
                   onPressed: () {
-                  
                     Navigator.of(ctx).pop();
                   },
                 )
@@ -96,17 +92,16 @@ class AuthHandler {
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (ctx) => EmailVerification(
+            builder: (ctx) => EmailVerificationAI(
               email: email,
             ),
           ),
         );
       } else if (Platform.isAndroid) {
-        print("reaching email");
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (ctx) => EmailVerificationAndroid(email: email),
+            builder: (ctx) => EmailVerificationAI(email: email),
           ),
         );
       }
@@ -119,7 +114,6 @@ class AuthHandler {
         if (!context.mounted) return;
         Navigator.pop(signUpContext);
         showErrorDialog(context, 'Alert', 'Email already in use');
-        
       }
     } catch (e) {
       if (!context.mounted) return;
@@ -142,14 +136,14 @@ class AuthHandler {
         if (Platform.isIOS) {
           Navigator.of(context).pushAndRemoveUntil(
             CupertinoPageRoute(
-              builder: (context) => const BottomNavBar(),
+              builder: (context) => const BottomNavAI(),
             ),
             (Route<dynamic> route) => false,
           );
         } else if (Platform.isAndroid) {
           Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const BottomNavAndroid(),
+              builder: (context) => const BottomNavAI(),
             ),
             (Route<dynamic> route) => false,
           );
@@ -161,7 +155,7 @@ class AuthHandler {
           Navigator.push(
             context,
             CupertinoPageRoute(
-              builder: (ctx) => EmailVerification(
+              builder: (ctx) => EmailVerificationAI(
                 email: email,
               ),
             ),
@@ -170,7 +164,7 @@ class AuthHandler {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (ctx) => EmailVerificationAndroid(
+              builder: (ctx) => EmailVerificationAI(
                 email: email,
               ),
             ),
@@ -183,8 +177,6 @@ class AuthHandler {
         Navigator.of(loginContext).pop();
         showErrorDialog(context, 'Alert',
             "You might not have an account, or your password could be wrong.");
-        
-
       } else if (e.code == 'too-many-requests') {
         if (!context.mounted) return;
         Navigator.of(loginContext).pop();
@@ -212,7 +204,6 @@ class AuthHandler {
           final isUserExists = await checkUserExistOrNot(user.email!);
           if (!isUserExists) {
             // this means user is done with googlesignin
-            print('reaching here this means user donot exist');
             if (!context.mounted) return;
             newUser.user = user;
             await storeSignUpData(
@@ -256,26 +247,18 @@ class AuthHandler {
     if (Platform.isIOS) {
       Navigator.of(context).pushAndRemoveUntil(
         CupertinoPageRoute(
-          builder: (context) => const BottomNavBar(),
+          builder: (context) => const BottomNavAI(),
         ),
         (Route<dynamic> route) => false,
       );
     } else if (Platform.isAndroid) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => const BottomNavAndroid(),
+          builder: (context) => const BottomNavAI(),
         ),
         (Route<dynamic> route) => false,
       );
     }
-  }
-
-  void moveToEmailVerification(String email, BuildContext context) {
-    Navigator.of(context).push(CupertinoPageRoute(
-      builder: (ctx) => EmailVerification(
-        email: email,
-      ),
-    ));
   }
 
   Future<void> storeSignUpData(
@@ -334,6 +317,7 @@ class AuthHandler {
       await firebaseAuth.sendPasswordResetEmail(email: email);
       if (!context.mounted) return;
       Navigator.of(foregetPasswordContext).pop();
+      FocusScope.of(context).unfocus();
       showAlert(context, email);
     } on FirebaseAuthException catch (e) {
       if (!context.mounted) return;
@@ -347,28 +331,60 @@ class AuthHandler {
   }
 
   void showAlert(BuildContext context, String email) {
-    showCupertinoDialog(
-      context: context,
-      builder: (context) => CupertinoAlertDialog(
-        title: Text(
-          'Alert',
-          style: GoogleFonts.roboto(),
-        ),
-        content: Text(
-          'Reset Password link has been sent to your Email: $email',
-          style: GoogleFonts.roboto(),
-        ),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop();
-            },
-            child: const Text('OK'),
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(
+              'Alert',
+              style: GoogleFonts.roboto(),
+            ),
+            content: Text(
+              'Reset Password link has been sent to your Email: $email',
+              style: GoogleFonts.roboto(),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  'Okay',
+                  style: GoogleFonts.roboto(
+                    color: Colors.blue,
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      );
+    } else if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: Text(
+            'Alert',
+            style: GoogleFonts.roboto(),
           ),
-        ],
-      ),
-    );
+          content: Text(
+            'Reset Password link has been sent to your Email: $email',
+            style: GoogleFonts.roboto(),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Future<void> changingUserToOnline() async {

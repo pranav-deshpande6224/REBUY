@@ -9,7 +9,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/IOS_Files/widgets/ad_card.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/show_ads.dart';
 
@@ -126,29 +126,30 @@ class _MyAdsState extends ConsumerState<MyAds> {
               Navigator.of(sellContext).pop();
             }
             showCupertinoDialog(
-                context: context,
-                builder: (ctx) {
-                  return CupertinoAlertDialog(
-                    title: Text(
-                      'Alert',
-                      style: GoogleFonts.roboto(),
-                    ),
-                    content: Text(
-                      e.toString(),
-                      style: GoogleFonts.roboto(),
-                    ),
-                    actions: [
-                      CupertinoDialogAction(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            'Okay',
-                            style: GoogleFonts.roboto(),
-                          ))
-                    ],
-                  );
-                });
+              context: context,
+              builder: (ctx) {
+                return CupertinoAlertDialog(
+                  title: Text(
+                    'Alert',
+                    style: GoogleFonts.roboto(),
+                  ),
+                  content: Text(
+                    e.toString(),
+                    style: GoogleFonts.roboto(),
+                  ),
+                  actions: [
+                    CupertinoDialogAction(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'Okay',
+                          style: GoogleFonts.roboto(),
+                        ))
+                  ],
+                );
+              },
+            );
           }
         }
       } else {
@@ -189,19 +190,20 @@ class _MyAdsState extends ConsumerState<MyAds> {
                       style: GoogleFonts.roboto(),
                     ),
                     CupertinoButton(
-                        child: Text(
-                          'Retry',
-                          style: GoogleFonts.roboto(),
-                        ),
-                        onPressed: () async {
-                          final x = ref.refresh(connectivityProvider);
-                          final y = ref.refresh(internetCheckerProvider);
-                          debugPrint(x.toString());
-                          debugPrint(y.toString());
-                          await ref
-                              .read(showActiveAdsProvider.notifier)
-                              .refreshItems();
-                        })
+                      child: Text(
+                        'Retry',
+                        style: GoogleFonts.roboto(),
+                      ),
+                      onPressed: () async {
+                        final x = ref.refresh(connectivityProvider);
+                        final y = ref.refresh(internetCheckerProvider);
+                        debugPrint(x.toString());
+                        debugPrint(y.toString());
+                        await ref
+                            .read(showActiveAdsProvider.notifier)
+                            .refreshItems();
+                      },
+                    )
                   ],
                 ),
               );
@@ -260,31 +262,10 @@ class _MyAdsState extends ConsumerState<MyAds> {
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Container(
-                                            padding: const EdgeInsets.all(20),
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Colors.blueAccent,
-                                                  Colors.lightBlue
-                                                ],
-                                                begin: Alignment.topLeft,
-                                                end: Alignment.bottomRight,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  blurRadius: 15,
-                                                  offset: Offset(0, 8),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Image.asset(
-                                              'assets/images/emoji.png',
-                                              height: 80,
-                                              width: 80,
-                                            ),
+                                          Image.asset(
+                                            'assets/images/emoji.png',
+                                            height: 80,
+                                            width: 80,
                                           ),
                                           const SizedBox(height: 24),
                                           Text(

@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/IOS_Files/screens/chats/chatting_screen.dart';
 import 'package:resell/UIPart/IOS_Files/screens/home/image_detail_screen.dart';
 

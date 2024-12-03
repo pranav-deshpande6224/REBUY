@@ -11,7 +11,7 @@ import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/chats/chatting_screen_android.dart';
 import 'package:resell/UIPart/Android_Files/screens/home/image_detail_screen_android.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 
 class ProductDetailScreenAndroid extends ConsumerStatefulWidget {
   final DocumentReference<Map<String, dynamic>> reference;

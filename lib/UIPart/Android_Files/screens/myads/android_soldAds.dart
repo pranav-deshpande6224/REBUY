@@ -27,7 +27,8 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldads> {
     soldAdScrollControllerAndroid.addListener(
       () {
         print('in listener');
-        double maxScroll = soldAdScrollControllerAndroid.position.maxScrollExtent;
+        double maxScroll =
+            soldAdScrollControllerAndroid.position.maxScrollExtent;
         double currentScroll = soldAdScrollControllerAndroid.position.pixels;
         double delta = MediaQuery.of(context).size.width * 0.20;
         if (maxScroll - currentScroll <= delta) {
@@ -163,23 +164,19 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldads> {
                                           ),
                                         ),
                                       )
-                                    : SliverPadding(
-                                        padding: const EdgeInsets.all(12),
-                                        sliver: SliverList(
-                                          delegate: SliverChildBuilderDelegate(
-                                            (ctx, index) {
-                                              final item =
-                                                  soldAdState.items[index];
-                                              return AdCard(
-                                                cardIndex: index,
-                                                ad: item,
-                                                adSold: null,
-                                                isSold: true,
-                                              );
-                                            },
-                                            childCount:
-                                                soldAdState.items.length,
-                                          ),
+                                    : SliverList(
+                                        delegate: SliverChildBuilderDelegate(
+                                          (ctx, index) {
+                                            final item =
+                                                soldAdState.items[index];
+                                            return AdCard(
+                                              cardIndex: index,
+                                              ad: item,
+                                              adSold: null,
+                                              isSold: true,
+                                            );
+                                          },
+                                          childCount: soldAdState.items.length,
                                         ),
                                       ),
                                 if (soldAdState.isLoadingMore)
@@ -210,7 +207,7 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldads> {
                               ],
                             ),
                             onRefresh: () async {
-                             await ref
+                              await ref
                                   .read(showSoldAdsProvider.notifier)
                                   .refreshItems();
                             },

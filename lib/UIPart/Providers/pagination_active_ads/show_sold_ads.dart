@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 
 class SoldAdState {
   final List<Item> items;

@@ -21,7 +21,6 @@ class _AndroidHomeState extends State<AndroidHome> {
         child: Column(
           children: [
             Expanded(
-              
               child: DisplayHomeAndroid(),
             )
           ],

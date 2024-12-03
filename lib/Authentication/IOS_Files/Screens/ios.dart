@@ -1,8 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
-import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
-
-import '../../../UIPart/IOS_Files/screens/bottom_nav_bar.dart';
+import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
+import 'package:resell/UIPart/android_ios/screens/bottom_nav_a_i.dart';
 
 class Ios extends StatelessWidget {
   final bool isUserLoggedIn;
@@ -10,9 +8,9 @@ class Ios extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: CupertinoThemeData(brightness: Brightness.light),
+      theme: const CupertinoThemeData(brightness: Brightness.light),
       debugShowCheckedModeBanner: false,
-      home: isUserLoggedIn ? const BottomNavBar() : const LoginIos(),
+      home: isUserLoggedIn ? const BottomNavAI() : const LoginAI(),
     );
   }
 }

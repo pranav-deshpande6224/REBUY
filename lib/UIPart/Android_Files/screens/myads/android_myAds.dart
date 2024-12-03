@@ -7,7 +7,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:resell/Authentication/Android_Files/auth_screens/login_android.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/IOS_Files/widgets/ad_card.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/show_ads.dart';
 
@@ -188,19 +188,20 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                       style: GoogleFonts.roboto(),
                     ),
                     TextButton(
-                        child: Text(
-                          'Retry',
-                          style: GoogleFonts.roboto(color: Colors.blue),
-                        ),
-                        onPressed: () async {
-                          final x = ref.refresh(connectivityProvider);
-                          final y = ref.refresh(internetCheckerProvider);
-                          debugPrint(x.toString());
-                          debugPrint(y.toString());
-                          await ref
-                              .read(showActiveAdsProvider.notifier)
-                              .refreshItems();
-                        })
+                      child: Text(
+                        'Retry',
+                        style: GoogleFonts.roboto(color: Colors.blue),
+                      ),
+                      onPressed: () async {
+                        final x = ref.refresh(connectivityProvider);
+                        final y = ref.refresh(internetCheckerProvider);
+                        debugPrint(x.toString());
+                        debugPrint(y.toString());
+                        await ref
+                            .read(showActiveAdsProvider.notifier)
+                            .refreshItems();
+                      },
+                    )
                   ],
                 ),
               );

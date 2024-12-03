@@ -238,7 +238,7 @@ class _LoginAndroidState extends ConsumerState<LoginAndroid> {
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
-                              shape: BeveledRectangleBorder(
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
                             ),

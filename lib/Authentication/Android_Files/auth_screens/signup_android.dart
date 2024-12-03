@@ -51,7 +51,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
     super.dispose();
   }
 
-  void changeStateOfPassword(value) {
+  void changeStateOfPassword(String value) {
     setState(() {
       isPasswordContainEightChar = value.length >= 8;
       isPasswordContainUppercase = uppercaseRegExp.hasMatch(value);
@@ -501,7 +501,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blue,
-                              shape: BeveledRectangleBorder(
+                              shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
                             ),

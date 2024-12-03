@@ -7,7 +7,7 @@ import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/home/product_detail_screen_android.dart';
 import 'package:resell/UIPart/Android_Files/screens/sell/android_detail_screen.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/constants/constants.dart';
 
@@ -172,9 +172,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                         TextButton(
                           child: Text(
                             'Retry',
-                            style: GoogleFonts.roboto(
-                              color: Colors.blue
-                            ),
+                            style: GoogleFonts.roboto(color: Colors.blue),
                           ),
                           onPressed: () async {
                             final x = ref.refresh(connectivityProvider);
@@ -225,9 +223,9 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                         final category = categoryList[index];
                                         return GestureDetector(
                                           onTap: () {
-                                            Navigator.of(context,
-                                                    rootNavigator: true)
-                                                .push(
+                                            Navigator.of(
+                                              context,
+                                            ).push(
                                               MaterialPageRoute(
                                                 builder: (ctx) =>
                                                     AndroidDetailScreen(

@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/IOS_Files/screens/sell/detail_screen.dart';
 import 'package:resell/constants/constants.dart';
 

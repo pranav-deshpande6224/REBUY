@@ -7,9 +7,9 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/contact.dart';
-import 'package:resell/UIPart/IOS_Files/model/item.dart';
-import 'package:resell/UIPart/IOS_Files/model/message.dart';
+import 'package:resell/UIPart/android_ios/model/contact.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
+import 'package:resell/UIPart/android_ios/model/message.dart';
 import 'package:resell/UIPart/IOS_Files/screens/home/product_detail_screen.dart';
 import 'package:resell/UIPart/IOS_Files/widgets/chat_bubble.dart';
 import 'package:resell/UIPart/IOS_Files/widgets/message_reply_preview.dart';

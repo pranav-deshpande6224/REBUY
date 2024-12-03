@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 
 class CategoryProvider extends StateNotifier<FetchCatAndSubCat> {
   CategoryProvider() : super(FetchCatAndSubCat(category: '', subCategory: ''));

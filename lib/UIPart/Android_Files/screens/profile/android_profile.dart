@@ -5,7 +5,7 @@ import 'package:resell/Authentication/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/myads/android_soldAds.dart';
 import 'package:resell/UIPart/Android_Files/screens/profile/about_android.dart';
 import 'package:resell/UIPart/Android_Files/screens/profile/policies_android.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,18 +42,12 @@ class _AndroidProfileState extends State<AndroidProfile> {
       handler.newUser.user = null;
       if (context.mounted) {
         Navigator.of(logoutContext).pop();
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (ctx) => const LoginAndroid()),
-            (Route<dynamic> route) => false);
+        
       }
     } catch (e) {
       if (context.mounted) {
         Navigator.of(logoutContext).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Something went wrong'),
-          ),
-        );
+        
       }
     }
   }
@@ -159,42 +153,7 @@ class _AndroidProfileState extends State<AndroidProfile> {
                           ),
                         );
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (ctx) {
-                            return AlertDialog(
-                              title: const Text(
-                                'Alert',
-                              ),
-                              content: const Text(
-                                'Are you sure want to Logout',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(ctx).pop();
-                                  },
-                                  child: const Text(
-                                    'No',
-                                    style: TextStyle(color: Colors.blue),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(ctx).pop();
-                                    spinner();
-                                  },
-                                  child: const Text(
-                                    'Yes',
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                        );
+                        
                       }
                     },
                     child: Column(

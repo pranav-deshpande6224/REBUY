@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:resell/UIPart/Android_Files/screens/sell/android_detail_screen.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/constants/constants.dart';
 
 class AndroidSell extends StatefulWidget {

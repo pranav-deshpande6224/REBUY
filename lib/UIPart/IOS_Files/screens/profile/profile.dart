@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/IOS_Files/screens/myads/my_sold_ads.dart';
 import 'package:resell/UIPart/IOS_Files/screens/profile/about.dart';
 import 'package:resell/UIPart/IOS_Files/screens/profile/policies.dart';
@@ -39,9 +39,7 @@ class _ProfileState extends ConsumerState<Profile> {
   }
 
   void moveToLogin() {
-    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-        CupertinoPageRoute(builder: (ctx) => const LoginIos()),
-        (Route<dynamic> route) => false);
+    
   }
 
   Future<void> executeSignOut(BuildContext signOutContext) async {
@@ -65,32 +63,7 @@ class _ProfileState extends ConsumerState<Profile> {
       } catch (e) {
         Navigator.pop(signOutContext);
         if (!context.mounted) return;
-        showCupertinoDialog(
-          context: context,
-          builder: (ctx) {
-            return CupertinoAlertDialog(
-              title: Text(
-                'Alert',
-                style: GoogleFonts.roboto(),
-              ),
-              content: Text(
-                e.toString(),
-                style: GoogleFonts.roboto(),
-              ),
-              actions: [
-                CupertinoDialogAction(
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                  child: Text(
-                    'Okay',
-                    style: GoogleFonts.roboto(),
-                  ),
-                ),
-              ],
-            );
-          },
-        );
+        
       }
     } else {
       if (signOutContext.mounted) {
@@ -231,42 +204,7 @@ class _ProfileState extends ConsumerState<Profile> {
                               ),
                             );
                           } else {
-                            showCupertinoDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return CupertinoAlertDialog(
-                                  title: Text('Alert',
-                                      style: GoogleFonts.roboto()),
-                                  content: Text(
-                                    'Are you sure want to Logout',
-                                    style: GoogleFonts.roboto(),
-                                  ),
-                                  actions: [
-                                    CupertinoDialogAction(
-                                      onPressed: () {
-                                        Navigator.of(ctx).pop();
-                                      },
-                                      child: Text(
-                                        'No',
-                                        style: GoogleFonts.roboto(),
-                                      ),
-                                    ),
-                                    CupertinoDialogAction(
-                                      onPressed: () {
-                                        Navigator.of(ctx).pop();
-                                        spinner();
-                                      },
-                                      child: Text(
-                                        'Yes',
-                                        style: GoogleFonts.roboto(
-                                          color: CupertinoColors.systemRed,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                );
-                              },
-                            );
+                            
                           }
                         },
                         leading: Icon(

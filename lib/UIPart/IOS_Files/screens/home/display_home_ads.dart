@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/category.dart';
+import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/IOS_Files/screens/home/product_detail_screen.dart';
 import 'package:resell/UIPart/IOS_Files/screens/sell/detail_screen.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/home_ads.dart';
@@ -428,7 +428,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                           ),
                         ),
                         SliverPadding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           sliver: SliverGrid(
                             delegate: SliverChildBuilderDelegate(
                               childCount: homeState.items.length,
@@ -470,7 +470,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                     .systemGrey
                                                     .withOpacity(0.3),
                                                 blurRadius: 10,
-                                                offset: Offset(0, 5),
+                                                offset: const Offset(0, 5),
                                               )
                                             ],
                                           ),

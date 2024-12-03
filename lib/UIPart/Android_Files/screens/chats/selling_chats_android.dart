@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/model/contact.dart';
+import 'package:resell/UIPart/android_ios/model/contact.dart';
 
 class SellingChatsAndroid extends ConsumerStatefulWidget {
   const SellingChatsAndroid({super.key});
