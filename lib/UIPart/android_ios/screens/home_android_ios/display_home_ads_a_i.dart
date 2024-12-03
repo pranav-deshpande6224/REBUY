@@ -367,6 +367,11 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
           ),
         ),
         categories(),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 10,
+          ),
+        ),
         text('Fresh Recomendations')
       ];
     } else if (Platform.isIOS) {
@@ -617,6 +622,11 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         ),
       ),
       categories(),
+      const SliverToBoxAdapter(
+        child: SizedBox(
+          height: 10,
+        ),
+      ),
       text('Fresh Recomendations'),
       gridContent(homeState),
       if (homeState.isLoadingMore) fetchingMoreHomeAds()

@@ -116,10 +116,14 @@ class DetailScreenAI extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          elevation: 10,
+          elevation: 3,
+          backgroundColor: Colors.grey[200],
           title: Text(
             categoryName,
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.roboto(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         body: body(context),

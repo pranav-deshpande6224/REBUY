@@ -105,79 +105,108 @@ class _SellAIState extends State<SellAI> {
         Constants.womensFashion,
       ],
     ),
+    SellCategory(
+      icon: Platform.isAndroid
+          ? Icons.other_houses
+          : Platform.isIOS
+              ? CupertinoIcons.folder_open
+              : Icons.photo,
+      categoryTitle: Constants.othere,
+      subCategory: [
+        Constants.mensFashion,
+        Constants.womensFashion,
+      ],
+    ),
   ];
 
   Widget body() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: GridView.builder(
-          itemCount: categoryList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.2,
-            mainAxisSpacing: 3,
-            crossAxisSpacing: 3,
-          ),
-          itemBuilder: (ctx, index) {
-            final category = categoryList[index];
-            return GestureDetector(
-              onTap: () {
-                if (Platform.isAndroid) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => DetailScreenAI(
-                        categoryName: category.categoryTitle,
-                        subCategoryList: category.subCategory,
-                        isPostingData: true,
-                      ),
-                    ),
-                  );
-                } else if (Platform.isIOS) {
-                  Navigator.of(context, rootNavigator: true).push(
-                    CupertinoPageRoute(
-                      builder: (ctx) => DetailScreenAI(
-                        categoryName: category.categoryTitle,
-                        subCategoryList: category.subCategory,
-                        isPostingData: true,
-                      ),
-                    ),
-                  );
-                }
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  color: CupertinoColors.systemGrey,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        category.icon,
-                        size: 35,
-                        color: CupertinoColors.white,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      FittedBox(
-                        child: Text(
-                          category.categoryTitle,
-                          style: GoogleFonts.roboto(
-                            color: CupertinoColors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              color: Platform.isAndroid
+                  ? Colors.grey
+                  : Platform.isIOS
+                      ? CupertinoColors.systemGrey
+                      : null),
+          child: GridView.builder(
+            itemCount: categoryList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.16,
+              mainAxisSpacing: 3,
+              crossAxisSpacing: 3,
+            ),
+            itemBuilder: (ctx, index) {
+              final category = categoryList[index];
+              return GestureDetector(
+                onTap: () {
+                  if (Platform.isAndroid) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => DetailScreenAI(
+                          categoryName: category.categoryTitle,
+                          subCategoryList: category.subCategory,
+                          isPostingData: true,
                         ),
                       ),
-                    ],
+                    );
+                  } else if (Platform.isIOS) {
+                    Navigator.of(context, rootNavigator: true).push(
+                      CupertinoPageRoute(
+                        builder: (ctx) => DetailScreenAI(
+                          categoryName: category.categoryTitle,
+                          subCategoryList: category.subCategory,
+                          isPostingData: true,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          category.icon,
+                          color: Platform.isAndroid
+                              ? Colors.blue[400]
+                              : Platform.isIOS
+                                  ? CupertinoColors.activeBlue
+                                  : null,
+                          size: 35,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        FittedBox(
+                          child: Text(
+                            category.categoryTitle,
+                            style: GoogleFonts.roboto(
+                              color: Platform.isAndroid
+                                  ? Colors.black87
+                                  : Platform.isIOS
+                                      ? CupertinoColors.black
+                                      : null,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -189,10 +218,14 @@ class _SellAIState extends State<SellAI> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          elevation: 10,
+          elevation: 3,
+          backgroundColor: Colors.grey[200],
           title: Text(
             'What are you selling?',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.roboto(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         body: body(),

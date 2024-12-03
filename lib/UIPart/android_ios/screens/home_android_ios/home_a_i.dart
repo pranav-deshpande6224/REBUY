@@ -23,12 +23,14 @@ class HomeAI extends StatelessWidget {
   Widget android() {
     return Scaffold(
       appBar: AppBar(
-        elevation: 10,
+        elevation: 3,
         centerTitle: true,
+        backgroundColor: Colors.grey[200],
         title: Text(
           'ReVYB',
           style: GoogleFonts.roboto(
-            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

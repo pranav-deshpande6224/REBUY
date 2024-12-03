@@ -434,11 +434,12 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
   Widget android() {
     return Scaffold(
       appBar: AppBar(
-        elevation: 10,
+        elevation: 3,
+        backgroundColor: Colors.grey[200],
         centerTitle: true,
         title: Text(
           'My Account',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.bold),
         ),
       ),
       body: content(),
