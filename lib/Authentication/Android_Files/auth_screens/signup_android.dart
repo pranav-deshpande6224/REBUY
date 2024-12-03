@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/constants/constants.dart';
 
 class SignupAndroid extends StatefulWidget {

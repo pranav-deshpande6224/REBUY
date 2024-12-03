@@ -4,7 +4,7 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:resell/Authentication/Android_Files/auth_screens/forget_password_android.dart';
 import 'package:resell/Authentication/Android_Files/auth_screens/signup_android.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/constants/constants.dart';
 
 class LoginAndroid extends ConsumerStatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/chats/android_chats.dart';
 import 'package:resell/UIPart/Android_Files/screens/home/android_home.dart';
 import 'package:resell/UIPart/Android_Files/screens/myads/android_myAds.dart';

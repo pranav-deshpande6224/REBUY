@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
 import 'package:resell/Authentication/Providers/error.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/IOS_Files/screens/sell/ad_uploaded.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/phone_brands.dart';
 import 'package:resell/UIPart/Providers/image_selected.dart';

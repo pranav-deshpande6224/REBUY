@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/category_ads_pagination.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/show_ads.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/Android_Files/auth_screens/login_android.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/myads/android_soldAds.dart';
 import 'package:resell/UIPart/Android_Files/screens/profile/about_android.dart';
 import 'package:resell/UIPart/Android_Files/screens/profile/policies_android.dart';

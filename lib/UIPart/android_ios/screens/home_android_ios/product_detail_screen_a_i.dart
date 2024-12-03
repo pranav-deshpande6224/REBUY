@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chatting_screen_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/image_detail_screen_a_i.dart';

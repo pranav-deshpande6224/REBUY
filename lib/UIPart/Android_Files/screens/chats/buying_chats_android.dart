@@ -6,7 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 
 class BuyingChatsAndroid extends ConsumerStatefulWidget {

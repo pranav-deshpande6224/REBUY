@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/Android_Files/auth_screens/login_android.dart';
 import 'package:resell/Authentication/Providers/error.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Android_Files/screens/sell/ad_uploaded_android.dart';
 import 'package:resell/UIPart/Providers/brand_filter.dart';
 import 'package:resell/UIPart/Providers/image_selected.dart';

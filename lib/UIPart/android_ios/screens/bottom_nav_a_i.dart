@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chats_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/home_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/myads_android_ios/myads_a_i.dart';

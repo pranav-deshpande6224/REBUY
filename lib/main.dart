@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resell/Authentication/Android_Files/android.dart';
 import 'package:resell/Authentication/IOS_Files/Screens/ios.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

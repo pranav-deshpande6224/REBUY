@@ -9,7 +9,7 @@ import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
 import 'package:resell/Authentication/android_ios/screens/forget_password_a_i.dart';
 import 'package:resell/Authentication/android_ios/screens/sign_up_a_i.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/constants/constants.dart';
 
 class LoginAI extends ConsumerStatefulWidget {

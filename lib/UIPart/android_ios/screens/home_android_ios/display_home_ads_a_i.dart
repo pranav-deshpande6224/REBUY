@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/product_detail_screen_a_i.dart';

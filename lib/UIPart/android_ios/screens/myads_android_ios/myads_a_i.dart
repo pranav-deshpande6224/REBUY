@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/IOS_Files/widgets/ad_card.dart';
 import 'package:resell/UIPart/Providers/pagination_active_ads/show_ads.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';

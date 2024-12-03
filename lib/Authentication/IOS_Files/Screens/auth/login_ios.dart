@@ -10,7 +10,7 @@ import 'package:resell/Authentication/IOS_Files/Screens/auth/forget_password.dar
 import 'package:resell/Authentication/IOS_Files/Screens/auth/sign_up.dart';
 import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/constants/constants.dart';
 
 class LoginIos extends ConsumerStatefulWidget {

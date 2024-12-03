@@ -1,6 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/IOS_Files/screens/home/home.dart';
 import 'package:resell/UIPart/IOS_Files/screens/profile/profile.dart';
 
