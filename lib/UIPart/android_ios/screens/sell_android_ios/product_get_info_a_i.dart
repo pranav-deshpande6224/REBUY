@@ -11,10 +11,10 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
-import 'package:resell/UIPart/Providers/brand_filter.dart';
-import 'package:resell/UIPart/Providers/image_selected.dart';
-import 'package:resell/UIPart/Providers/select_image.dart';
-import 'package:resell/UIPart/Providers/selected_item.dart';
+import 'package:resell/UIPart/android_ios/Providers/brand_filter.dart';
+import 'package:resell/UIPart/android_ios/Providers/image_selected.dart';
+import 'package:resell/UIPart/android_ios/Providers/select_image.dart';
+import 'package:resell/UIPart/android_ios/Providers/selected_item.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/ad_uploaded_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/phone_brands.dart';
 import 'package:resell/constants/constants.dart';

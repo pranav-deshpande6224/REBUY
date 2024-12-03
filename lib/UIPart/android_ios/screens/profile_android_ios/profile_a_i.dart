@@ -5,12 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/category_ads_pagination.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/home_ads.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/show_ads.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/show_sold_ads.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/home_ads.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_ads.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_sold_ads.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
+import 'package:resell/UIPart/android_ios/screens/myads_android_ios/mysoldads_a_i.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileAI extends ConsumerStatefulWidget {
@@ -31,25 +33,11 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
         title: 'My Sold Ads'),
     ProfileCategory(
         icon: Platform.isAndroid
-            ? Icons.person
-            : Platform.isIOS
-                ? CupertinoIcons.person
-                : Icons.photo,
-        title: 'About'),
-    ProfileCategory(
-        icon: Platform.isAndroid
             ? Icons.share
             : Platform.isIOS
                 ? CupertinoIcons.share
                 : Icons.photo,
         title: 'Share'),
-    ProfileCategory(
-        icon: Platform.isAndroid
-            ? Icons.book
-            : Platform.isIOS
-                ? CupertinoIcons.book
-                : Icons.photo,
-        title: 'Policies'),
     ProfileCategory(
         icon: Platform.isAndroid
             ? Icons.logout
@@ -136,6 +124,16 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
           );
         },
       );
+    }
+  }
+
+  void moveToSoldAds() {
+    if (Platform.isAndroid) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (ctx) => const MysoldadsAI()));
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true)
+          .push(CupertinoPageRoute(builder: (ctx) => const MysoldadsAI()));
     }
   }
 
@@ -277,9 +275,9 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                     ? ListTile(
                         onTap: () {
                           if (index == 0) {
+                            moveToSoldAds();
                           } else if (index == 1) {
-                          } else if (index == 2) {
-                          } else if (index == 3) {
+                            Share.share("hello");
                           } else {
                             showDialog(
                               context: context,

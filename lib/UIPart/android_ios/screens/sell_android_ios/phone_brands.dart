@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:resell/UIPart/Providers/brand_filter.dart';
+import 'package:resell/UIPart/android_ios/Providers/brand_filter.dart';
 import 'package:resell/constants/constants.dart';
 
 class PhoneBrands extends ConsumerStatefulWidget {

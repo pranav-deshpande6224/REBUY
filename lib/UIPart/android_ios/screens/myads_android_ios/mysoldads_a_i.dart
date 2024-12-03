@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
-import 'package:resell/UIPart/IOS_Files/widgets/ad_card.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/show_sold_ads.dart';
+import 'package:resell/UIPart/android_ios/widgets/ad_card.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_sold_ads.dart';
 
 class MysoldadsAI extends ConsumerStatefulWidget {
   const MysoldadsAI({super.key});
@@ -287,7 +287,10 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                       data: (soldAdState) {
                         return RefreshIndicator(
                           color: Colors.blue,
-                          child: scrollView(soldAdState),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: scrollView(soldAdState),
+                          ),
                           onRefresh: () async {
                             await ref
                                 .read(showSoldAdsProvider.notifier)
@@ -369,7 +372,11 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
       onPopInvokedWithResult: (didPop, result) {
         ref.read(showSoldAdsProvider.notifier).resetState();
       },
-      child: Platform.isAndroid ? android() : Platform.isIOS ? ios() : const SizedBox(),
+      child: Platform.isAndroid
+          ? android()
+          : Platform.isIOS
+              ? ios()
+              : const SizedBox(),
     );
   }
 }

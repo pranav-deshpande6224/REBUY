@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
-import 'package:resell/UIPart/Providers/pagination_active_ads/category_ads_pagination.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/product_detail_screen_a_i.dart';
 
 class DisplayCategoryAdsAI extends ConsumerStatefulWidget {
