@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,7 @@ import 'package:resell/Authentication/IOS_Files/Screens/auth/login_ios.dart';
 import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/handlers/auth_handler.dart';
 import 'package:resell/UIPart/IOS_Files/screens/sell/ad_uploaded.dart';
-import 'package:resell/UIPart/IOS_Files/screens/sell/phone_brands.dart';
+import 'package:resell/UIPart/android_ios/screens/sell_android_ios/phone_brands.dart';
 import 'package:resell/UIPart/Providers/image_selected.dart';
 import 'package:resell/UIPart/Providers/select_image.dart';
 import 'package:resell/UIPart/Providers/selected_item.dart';
@@ -169,11 +170,15 @@ class _ProductGetInfoState extends ConsumerState<ProductGetInfo> {
                   context: context,
                   builder: (ctx) {
                     popContext = ctx;
-                    return const Center(
-                      child: CupertinoActivityIndicator(
-                        radius: 15,
-                        color: CupertinoColors.darkBackgroundGray,
-                      ),
+                    return Center(
+                      child: Platform.isAndroid
+                          ? const CircularProgressIndicator(
+                              color: Colors.blue,
+                            )
+                          : const CupertinoActivityIndicator(
+                              radius: 15,
+                              color: CupertinoColors.darkBackgroundGray,
+                            ),
                     );
                   });
               for (int i = 0; i < ref.read(imageProvider).length; i++) {
@@ -294,24 +299,25 @@ class _ProductGetInfoState extends ConsumerState<ProductGetInfo> {
       }
     } else {
       showCupertinoDialog(
-          context: context,
-          builder: (ctx) {
-            return CupertinoAlertDialog(
-              title: Text('Alert', style: GoogleFonts.roboto()),
-              content: Text(
-                'You are Uploading more than 3 images',
-                style: GoogleFonts.roboto(),
-              ),
-              actions: [
-                CupertinoDialogAction(
-                  child: Text('Okay', style: GoogleFonts.roboto()),
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                )
-              ],
-            );
-          });
+        context: context,
+        builder: (ctx) {
+          return CupertinoAlertDialog(
+            title: Text('Alert', style: GoogleFonts.roboto()),
+            content: Text(
+              'You are Uploading more than 3 images',
+              style: GoogleFonts.roboto(),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                child: Text('Okay', style: GoogleFonts.roboto()),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -1024,7 +1030,7 @@ class _ProductGetInfoState extends ConsumerState<ProductGetInfo> {
                                     onTap: () {
                                       dialog(ctx, images[selectedIndex]);
                                     },
-                                    child: Icon(
+                                    child: const Icon(
                                       CupertinoIcons.clear_circled_solid,
                                       color: CupertinoColors.destructiveRed,
                                     ),

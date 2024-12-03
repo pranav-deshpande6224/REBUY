@@ -52,6 +52,7 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
     _adTitleFocus.unfocus();
     _adDescriptionFocus.unfocus();
     _priceFocus.unfocus();
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -312,11 +313,11 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
     }
   }
 
-  _showBrandSelectorDialog() async {
-    final brandList = ref.read(brandFilterProvider);
-    String? selectedBrand = await showDialog(
+  void _showBrandSelectorDialog() async {
+    final List<String> brandList = ref.read<List<String>>(brandFilterProvider);
+    String? selectedBrand = await showDialog<String>(
       context: context,
-      builder: (ctx) {
+      builder: (BuildContext ctx) {
         return AlertDialog(
           title: const Text('Select Brand'),
           content: SizedBox(
@@ -324,10 +325,10 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
             height: 450,
             child: ListView.builder(
               itemCount: brandList.length,
-              itemBuilder: (itemContext, index) {
+              itemBuilder: (BuildContext itemContext, int index) {
                 return ListTile(
                   onTap: () {
-                    Navigator.of(ctx).pop(brandList[index]);
+                    Navigator.of(ctx).pop<String>(brandList[index]);
                   },
                   title: Text(brandList[index]),
                 );
@@ -824,22 +825,23 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
 
   uploadImageDialog() {
     showDialog(
-        context: context,
-        builder: (ctx) {
-          return AlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
-            content: Text('Please select atleast 1 image',
-                style: GoogleFonts.roboto()),
-            actions: [
-              TextButton(
-                child: Text('Okay', style: GoogleFonts.roboto()),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
-        });
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: Text('Alert', style: GoogleFonts.roboto()),
+          content: Text('Please select atleast 1 image',
+              style: GoogleFonts.roboto()),
+          actions: [
+            TextButton(
+              child: Text('Okay', style: GoogleFonts.roboto()),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   bool checkAtleastOneImage() {
@@ -923,21 +925,24 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
       cursorColor: Colors.black,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
-        labelText: 'Ad Title',
-        labelStyle: const TextStyle(color: Colors.black),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.black),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+          borderRadius: BorderRadius.circular(5),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.black, width: 1),
+        border: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(5),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          borderSide: const BorderSide(color: Colors.black, width: 1),
+          borderSide: const BorderSide(color: Colors.black),
+          borderRadius: BorderRadius.circular(5),
         ),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        label: Text(
+          'Ad Title',
+          style: GoogleFonts.roboto(),
+        ),
+        labelStyle: const TextStyle(color: Colors.black),
+        floatingLabelStyle: const TextStyle(color: Colors.blue),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
