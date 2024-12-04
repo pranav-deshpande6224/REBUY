@@ -77,42 +77,43 @@ class AdCard extends ConsumerWidget {
                     );
                   },
                 );
-              } else {
+              } else if (Platform.isAndroid) {
                 showDialog(
-                    context: context,
-                    builder: (ctx) {
-                      return AlertDialog(
-                        title: Text(
-                          'Alert',
-                          style: GoogleFonts.roboto(),
-                        ),
-                        content: Text(
-                          'Is this Item Sold?',
-                          style: GoogleFonts.roboto(),
-                        ),
-                        actions: [
-                          TextButton(
-                            child: Text(
-                              'No',
-                              style: GoogleFonts.roboto(color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Navigator.of(ctx).pop();
-                            },
+                  context: context,
+                  builder: (ctx) {
+                    return AlertDialog(
+                      title: Text(
+                        'Alert',
+                        style: GoogleFonts.roboto(),
+                      ),
+                      content: Text(
+                        'Is this Item Sold?',
+                        style: GoogleFonts.roboto(),
+                      ),
+                      actions: [
+                        TextButton(
+                          child: Text(
+                            'No',
+                            style: GoogleFonts.roboto(color: Colors.blue),
                           ),
-                          TextButton(
-                            child: Text('Yes',
-                                style: GoogleFonts.roboto(
-                                  color: CupertinoColors.destructiveRed,
-                                )),
-                            onPressed: () {
-                              Navigator.of(ctx).pop();
-                              adSold!(ad);
-                            },
-                          ),
-                        ],
-                      );
-                    });
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: Text('Yes',
+                              style: GoogleFonts.roboto(
+                                color: Colors.red,
+                              )),
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                            adSold!(ad);
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
               }
             },
             child: Container(

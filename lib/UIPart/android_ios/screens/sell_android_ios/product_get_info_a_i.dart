@@ -270,7 +270,6 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               return;
             }
             unfocusFields();
-            // For every other category i'm taking an empty string as category
             saveMyAdToDB('');
           }
         }

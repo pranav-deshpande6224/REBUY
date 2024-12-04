@@ -197,10 +197,14 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        elevation: 10,
+        elevation: 3,
+        backgroundColor: Colors.grey[200],
         title: Text(
           'Product Details',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.roboto(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: SafeArea(

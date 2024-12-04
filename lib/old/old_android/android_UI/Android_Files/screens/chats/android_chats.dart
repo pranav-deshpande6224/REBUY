@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:resell/old/old_android/android_UI/Android_Files/screens/chats/buying_chats_android.dart';
-import 'package:resell/old/old_android/android_UI/Android_Files/screens/chats/selling_chats_android.dart';
+import 'package:resell/UIPart/android_ios/screens/chats_android_ios/buying_chats_android.dart';
+import 'package:resell/UIPart/android_ios/screens/chats_android_ios/selling_chats_android.dart';
 
 class AndroidChats extends StatefulWidget {
   const AndroidChats({super.key});
@@ -40,10 +40,14 @@ class _AndroidChatsState extends State<AndroidChats> {
                 )
               ],
             ),
-            Expanded(child: TabBarView(children: [
-              BuyingChatsAndroid(),
-              SellingChatsAndroid(),
-            ]))
+            Expanded(
+              child: TabBarView(
+                children: [
+                  BuyingChatsAndroid(),
+                  SellingChatsAndroid(),
+                ],
+              ),
+            )
           ],
         ),
       ),

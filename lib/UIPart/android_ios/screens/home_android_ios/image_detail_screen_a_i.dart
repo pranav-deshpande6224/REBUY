@@ -44,7 +44,8 @@ class ImageDetailScreenAI extends StatelessWidget {
     if (Platform.isAndroid) {
       return Scaffold(
         appBar: AppBar(
-          elevation: 10,
+          elevation: 3,
+          backgroundColor: Colors.grey[200],
         ),
         body: displayImages(),
       );

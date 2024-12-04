@@ -354,7 +354,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                           const SizedBox(height: 4),
                           Text(
                             catAd.adTitle,
-                            maxLines: 2,
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.roboto(
                               fontSize: 16,

@@ -16,10 +16,10 @@ class MessageReplyPreview extends ConsumerWidget {
     final messageReply = ref.watch(messageReplyProvider);
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(top: BorderSide(width: 0.5)),
         color: CupertinoColors.systemGrey5,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),

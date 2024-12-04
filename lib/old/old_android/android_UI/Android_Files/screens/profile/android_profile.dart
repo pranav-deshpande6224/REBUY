@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:resell/old/old_android/android_auth/Android_Files/auth_screens/login_android.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/myads/android_soldAds.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/profile/about_android.dart';
