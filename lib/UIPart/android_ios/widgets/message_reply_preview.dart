@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/UIPart/android_ios/Providers/message_reply_provider.dart';
@@ -16,10 +19,14 @@ class MessageReplyPreview extends ConsumerWidget {
     final messageReply = ref.watch(messageReplyProvider);
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(width: 0.5)),
-        color: CupertinoColors.systemGrey5,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        border: const Border(top: BorderSide(width: 0.5)),
+        color: Platform.isAndroid
+            ? Colors.grey[200]
+            : Platform.isIOS
+                ? CupertinoColors.systemGrey5
+                : Colors.white,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
@@ -42,7 +49,12 @@ class MessageReplyPreview extends ConsumerWidget {
               ),
               GestureDetector(
                 onTap: () => cancelReply(ref),
-                child: const Icon(CupertinoIcons.clear_circled, size: 20),
+                child: Icon(
+                  Platform.isAndroid
+                      ? Icons.close_outlined
+                      : CupertinoIcons.clear_circled,
+                  size: 20,
+                ),
               )
             ],
           ),

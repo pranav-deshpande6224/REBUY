@@ -41,8 +41,10 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
             context: context,
             builder: (spinnerContext) {
               spinner = spinnerContext;
-              return const CircularProgressIndicator(
-                color: Colors.blue,
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
               );
             });
         CollectionReference<Map<String, dynamic>> chatMessagesCollectionRef =
@@ -221,9 +223,20 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                       }
                       return snapshot.data!.isEmpty
                           ? Center(
-                              child: Text(
-                                'No Buying Chats',
-                                style: GoogleFonts.roboto(color: Colors.blue),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/emoji.png',
+                                    height: 80,
+                                    width: 80,
+                                  ),
+                                  Text(
+                                    'No Buying Chats',
+                                    style:
+                                        GoogleFonts.roboto(color: Colors.blue),
+                                  ),
+                                ],
                               ),
                             )
                           : Padding(

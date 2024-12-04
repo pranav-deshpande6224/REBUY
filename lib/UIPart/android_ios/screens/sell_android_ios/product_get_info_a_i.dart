@@ -134,7 +134,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
   void adTitleErrorText() {
     if (_adTitleController.text.trim().isEmpty) {
       ref.read(adTitleError.notifier).updateError('Ad title is Mandatory');
-    } else if (_adTitleController.text.trim().length < 10) {
+    } else if (_adTitleController.text.trim().length < 5) {
       ref
           .read(adTitleError.notifier)
           .updateError('Ad title should be atleast 10 characters');
@@ -148,7 +148,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
       ref
           .read(adDescriptionError.notifier)
           .updateError('Please provide ad description');
-    } else if (_adDescriptionController.text.trim().length < 10) {
+    } else if (_adDescriptionController.text.trim().length < 5) {
       ref
           .read(adDescriptionError.notifier)
           .updateError('Ad description should be atleast 10 characters');
@@ -258,20 +258,20 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           }
           unfocusFields();
           saveMyAdToDB(Constants.mobileChargerLaptopCharger);
-        } else {
-          adTitleErrorText();
-          adDescriptionErrorText();
-          priceErrorText();
-          if (ref.read(adTitleError).isEmpty &&
-              ref.read(adDescriptionError).isEmpty &&
-              ref.read(priceError).isEmpty) {
-            if (checkAtleastOneImage()) {
-              uploadImageDialog();
-              return;
-            }
-            unfocusFields();
-            saveMyAdToDB('');
+        }
+      } else {
+        adTitleErrorText();
+        adDescriptionErrorText();
+        priceErrorText();
+        if (ref.read(adTitleError).isEmpty &&
+            ref.read(adDescriptionError).isEmpty &&
+            ref.read(priceError).isEmpty) {
+          if (checkAtleastOneImage()) {
+            uploadImageDialog();
+            return;
           }
+          unfocusFields();
+          saveMyAdToDB('');
         }
       }
     }
@@ -1587,6 +1587,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           padding: const EdgeInsets.all(18),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 watchingMobileSelection(),
                 mobileNotSelectionError(),

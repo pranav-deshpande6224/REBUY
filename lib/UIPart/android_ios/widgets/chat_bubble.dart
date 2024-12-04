@@ -24,9 +24,9 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final formattedTime = DateFormat('hh:mm a').format(date);
     final isReplying = repliedText.isNotEmpty;
-    final Color senderColor = Color(0xFFDCF8C6);
-    final Color receiverColor = Color(0xFFE5E5E5);
-    final Color textColor = Colors.black;
+    const  Color senderColor = Color(0xFFDCF8C6);
+    const  Color receiverColor = Color(0xFFE5E5E5);
+    const  Color textColor = Colors.black;
     return Align(
       alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
@@ -39,10 +39,10 @@ class ChatBubble extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSender ? senderColor : receiverColor,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-              bottomLeft: isSender ? Radius.circular(12) : Radius.circular(0),
-              bottomRight: isSender ? Radius.circular(0) : Radius.circular(12),
+              topLeft: const Radius.circular(12),
+              topRight: const  Radius.circular(12),
+              bottomLeft: isSender ? const Radius.circular(12) : Radius.circular(0),
+              bottomRight: isSender ? const Radius.circular(0) : Radius.circular(12),
             ),
           ),
           child: Column(

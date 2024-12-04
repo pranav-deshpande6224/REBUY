@@ -407,7 +407,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
           stream: getMessages(widget.recieverId, widget.adId),
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CupertinoActivityIndicator(),
               );
             }

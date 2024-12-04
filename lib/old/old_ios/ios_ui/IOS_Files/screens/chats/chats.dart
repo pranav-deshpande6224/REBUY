@@ -94,8 +94,8 @@ class _ChatsState extends ConsumerState<Chats> {
     } else {
       // MOVE TO LOGIN
       Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-        CupertinoPageRoute(builder: (ctx) => const LoginIos()),
-        (Route<dynamic> route) => false);
+          CupertinoPageRoute(builder: (ctx) => const LoginIos()),
+          (Route<dynamic> route) => false);
     }
   }
 
@@ -160,7 +160,7 @@ class _ChatsState extends ConsumerState<Chats> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                   const Icon(
+                    const Icon(
                       CupertinoIcons.wifi_slash,
                       color: CupertinoColors.activeBlue,
                       size: 40,
@@ -193,7 +193,7 @@ class _ChatsState extends ConsumerState<Chats> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                         const  Icon(
+                          const Icon(
                             CupertinoIcons.wifi_slash,
                             color: CupertinoColors.activeBlue,
                             size: 40,
@@ -236,11 +236,12 @@ class _ChatsState extends ConsumerState<Chats> {
                                       width: constraints.maxWidth / 2 -
                                           8, // Adjust width for equal segments.
                                       child: Center(
-                                          child: Text(
-                                        'Buying',
-                                        style: GoogleFonts.roboto(
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                        child: Text(
+                                          'Buying',
+                                          style: GoogleFonts.roboto(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
                                     ),
                                     'selling': SizedBox(
                                       width: constraints.maxWidth / 2 - 8,
@@ -298,263 +299,265 @@ class _ChatsState extends ConsumerState<Chats> {
                                           itemBuilder: (ctx, index) {
                                             final obj = snapshot.data![index];
                                             return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 8,
-                                                    right: 8,
-                                                    bottom: 8),
-                                                child: Slidable(
-                                                  endActionPane: ActionPane(
-                                                    motion:
-                                                        const ScrollMotion(),
-                                                    children: [
-                                                      SlidableAction(
-                                                        onPressed: (ctx) {
-                                                          showCupertinoDialog(
-                                                              context: ctx,
-                                                              builder:
-                                                                  (builderContext) {
-                                                                return CupertinoAlertDialog(
-                                                                  title: const Text(
-                                                                      'Alert!'),
-                                                                  content: const Text(
-                                                                      'Are you sure you want to delete this chat?'),
-                                                                  actions: [
-                                                                    CupertinoDialogAction(
-                                                                      isDefaultAction:
-                                                                          true,
-                                                                      child: const Text(
-                                                                          'Cancel'),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.pop(
-                                                                            builderContext);
-                                                                      },
+                                              padding: const EdgeInsets.only(
+                                                  left: 8, right: 8, bottom: 8),
+                                              child: Slidable(
+                                                endActionPane: ActionPane(
+                                                  motion: const ScrollMotion(),
+                                                  children: [
+                                                    SlidableAction(
+                                                      onPressed: (ctx) {
+                                                        showCupertinoDialog(
+                                                            context: ctx,
+                                                            builder:
+                                                                (builderContext) {
+                                                              return CupertinoAlertDialog(
+                                                                title: const Text(
+                                                                    'Alert!'),
+                                                                content: const Text(
+                                                                    'Are you sure you want to delete this chat?'),
+                                                                actions: [
+                                                                  CupertinoDialogAction(
+                                                                    isDefaultAction:
+                                                                        true,
+                                                                    child: const Text(
+                                                                        'Cancel'),
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.pop(
+                                                                          builderContext);
+                                                                    },
+                                                                  ),
+                                                                  CupertinoDialogAction(
+                                                                    isDestructiveAction:
+                                                                        true,
+                                                                    child:
+                                                                        const Text(
+                                                                      "Delete",
                                                                     ),
-                                                                    CupertinoDialogAction(
-                                                                      isDestructiveAction:
-                                                                          true,
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.pop(
+                                                                          builderContext);
+                                                                      deleteConversation(
+                                                                          obj.id);
+                                                                      // return const Center(
+                                                                      //   child:
+                                                                      //       CupertinoActivityIndicator(),
+                                                                      // );
+                                                                    },
+                                                                  )
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                      foregroundColor:
+                                                          Colors.white,
+                                                      icon: Icons.delete,
+                                                      label: 'Delete',
+                                                    )
+                                                  ],
+                                                ),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.of(context,
+                                                            rootNavigator: true)
+                                                        .push(
+                                                      CupertinoPageRoute(
+                                                        builder: (ctx) =>
+                                                            ChattingScreen(
+                                                          name:
+                                                              obj.nameOfContact,
+                                                          recieverId:
+                                                              obj.contactId,
+                                                          senderId: handler
+                                                              .newUser
+                                                              .user!
+                                                              .uid,
+                                                          documentReference:
+                                                              obj.reference,
+                                                          adImageUrl:
+                                                              obj.adImage,
+                                                          adTitle: obj.adTitle,
+                                                          price: obj.adPrice,
+                                                          adId: obj.adId,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Column(
+                                                    children: [
+                                                      SizedBox(
+                                                        height: 73,
+                                                        child: Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Container(
+                                                              height: 60,
+                                                              width: 60,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                border: Border.all(
+                                                                    color: CupertinoColors
+                                                                        .black),
+                                                              ),
+                                                              child: ClipOval(
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl: obj
+                                                                      .adImage,
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                  placeholder:
+                                                                      (context,
+                                                                          url) {
+                                                                    return const Center(
                                                                       child:
-                                                                          const Text(
-                                                                        "Delete",
+                                                                          Icon(
+                                                                        CupertinoIcons
+                                                                            .photo,
+                                                                        size:
+                                                                            30,
+                                                                        color: CupertinoColors
+                                                                            .black,
                                                                       ),
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.pop(
-                                                                            builderContext);
-                                                                        deleteConversation(
-                                                                            obj.id);
-                                                                        // return const Center(
-                                                                        //   child:
-                                                                        //       CupertinoActivityIndicator(),
-                                                                        // );
-                                                                      },
-                                                                    )
+                                                                    );
+                                                                  },
+                                                                  errorWidget:
+                                                                      (context,
+                                                                          url,
+                                                                          error) {
+                                                                    return const Center(
+                                                                      child:
+                                                                          Icon(
+                                                                        CupertinoIcons
+                                                                            .photo,
+                                                                        size:
+                                                                            30,
+                                                                        color: CupertinoColors
+                                                                            .black,
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              width: 10,
+                                                            ),
+                                                            Expanded(
+                                                              child: Container(
+                                                                decoration:
+                                                                    const BoxDecoration(
+                                                                  border:
+                                                                      Border(
+                                                                    bottom:
+                                                                        BorderSide(
+                                                                      width:
+                                                                          0.5,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            maxLines:
+                                                                                1,
+                                                                            overflow:
+                                                                                TextOverflow.ellipsis,
+                                                                            obj.nameOfContact,
+                                                                            style:
+                                                                                GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                                                                          ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .only(
+                                                                              right: 8),
+                                                                          child:
+                                                                              Text(
+                                                                            getTime(obj.timeSent),
+                                                                            style:
+                                                                                GoogleFonts.roboto(fontWeight: FontWeight.w500),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Text(
+                                                                      obj.adTitle,
+                                                                      maxLines:
+                                                                          1,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
+                                                                      style: GoogleFonts
+                                                                          .roboto(
+                                                                        fontSize:
+                                                                            14,
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 8,
+                                                                    ),
+                                                                    obj.lastMessageId ==
+                                                                            handler.newUser.user!.uid
+                                                                        ? Row(
+                                                                            children: [
+                                                                              Icon(
+                                                                                Icons.done_all,
+                                                                                color: obj.isSeen ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
+                                                                              ),
+                                                                              const SizedBox(
+                                                                                width: 10,
+                                                                              ),
+                                                                              Expanded(
+                                                                                child: Text(
+                                                                                  obj.lastMessage,
+                                                                                  maxLines: 1,
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          )
+                                                                        : Expanded(
+                                                                            child:
+                                                                                Text(
+                                                                              obj.lastMessage,
+                                                                              maxLines: 1,
+                                                                              overflow: TextOverflow.ellipsis,
+                                                                            ),
+                                                                          )
                                                                   ],
-                                                                );
-                                                              });
-                                                        },
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                        foregroundColor:
-                                                            Colors.white,
-                                                        icon: Icons.delete,
-                                                        label: 'Delete',
+                                                                ),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 10,
                                                       )
                                                     ],
                                                   ),
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.of(context,
-                                                              rootNavigator:
-                                                                  true)
-                                                          .push(
-                                                        CupertinoPageRoute(
-                                                          builder: (ctx) =>
-                                                              ChattingScreen(
-                                                            name: obj
-                                                                .nameOfContact,
-                                                            recieverId:
-                                                                obj.contactId,
-                                                            senderId: handler
-                                                                .newUser
-                                                                .user!
-                                                                .uid,
-                                                            documentReference:
-                                                                obj.reference,
-                                                            adImageUrl:
-                                                                obj.adImage,
-                                                            adTitle:
-                                                                obj.adTitle,
-                                                            price: obj.adPrice,
-                                                            adId: obj.adId,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: Column(
-                                                      children: [
-                                                        SizedBox(
-                                                          height: 73,
-                                                          child: Row(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                height: 60,
-                                                                width: 60,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  border: Border.all(
-                                                                      color: CupertinoColors
-                                                                          .black),
-                                                                ),
-                                                                child: ClipOval(
-                                                                  child:
-                                                                      CachedNetworkImage(
-                                                                    imageUrl: obj
-                                                                        .adImage,
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                    placeholder:
-                                                                        (context,
-                                                                            url) {
-                                                                      return const Center(
-                                                                        child:
-                                                                            Icon(
-                                                                          CupertinoIcons
-                                                                              .photo,
-                                                                          size:
-                                                                              30,
-                                                                          color:
-                                                                              CupertinoColors.black,
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                    errorWidget:
-                                                                        (context,
-                                                                            url,
-                                                                            error) {
-                                                                      return const Center(
-                                                                        child:
-                                                                            Icon(
-                                                                          CupertinoIcons
-                                                                              .photo,
-                                                                          size:
-                                                                              30,
-                                                                          color:
-                                                                              CupertinoColors.black,
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                             const  SizedBox(
-                                                                width: 10,
-                                                              ),
-                                                              Expanded(
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                     const  BoxDecoration(
-                                                                    border:
-                                                                        Border(
-                                                                      bottom:
-                                                                          BorderSide(
-                                                                        width:
-                                                                            0.5,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                Text(
-                                                                              maxLines: 1,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                              obj.nameOfContact,
-                                                                              style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(right: 8),
-                                                                            child:
-                                                                                Text(
-                                                                              getTime(obj.timeSent),
-                                                                              style: GoogleFonts.roboto(fontWeight: FontWeight.w500),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      Text(
-                                                                        obj.adTitle,
-                                                                        maxLines:
-                                                                            1,
-                                                                        overflow:
-                                                                            TextOverflow.ellipsis,
-                                                                        style: GoogleFonts
-                                                                            .roboto(
-                                                                          fontSize:
-                                                                              14,
-                                                                        ),
-                                                                      ),
-                                                                     const  SizedBox(
-                                                                        height:
-                                                                            8,
-                                                                      ),
-                                                                      obj.lastMessageId ==
-                                                                              handler.newUser.user!.uid
-                                                                          ? Row(
-                                                                              children: [
-                                                                                Icon(
-                                                                                  Icons.done_all,
-                                                                                  color: obj.isSeen ? CupertinoColors.activeBlue : CupertinoColors.systemGrey,
-                                                                                ),
-                                                                             const SizedBox(
-                                                                                  width: 10,
-                                                                                ),
-                                                                                Expanded(
-                                                                                  child: Text(
-                                                                                    obj.lastMessage,
-                                                                                    maxLines: 1,
-                                                                                    overflow: TextOverflow.ellipsis,
-                                                                                  ),
-                                                                                )
-                                                                              ],
-                                                                            )
-                                                                          : Expanded(
-                                                                              child: Text(
-                                                                                obj.lastMessage,
-                                                                                maxLines: 1,
-                                                                                overflow: TextOverflow.ellipsis,
-                                                                              ),
-                                                                            )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                       const SizedBox(
-                                                          height: 10,
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ));
+                                                ),
+                                              ),
+                                            );
                                           },
                                         ),
                                 );
