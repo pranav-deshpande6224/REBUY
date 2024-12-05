@@ -259,6 +259,20 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           unfocusFields();
           saveMyAdToDB(Constants.mobileChargerLaptopCharger);
         }
+      } else if (widget.subCategoryName == '') {
+        adTitleErrorText();
+        adDescriptionErrorText();
+        priceErrorText();
+        if (ref.read(adTitleError).isEmpty &&
+            ref.read(adDescriptionError).isEmpty &&
+            ref.read(priceError).isEmpty) {
+          if (checkAtleastOneImage()) {
+            uploadImageDialog();
+            return;
+          }
+          unfocusFields();
+          saveAdToDB(Constants.other);
+        }
       } else {
         adTitleErrorText();
         adDescriptionErrorText();
@@ -322,6 +336,171 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
     }
   }
 
+  void saveAdToDB(String categoryName) async {
+    List<String> url = [];
+    if (ref.read(imageProvider).length <= 3) {
+      final fbStorage = handler.storage;
+      final fbCloudFireStore = handler.fireStore;
+      final uuid = const Uuid().v4();
+      final uuid1 = const Uuid().v1();
+      if (handler.newUser.user != null) {
+        final internetCheck = await InternetConnection().hasInternetAccess;
+        if (context.mounted) {
+          if (internetCheck) {
+            late BuildContext popContext;
+            try {
+              await fbCloudFireStore.runTransaction(
+                (_) async {
+                  if (Platform.isAndroid) {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          popContext = ctx;
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.blue,
+                            ),
+                          );
+                        });
+                  } else if (Platform.isIOS) {
+                    showCupertinoDialog(
+                      context: context,
+                      builder: (ctx) {
+                        popContext = ctx;
+                        return const Center(
+                          child: CupertinoActivityIndicator(
+                            radius: 15,
+                            color: CupertinoColors.darkBackgroundGray,
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  for (int i = 0; i < ref.read(imageProvider).length; i++) {
+                    final dir = await path_provider.getTemporaryDirectory();
+                    final targetPath = '${dir.absolute.path}/temp.jpg';
+                    final result =
+                        await FlutterImageCompress.compressAndGetFile(
+                            ref.read(imageProvider)[i].path, targetPath,
+                            quality: 50);
+
+                    String uniqueName =
+                        '${handler.newUser.user!.uid}/$uuid/$i.jpeg';
+                    UploadTask task =
+                        fbStorage.ref(uniqueName).putFile(File(result!.path));
+                    await task.whenComplete(() => null);
+                    String downloadURL =
+                        await fbStorage.ref(uniqueName).getDownloadURL();
+                    url.add(downloadURL);
+                  }
+                  DocumentReference<Map<String, dynamic>> activeAdDoc =
+                      fbCloudFireStore
+                          .collection('users')
+                          .doc(handler.newUser.user!.uid)
+                          .collection('MyActiveAds')
+                          .doc(uuid1);
+                  final timeStamp = FieldValue.serverTimestamp();
+                  await activeAdDoc.set(
+                    {
+                      'id': uuid1,
+                      'adTitle': _adTitleController.text.trim(),
+                      'adDescription': _adDescriptionController.text.trim(),
+                      'price': double.parse(_priceController.text.trim()),
+                      'brand': '',
+                      'tablet_type': '',
+                      'charger_type': '',
+                      'images': url,
+                      'createdAt': timeStamp,
+                      'postedBy': '${handler.newUser.user!.displayName}',
+                      'categoryName': widget.categoryName,
+                      'subCategoryName': widget.subCategoryName,
+                      'userId': handler.newUser.user!.uid,
+                      'isAvailable': true,
+                    },
+                  );
+                  CollectionReference allAdsCollection =
+                      fbCloudFireStore.collection('AllAds');
+                  QuerySnapshot existingPost = await allAdsCollection
+                      .where('adReference', isEqualTo: activeAdDoc)
+                      .get();
+                  if (existingPost.docs.isEmpty) {
+                    await allAdsCollection.add({
+                      'adReference':
+                          activeAdDoc, // Store reference to the ad document in MyActiveAds
+                      'createdAt': timeStamp
+                    });
+                  }
+                  //till here its all Ads and myACtiveAds done
+                  // now do for the category Ads
+                  CollectionReference othersCollectionReference =
+                      fbCloudFireStore
+                          .collection('users')
+                          .doc(handler.newUser.user!.uid)
+                          .collection('others');
+                  QuerySnapshot existingOtherAd =
+                      await othersCollectionReference
+                          .where('adReference', isEqualTo: activeAdDoc)
+                          .get();
+                  if (existingOtherAd.docs.isEmpty) {
+                    await othersCollectionReference.add(
+                      {
+                        'adReference':
+                            activeAdDoc, // Store reference to the ad document in MyActiveAds
+                        'createdAt': timeStamp
+                      },
+                    );
+                  }
+                },
+              ).then((_) {
+                if (!context.mounted) {
+                  return;
+                }
+                resetFields();
+                Navigator.of(popContext).pop();
+                if (context.mounted) {
+                  if (Platform.isAndroid) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => AdUploadedAI(
+                          categoryName: widget.categoryName,
+                        )));
+                  } else if (Platform.isIOS) {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (ctx) =>  AdUploadedAI(
+                          categoryName: widget.categoryName
+                        )));
+                  }
+                }
+              });
+            } catch (e) {
+              if (!context.mounted) {
+                return;
+              }
+              Navigator.of(popContext).pop();
+              errorAlert(e.toString());
+            }
+          } else {
+            noInternetDialog();
+          }
+        }
+      } else {
+        if (Platform.isAndroid) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginAI()),
+            (Route<dynamic> route) => false, // Remove all previous routes
+          );
+        } else if (Platform.isIOS) {
+          Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+            CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+            (Route<dynamic> route) => false,
+          );
+        }
+      }
+    } else {
+      showMoreImagesUploadDialog();
+    }
+  }
+
   void saveMyAdToDB(String categoryForPostingData) async {
     List<String> url = [];
     if (ref.read(imageProvider).length <= 3) {
@@ -366,7 +545,6 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   final result = await FlutterImageCompress.compressAndGetFile(
                       ref.read(imageProvider)[i].path, targetPath,
                       quality: 50);
-                  print(result);
                   String uniqueName =
                       '${handler.newUser.user!.uid}/$uuid/$i.jpeg';
                   UploadTask task =
@@ -446,10 +624,14 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 if (context.mounted) {
                   if (Platform.isAndroid) {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => const AdUploadedAI()));
+                        builder: (ctx) =>  AdUploadedAI(
+                          categoryName: widget.categoryName,
+                        )));
                   } else if (Platform.isIOS) {
                     Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (ctx) => const AdUploadedAI()));
+                        builder: (ctx) =>  AdUploadedAI(
+                          categoryName: widget.categoryName,
+                        )));
                   }
                 }
               });

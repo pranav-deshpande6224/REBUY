@@ -10,7 +10,7 @@ class Constants {
   static const booksandSports = 'Books & Sports';
   static const electronicandAppliances = 'Electronic & Appliances';
   static const fashion = 'Fashion';
-  static const othere = 'Other';
+  static const other = 'Others';
   static const mobilePhone = 'Mobile Phones';
   static const tablet = 'Tablet';
   static const earphoneHeadPhoneSpeakers = 'EarPhones, HeadPhone, Speakers';

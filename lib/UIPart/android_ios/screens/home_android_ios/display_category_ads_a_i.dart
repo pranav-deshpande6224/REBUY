@@ -11,7 +11,10 @@ import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/other_ads_pagination.dart';
+import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/product_detail_screen_a_i.dart';
+import 'package:resell/constants/constants.dart';
 
 class DisplayCategoryAdsAI extends ConsumerStatefulWidget {
   final String categoryName;
@@ -32,19 +35,27 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
     handler = AuthHandler.authHandlerInstance;
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(showCatAdsProvider.notifier).fetchInitialItems(
-            widget.categoryName,
-            widget.subCategoryName,
-          );
+      if (widget.categoryName == Constants.other) {
+        ref.read(otherAdsprovider.notifier).fetchInitialItems();
+      } else {
+        ref.read(showCatAdsProvider.notifier).fetchInitialItems(
+              widget.categoryName,
+              widget.subCategoryName,
+            );
+      }
     });
     categoryAdScrollController.addListener(() {
       double maxScroll = categoryAdScrollController.position.maxScrollExtent;
       double currentScroll = categoryAdScrollController.position.pixels;
       double delta = MediaQuery.of(context).size.width * 0.20;
       if (maxScroll - currentScroll <= delta) {
-        ref
-            .read(showCatAdsProvider.notifier)
-            .fetchMoreItems(widget.categoryName, widget.subCategoryName);
+        if (widget.categoryName == Constants.other) {
+          ref.read(otherAdsprovider.notifier).fetchMoreItems();
+        } else {
+          ref
+              .read(showCatAdsProvider.notifier)
+              .fetchMoreItems(widget.categoryName, widget.subCategoryName);
+        }
       }
     });
   }
@@ -207,6 +218,15 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
     return [];
   }
 
+  List<Widget> noOtherAdSliver() {
+    if (Platform.isAndroid) {
+      return [noAds()];
+    } else if (Platform.isIOS) {
+      return [refreshOtherIos(), noAds()];
+    }
+    return [];
+  }
+
   SliverToBoxAdapter fetchMoreAdsLoader() {
     return SliverToBoxAdapter(
       child: Padding(
@@ -255,6 +275,160 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
     return [];
   }
 
+  List<Widget> havingOtherAdSliver(OtherAdState otherAdState) {
+    if (Platform.isAndroid) {
+      return [
+        otherData(otherAdState),
+        if (otherAdState.isLoadingMore) fetchMoreAdsLoader()
+      ];
+    } else if (Platform.isIOS) {
+      return [
+        refreshOtherIos(),
+        otherData(otherAdState),
+        if (otherAdState.isLoadingMore) fetchMoreAdsLoader()
+      ];
+    }
+    return [];
+  }
+
+  Widget dataDisplay(Item ad) {
+    return GestureDetector(
+      onTap: () {
+        if (Platform.isAndroid) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) {
+                return ProductDetailScreenAI(
+                  documentReference: ad.documentReference,
+                );
+              },
+            ),
+          );
+        } else if (Platform.isIOS) {
+          Navigator.of(context).push(
+            CupertinoPageRoute(
+              builder: (ctx) {
+                return ProductDetailScreenAI(
+                  documentReference: ad.documentReference,
+                );
+              },
+            ),
+          );
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.grey,
+            width: 1,
+          ),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CachedNetworkImage(
+                imageUrl: ad.images[0],
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+                placeholder: (context, url) {
+                  return Center(
+                    child: Platform.isAndroid
+                        ? const Icon(Icons.photo)
+                        : Platform.isIOS
+                            ? const Icon(CupertinoIcons.photo)
+                            : const SizedBox(),
+                  );
+                },
+                errorWidget: (context, url, error) {
+                  return Center(
+                    child: Icon(
+                      Platform.isAndroid
+                          ? Icons.photo
+                          : Platform.isIOS
+                              ? CupertinoIcons.photo
+                              : null,
+                      size: 30,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '₹ ${ad.price}',
+                    style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.green[700],
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    ad.adTitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.roboto(
+                      fontSize: 16,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(
+                        Platform.isAndroid
+                            ? Icons.person
+                            : Platform.isIOS
+                                ? CupertinoIcons.person
+                                : null,
+                        size: 16,
+                        color: Colors.black87,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        ad.postedBy,
+                        style: GoogleFonts.roboto(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    getDate(ad.timestamp),
+                    style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   SliverPadding catData(CategoryAdsState data) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -263,141 +437,22 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
           childCount: data.items.length,
           (context, index) {
             final catAd = data.items[index];
-            return GestureDetector(
-              onTap: () {
-                if (Platform.isAndroid) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) {
-                        return ProductDetailScreenAI(
-                          documentReference: catAd.documentReference,
-                        );
-                      },
-                    ),
-                  );
-                } else if (Platform.isIOS) {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(
-                      builder: (ctx) {
-                        return ProductDetailScreenAI(
-                          documentReference: catAd.documentReference,
-                        );
-                      },
-                    ),
-                  );
-                }
-              },
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 8,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: catAd.images[0],
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
-                        placeholder: (context, url) {
-                          return Center(
-                            child: Platform.isAndroid
-                                ? const Icon(Icons.photo)
-                                : Platform.isIOS
-                                    ? const Icon(CupertinoIcons.photo)
-                                    : const SizedBox(),
-                          );
-                        },
-                        errorWidget: (context, url, error) {
-                          return Center(
-                            child: Icon(
-                              Platform.isAndroid
-                                  ? Icons.photo
-                                  : Platform.isIOS
-                                      ? CupertinoIcons.photo
-                                      : null,
-                              size: 30,
-                              color: Colors.grey,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '₹ ${catAd.price}',
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.green[700],
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            catAd.adTitle,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              color: Colors.black87,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            children: [
-                              Icon(
-                                Platform.isAndroid
-                                    ? Icons.person
-                                    : Platform.isIOS
-                                        ? CupertinoIcons.person
-                                        : null,
-                                size: 16,
-                                color: Colors.black87,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                catAd.postedBy,
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            getDate(catAd.timestamp),
-                            style: GoogleFonts.roboto(
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return dataDisplay(catAd);
+          },
+        ),
+      ),
+    );
+  }
+
+  SliverPadding otherData(OtherAdState data) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: data.items.length,
+          (context, index) {
+            final otherAd = data.items[index];
+            return dataDisplay(otherAd);
           },
         ),
       ),
@@ -414,6 +469,16 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
     );
   }
 
+  CustomScrollView otherScrollView(OtherAdState otherAdState) {
+    return CustomScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      controller: categoryAdScrollController,
+      slivers: otherAdState.items.isEmpty
+          ? noOtherAdSliver()
+          : havingOtherAdSliver(otherAdState),
+    );
+  }
+
   CupertinoSliverRefreshControl refreshIos() {
     return CupertinoSliverRefreshControl(
       onRefresh: () async {
@@ -421,6 +486,14 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
               widget.categoryName,
               widget.subCategoryName,
             );
+      },
+    );
+  }
+
+  CupertinoSliverRefreshControl refreshOtherIos() {
+    return CupertinoSliverRefreshControl(
+      onRefresh: () async {
+        await ref.read(otherAdsprovider.notifier).refreshItems();
       },
     );
   }
@@ -438,25 +511,44 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
               if (!hasInternet) {
                 return netIssue();
               } else {
-                final catItemState = ref.watch(showCatAdsProvider);
-                return catItemState.when(
-                  data: (catAdState) {
-                    return RefreshIndicator(
-                      color: Colors.blue,
-                      onRefresh: () async {
-                        await ref
-                            .read(showCatAdsProvider.notifier)
-                            .refreshItems(
-                              widget.categoryName,
-                              widget.subCategoryName,
-                            );
-                      },
-                      child: scrollView(catAdState),
-                    );
-                  },
-                  error: (error, _) => Center(child: Text('Error: $error')),
-                  loading: spinner,
-                );
+                if (widget.categoryName == Constants.other) {
+                  final otherItemState = ref.watch(otherAdsprovider);
+                  return otherItemState.when(
+                    data: (otherAdState) {
+                      return RefreshIndicator(
+                        color: Colors.blue,
+                        onRefresh: () async {
+                          await ref
+                              .read(otherAdsprovider.notifier)
+                              .refreshItems();
+                        },
+                        child: otherScrollView(otherAdState),
+                      );
+                    },
+                    error: (error, _) => Center(child: Text('Error: $error')),
+                    loading: spinner,
+                  );
+                } else {
+                  final catItemState = ref.watch(showCatAdsProvider);
+                  return catItemState.when(
+                    data: (catAdState) {
+                      return RefreshIndicator(
+                        color: Colors.blue,
+                        onRefresh: () async {
+                          await ref
+                              .read(showCatAdsProvider.notifier)
+                              .refreshItems(
+                                widget.categoryName,
+                                widget.subCategoryName,
+                              );
+                        },
+                        child: scrollView(catAdState),
+                      );
+                    },
+                    error: (error, _) => Center(child: Text('Error: $error')),
+                    loading: spinner,
+                  );
+                }
               }
             },
             error: (error, _) => Center(child: Text('Error: $error')),
@@ -482,14 +574,25 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
               if (!hasInternet) {
                 return netIssue();
               } else {
-                final catItemState = ref.watch(showCatAdsProvider);
-                return catItemState.when(
-                  data: (catAdState) {
-                    return scrollView(catAdState);
-                  },
-                  error: (error, _) => Center(child: Text('Error: $error')),
-                  loading: spinner,
-                );
+                if (widget.categoryName == Constants.other) {
+                  final otherItemState = ref.watch(otherAdsprovider);
+                  return otherItemState.when(
+                    data: (otherAdState) {
+                      return otherScrollView(otherAdState);
+                    },
+                    error: (error, _) => Center(child: Text('Error: $error')),
+                    loading: spinner,
+                  );
+                } else {
+                  final catItemState = ref.watch(showCatAdsProvider);
+                  return catItemState.when(
+                    data: (catAdState) {
+                      return scrollView(catAdState);
+                    },
+                    error: (error, _) => Center(child: Text('Error: $error')),
+                    loading: spinner,
+                  );
+                }
               }
             },
             error: (error, _) => Center(child: Text('Error: $error')),

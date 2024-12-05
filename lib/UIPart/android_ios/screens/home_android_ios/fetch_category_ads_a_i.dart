@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/display_category_ads_a_i.dart';
+import 'package:resell/constants/constants.dart';
 
 class FetchCategoryAdsAI extends StatelessWidget {
   final String categoryName;
@@ -28,7 +29,7 @@ class FetchCategoryAdsAI extends StatelessWidget {
           elevation: 3,
           backgroundColor: Colors.grey[200],
           title: Text(
-            subCategoryName,
+           categoryName==Constants.other? 'Other' : subCategoryName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.roboto(

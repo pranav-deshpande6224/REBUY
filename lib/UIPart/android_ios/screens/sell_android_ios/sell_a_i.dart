@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/detail_screen_a_i.dart';
+import 'package:resell/UIPart/android_ios/screens/sell_android_ios/product_get_info_a_i.dart';
 import 'package:resell/constants/constants.dart';
 
 class SellAI extends StatefulWidget {
@@ -111,13 +112,51 @@ class _SellAIState extends State<SellAI> {
           : Platform.isIOS
               ? CupertinoIcons.folder_open
               : Icons.photo,
-      categoryTitle: Constants.othere,
-      subCategory: [
-        Constants.mensFashion,
-        Constants.womensFashion,
-      ],
+      categoryTitle: Constants.other,
+      subCategory: [],
     ),
   ];
+
+  Widget getWidget(SellCategory category) {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              category.icon,
+              color: Platform.isAndroid
+                  ? Colors.blue[400]
+                  : Platform.isIOS
+                      ? CupertinoColors.activeBlue
+                      : null,
+              size: 35,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            FittedBox(
+              child: Text(
+                category.categoryTitle,
+                style: GoogleFonts.roboto(
+                  color: Platform.isAndroid
+                      ? Colors.black87
+                      : Platform.isIOS
+                          ? CupertinoColors.black
+                          : null,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget body() {
     return SafeArea(
@@ -142,69 +181,56 @@ class _SellAIState extends State<SellAI> {
             ),
             itemBuilder: (ctx, index) {
               final category = categoryList[index];
-              return GestureDetector(
-                onTap: () {
-                  if (Platform.isAndroid) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => DetailScreenAI(
-                          categoryName: category.categoryTitle,
-                          subCategoryList: category.subCategory,
-                          isPostingData: true,
-                        ),
-                      ),
-                    );
-                  } else if (Platform.isIOS) {
-                    Navigator.of(context, rootNavigator: true).push(
-                      CupertinoPageRoute(
-                        builder: (ctx) => DetailScreenAI(
-                          categoryName: category.categoryTitle,
-                          subCategoryList: category.subCategory,
-                          isPostingData: true,
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          category.icon,
-                          color: Platform.isAndroid
-                              ? Colors.blue[400]
-                              : Platform.isIOS
-                                  ? CupertinoColors.activeBlue
-                                  : null,
-                          size: 35,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        FittedBox(
-                          child: Text(
-                            category.categoryTitle,
-                            style: GoogleFonts.roboto(
-                              color: Platform.isAndroid
-                                  ? Colors.black87
-                                  : Platform.isIOS
-                                      ? CupertinoColors.black
-                                      : null,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+              if (category.categoryTitle == Constants.other) {
+                return GestureDetector(
+                    onTap: () {
+                      if (Platform.isAndroid) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (ctx) => const ProductGetInfoAI(
+                              categoryName: Constants.other,
+                              subCategoryName: '',
                             ),
                           ),
+                        );
+                      } else if (Platform.isIOS) {
+                        Navigator.of(context, rootNavigator: true).push(
+                          CupertinoPageRoute(
+                            builder: (ctx) => const ProductGetInfoAI(
+                              categoryName: Constants.other,
+                              subCategoryName: '',
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                    child: getWidget(category));
+              }
+              return GestureDetector(
+                  onTap: () {
+                    if (Platform.isAndroid) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (ctx) => DetailScreenAI(
+                            categoryName: category.categoryTitle,
+                            subCategoryList: category.subCategory,
+                            isPostingData: true,
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
+                      );
+                    } else if (Platform.isIOS) {
+                      Navigator.of(context, rootNavigator: true).push(
+                        CupertinoPageRoute(
+                          builder: (ctx) => DetailScreenAI(
+                            categoryName: category.categoryTitle,
+                            subCategoryList: category.subCategory,
+                            isPostingData: true,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: getWidget(category));
             },
           ),
         ),

@@ -10,6 +10,7 @@ import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
+import 'package:resell/UIPart/android_ios/screens/home_android_ios/fetch_category_ads_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/product_detail_screen_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/detail_screen_a_i.dart';
 import 'package:resell/constants/constants.dart';
@@ -113,6 +114,15 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         Constants.mensFashion,
         Constants.womensFashion,
       ],
+    ),
+    SellCategory(
+      icon: Platform.isAndroid
+          ? Icons.other_houses
+          : Platform.isIOS
+              ? CupertinoIcons.folder_open
+              : Icons.photo,
+      categoryTitle: Constants.other,
+      subCategory: [],
     ),
   ];
   @override
@@ -264,76 +274,110 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
               itemCount: categoryList.length,
               itemBuilder: (ctx, index) {
                 final category = categoryList[index];
+                if (category.categoryTitle == Constants.other) {
+                  return GestureDetector(
+                    onTap: () => moveToFetchOtherCategoryAdsAI(category),
+                    child: childBody(category),
+                  );
+                }
                 return GestureDetector(
-                  onTap: () {
-                    if (Platform.isAndroid) {
-                      Navigator.of(
-                        context,
-                      ).push(
-                        MaterialPageRoute(
-                          builder: (ctx) => DetailScreenAI(
-                            categoryName: category.categoryTitle,
-                            subCategoryList: category.subCategory,
-                            isPostingData: false,
-                          ),
-                        ),
-                      );
-                    } else if (Platform.isIOS) {
-                      Navigator.of(context, rootNavigator: true).push(
-                        CupertinoPageRoute(
-                          builder: (ctx) => DetailScreenAI(
-                            categoryName: category.categoryTitle,
-                            subCategoryList: category.subCategory,
-                            isPostingData: false,
-                          ),
-                        ),
-                      );
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 120,
-                        height: double.infinity,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 6,
-                              child: Icon(
-                                categoryList[index].icon,
-                                size: 50,
-                                color: Platform.isAndroid
-                                    ? Colors.blue
-                                    : Platform.isIOS
-                                        ? CupertinoColors.activeBlue
-                                        : Colors.blue,
-                              ),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                categoryList[index].categoryTitle,
-                                style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      )
-                    ],
-                  ),
+                  onTap: () => moveToDetailScreenAI(category),
+                  child: childBody(category),
                 );
               },
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void moveToFetchOtherCategoryAdsAI(SellCategory category) {
+    if (Platform.isAndroid) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (ctx) => FetchCategoryAdsAI(
+            categoryName: category.categoryTitle,
+            subCategoryName: '',
+          ),
+        ),
+      );
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).push(
+        CupertinoPageRoute(
+          builder: (ctx) => FetchCategoryAdsAI(
+            categoryName: category.categoryTitle,
+            subCategoryName: '',
+          ),
+        ),
+      );
+    }
+  }
+
+  void moveToDetailScreenAI(SellCategory category) {
+    if (Platform.isAndroid) {
+      Navigator.of(
+        context,
+      ).push(
+        MaterialPageRoute(
+          builder: (ctx) => DetailScreenAI(
+            categoryName: category.categoryTitle,
+            subCategoryList: category.subCategory,
+            isPostingData: false,
+          ),
+        ),
+      );
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).push(
+        CupertinoPageRoute(
+          builder: (ctx) => DetailScreenAI(
+            categoryName: category.categoryTitle,
+            subCategoryList: category.subCategory,
+            isPostingData: false,
+          ),
+        ),
+      );
+    }
+  }
+
+  Widget childBody(SellCategory category) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 120,
+          height: double.infinity,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Icon(
+                  category.icon,
+                  size: 50,
+                  color: Platform.isAndroid
+                      ? Colors.blue
+                      : Platform.isIOS
+                          ? CupertinoColors.activeBlue
+                          : Colors.blue,
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: Text(
+                  textAlign: TextAlign.center,
+                  category.categoryTitle,
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        )
+      ],
     );
   }
 

@@ -337,7 +337,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
               ),
             ),
           ),
-          SizedBox(
+         const  SizedBox(
             width: 10,
           ),
           Expanded(
@@ -432,7 +432,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                     },
                     child: Container(
                       height: 40,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           bottom: BorderSide(width: 0.2),
                         ),
@@ -450,7 +450,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                                 style: GoogleFonts.roboto(),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Expanded(
@@ -640,9 +640,9 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                                             context: context,
                                             builder: (context) =>
                                                 CupertinoAlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                   'No Internet Connection'),
-                                              content: Text(
+                                              content: const Text(
                                                 'Please check your internet connection and try again.',
                                               ),
                                               actions: [
@@ -650,7 +650,7 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
-                                                  child: Text('OK'),
+                                                  child: const Text('OK'),
                                                 ),
                                               ],
                                             ),
@@ -658,7 +658,7 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                                         }
                                       }
                                     : null,
-                                child: Icon(CupertinoIcons.paperplane),
+                                child: const Icon(CupertinoIcons.paperplane),
                               );
                             },
                           )

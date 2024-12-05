@@ -12,6 +12,7 @@ import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/widgets/ad_card.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_ads.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';
+import 'package:resell/constants/constants.dart';
 
 class MyadsAI extends ConsumerStatefulWidget {
   const MyadsAI({super.key});
@@ -44,6 +45,38 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
   void dispose() {
     activeAdScrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> sellOtherAd(Item item) async {
+    final firestore = handler.fireStore;
+    await firestore.runTransaction(
+      (transaction) async {
+        DocumentReference<Map<String, dynamic>> ref = firestore
+            .collection('users')
+            .doc(handler.newUser.user!.uid)
+            .collection('MyActiveAds')
+            .doc(item.id);
+        DocumentSnapshot<Map<String, dynamic>> snapshot = await ref.get();
+        DocumentReference<Map<String, dynamic>> docRef = snapshot.reference;
+        Query<Map<String, dynamic>> allAdsQuery = firestore
+            .collection('AllAds')
+            .where('adReference', isEqualTo: docRef);
+        QuerySnapshot<Map<String, dynamic>> querySnapshot =
+            await allAdsQuery.get();
+
+        Query<Map<String, dynamic>> otherAdsQuery = firestore
+            .collection('users')
+            .doc(handler.newUser.user!.uid)
+            .collection('others')
+            .where('adReference', isEqualTo: docRef);
+        QuerySnapshot<Map<String, dynamic>> otherQuerySnapshot =
+            await otherAdsQuery.get();
+        await querySnapshot.docs.first.reference.delete();
+        await otherQuerySnapshot.docs.first.reference.delete();
+        item = item.copyWith(isAvailable: false);
+        await docRef.update(item.toJson());
+      },
+    );
   }
 
   Future<void> runTheTransaction(Item item) async {
@@ -153,7 +186,11 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                 },
               );
             }
-            await runTheTransaction(item);
+            if (item.categoryName == Constants.other) {
+              await sellOtherAd(item);
+            } else {
+              await runTheTransaction(item);
+            }
             ref.read(showActiveAdsProvider.notifier).deleteItem(item);
             if (sellContext.mounted) {
               Navigator.of(sellContext).pop();
@@ -182,7 +219,9 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                         },
                         child: Text(
                           'Okay',
-                          style: GoogleFonts.roboto(color: Colors.blue),
+                          style: GoogleFonts.roboto(
+                            color: Colors.blue,
+                          ),
                         ),
                       )
                     ],

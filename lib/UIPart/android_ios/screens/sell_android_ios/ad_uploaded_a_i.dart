@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:resell/constants/constants.dart';
 
 class AdUploadedAI extends StatelessWidget {
-  const AdUploadedAI({super.key});
+  final String categoryName;
+  const AdUploadedAI({required this.categoryName, super.key});
 
   Widget body(BuildContext context) {
     return SafeArea(
@@ -64,9 +66,14 @@ class AdUploadedAI extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+                  if (categoryName == Constants.other) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  } else {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: const Text(
                   'Continue',
@@ -97,9 +104,14 @@ class AdUploadedAI extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+                   if (categoryName == Constants.other) {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  } else {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                  }
                 },
               ),
             ),
