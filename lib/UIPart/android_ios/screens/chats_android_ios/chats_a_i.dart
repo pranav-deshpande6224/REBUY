@@ -151,8 +151,17 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
   }
 
   String getTime(DateTime time) {
-    final formattedTime = DateFormat('hh:mm a').format(time);
-    return formattedTime;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    if (time.isAfter(today)) {
+      return DateFormat('hh:mm a')
+          .format(time); 
+    } else if (time.isAfter(yesterday)) {
+      return 'Yesterday';
+    } else {
+      return DateFormat('yyyy-MM-dd').format(time);
+    }
   }
 
   Future<void> deleteConversation(String conversationId) async {
@@ -311,7 +320,7 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
                                   child: snapshot.data!.isEmpty
                                       ? Center(
                                           child: Column(
-                                            mainAxisSize: MainAxisSize.min ,
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Image.asset(
                                                 'assets/images/emoji.png',
