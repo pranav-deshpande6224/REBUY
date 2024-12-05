@@ -73,28 +73,15 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
     final DateTime now = DateTime.now();
     final DateTime dateTime =
         DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
 
-    final DateFormat timeFormat =
-        DateFormat('h:mm a'); // e.g., 12:30 AM, 1:00 PM
-    final String formattedTime = timeFormat.format(dateTime);
-
-    final Duration difference = now.difference(dateTime);
-
-    if (difference.inDays == 0) {
-      // Same day
-      return 'last seen today at $formattedTime';
-    } else if (difference.inDays == 1) {
-      // Yesterday
-      return 'last seen yesterday at $formattedTime';
-    } else if (difference.inDays < 7) {
-      // Within the last week
-      final String weekday =
-          DateFormat.EEEE().format(dateTime); // e.g., Monday, Tuesday
-      return 'last seen on $weekday at $formattedTime';
+    if (dateTime.isAfter(today)) {
+      return "Last seen Today ${DateFormat('hh:mm a').format(dateTime)}";
+    } else if (dateTime.isAfter(yesterday)) {
+      return 'Last seen Yesterday ${DateFormat('hh:mm a').format(dateTime)}';
     } else {
-      // More than a week ago, display date and time
-      final DateFormat dateFormat = DateFormat('yMMMd'); // e.g., Oct 24, 2024
-      return 'last seen on ${dateFormat.format(dateTime)} at $formattedTime';
+      return 'Last seen ${DateFormat('yyyy-MM-dd').format(dateTime)}';
     }
   }
 
