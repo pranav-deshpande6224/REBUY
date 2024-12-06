@@ -67,7 +67,7 @@ class ShowHomeAds extends StateNotifier<AsyncValue<HomeAdState>> {
     if (_isLoadingHome) return;
     _lastHomeDocument = null;
     _hasMoreHome = true;
-    state = AsyncValue.loading();
+    state = const AsyncValue.loading();
     await fetchInitialItems();
   }
 
@@ -75,7 +75,7 @@ class ShowHomeAds extends StateNotifier<AsyncValue<HomeAdState>> {
     _hasMoreHome = true;
     _isLoadingHome = false;
     _lastHomeDocument = null;
-    state = AsyncValue.loading();
+    state = const AsyncValue.loading();
   }
 
   Future<void> fetchMoreItems() async {
@@ -88,7 +88,7 @@ class ShowHomeAds extends StateNotifier<AsyncValue<HomeAdState>> {
     final fireStore = handler.fireStore;
     if (handler.newUser.user != null) {
       try {
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
         Query<Map<String, dynamic>> query = fireStore
             .collection('AllAds')
             .orderBy('createdAt', descending: true)

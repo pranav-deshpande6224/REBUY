@@ -5,7 +5,7 @@ class Policies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
+    return const CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('Policies'),
       ),

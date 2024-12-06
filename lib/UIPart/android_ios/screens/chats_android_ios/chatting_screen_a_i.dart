@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/active_inactive_send.dart';
+import 'package:resell/UIPart/android_ios/Providers/item_object_stream.dart';
 import 'package:resell/UIPart/android_ios/Providers/message_reply_provider.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';
@@ -52,21 +55,25 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
-    chatFocusNode.addListener(() {
-      if (chatFocusNode.hasFocus) {
-        Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      chatFocusNode.addListener(() {
+        if (chatFocusNode.hasFocus) {
+          Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
+        }
+      });
+      Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
     });
-    Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
     super.initState();
   }
 
   void scrollDown() {
-    messageController.animateTo(
-      messageController.position.maxScrollExtent + 300,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.fastOutSlowIn,
-    );
+    if (messageController.hasClients) {
+      messageController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   String _formatLastSeen(int millisecondsSinceEpoch) {
@@ -199,7 +206,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
         var message = Message.fromJson(doc.data());
         messages.add(message);
       }
-      return messages.toList();
+      return messages.reversed.toList();
     });
   }
 
@@ -368,6 +375,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
 
   Widget android() {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: getAndroidAppBar(),
       body: PopScope(
         onPopInvokedWithResult: (didPop, result) {
@@ -410,15 +418,16 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
               );
             }
             return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    detailsAboutProduct(),
-                    Expanded(
-                      child: ListView.builder(
+              child: Column(
+                children: [
+                  detailsAboutProduct(),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ListView.separated(
+                        reverse: true,
+                        shrinkWrap: true,
                         controller: messageController,
-                        itemCount: snapshot.data!.length,
                         itemBuilder: (ctx, index) {
                           final message = snapshot.data![index];
                           if (!message.isSeen &&
@@ -430,6 +439,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                           }
                           if (message.senderId == handler.newUser.user!.uid) {
                             return SwipeTo(
+                              key: UniqueKey(),
                               onRightSwipe: (details) {
                                 ref.read(messageReplyProvider.notifier).update(
                                       (state) => MessageReply(
@@ -447,6 +457,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                             );
                           }
                           return SwipeTo(
+                            key: UniqueKey(),
                             onRightSwipe: (details) {
                               ref.read(messageReplyProvider.notifier).update(
                                     (state) => MessageReply(
@@ -463,81 +474,74 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                             ),
                           );
                         },
+                        separatorBuilder: (ctx, index) {
+                          return const SizedBox(
+                            height: 5,
+                          );
+                        },
+                        itemCount: snapshot.data!.length,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    StreamBuilder(
-                      stream: widget.documentReference.snapshots(),
-                      builder: (ctx, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: Platform.isAndroid
-                                ? const CircularProgressIndicator(
-                                    color: Colors.blue,
-                                  )
-                                : const CupertinoActivityIndicator(),
-                          );
-                        }
-                        if (snapshot.hasError) {
-                          return const Center(
-                            child: Text('Something went wrong'),
-                          );
-                        }
-                        Timestamp? timeStamp =
-                            snapshot.data!.data()!['createdAt'];
-                        timeStamp ??= Timestamp.fromMicrosecondsSinceEpoch(
-                            DateTime.now().millisecondsSinceEpoch);
-                        final item = Item.fromJson(
-                          snapshot.data!.data()!,
-                          snapshot.data!,
-                          snapshot.data!.reference,
-                        );
-
-                        return item.isAvailable
-                            ? ChatMessageTextField(
-                                scrollDown: scrollDown,
-                                documentReference: widget.documentReference,
-                                chatFocusNode: chatFocusNode,
-                                name: widget.name,
-                                senderId: widget.senderId,
-                                recieverId: widget.recieverId,
-                                item: item,
-                              )
-                            : Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Platform.isAndroid
-                                        ? Colors.grey[200]
-                                        : CupertinoColors.systemGrey,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10,
-                                        bottom: 10,
-                                        left: 10,
-                                        right: 10),
-                                    child: Center(
-                                      child: Text(
-                                        "Item Sold Out....",
-                                        style: GoogleFonts.roboto(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  textFieldOrContainer(),
+                  const SizedBox(
+                    height: 20,
+                  )
+                ],
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+
+  Widget textFieldOrContainer() {
+    final itemAsyncValue =
+        ref.watch(itemStreamProvider(widget.documentReference));
+    return itemAsyncValue.when(
+      data: (item) {
+        return item.isAvailable
+            ? ChatMessageTextField(
+                scrollDown: scrollDown,
+                documentReference: widget.documentReference,
+                chatFocusNode: chatFocusNode,
+                name: widget.name,
+                senderId: widget.senderId,
+                recieverId: widget.recieverId,
+                item: item,
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Platform.isAndroid
+                        ? Colors.grey[200]
+                        : CupertinoColors.systemGrey,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 10, right: 10),
+                    child: Center(
+                      child: Text(
+                        "Item Sold Out....",
+                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+      },
+      error: (error, stackTrace) => const Center(
+        child: Text('Error in the code'),
+      ),
+      loading: () => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.blue,
         ),
       ),
     );
@@ -711,108 +715,66 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                     height: 10,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      controller: messageController,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (ctx, index) {
-                        final message = snapshot.data![index];
-                        if (!message.isSeen &&
-                            message.receiverId == handler.newUser.user!.uid) {
-                          updateTheDBOfSeenMesages(
-                              message.messageId, widget.adId);
-                        }
-                        if (message.senderId == handler.newUser.user!.uid) {
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ListView.separated(
+                        reverse: true,
+                        shrinkWrap: true,
+                        controller: messageController,
+                        itemBuilder: (ctx, index) {
+                          final message = snapshot.data![index];
+                          if (!message.isSeen &&
+                              message.receiverId == handler.newUser.user!.uid) {
+                            updateTheDBOfSeenMesages(
+                              message.messageId,
+                              widget.adId,
+                            );
+                          }
+                          if (message.senderId == handler.newUser.user!.uid) {
+                            return SwipeTo(
+                              onRightSwipe: (details) {
+                                ref.read(messageReplyProvider.notifier).update(
+                                      (state) => MessageReply(
+                                          message: message.text, isMe: true),
+                                    );
+                              },
+                              child: ChatBubble(
+                                message: message.text,
+                                date: message.timeSent,
+                                isSender: true,
+                                isRead: message.isSeen,
+                                repliedText: message.repliedMessage,
+                                userName: message.repliedTo,
+                              ),
+                            );
+                          }
                           return SwipeTo(
                             onRightSwipe: (details) {
                               ref.read(messageReplyProvider.notifier).update(
                                     (state) => MessageReply(
-                                        message: message.text, isMe: true),
+                                        message: message.text, isMe: false),
                                   );
                             },
                             child: ChatBubble(
                               message: message.text,
                               date: message.timeSent,
-                              isSender: true,
+                              isSender: false,
                               isRead: message.isSeen,
                               repliedText: message.repliedMessage,
                               userName: message.repliedTo,
                             ),
                           );
-                        }
-                        return SwipeTo(
-                          onRightSwipe: (details) {
-                            ref.read(messageReplyProvider.notifier).update(
-                                  (state) => MessageReply(
-                                      message: message.text, isMe: false),
-                                );
-                          },
-                          child: ChatBubble(
-                            message: message.text,
-                            date: message.timeSent,
-                            isSender: false,
-                            isRead: message.isSeen,
-                            repliedText: message.repliedMessage,
-                            userName: message.repliedTo,
-                          ),
-                        );
-                      },
+                        },
+                        separatorBuilder: (ctx, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                        itemCount: snapshot.data!.length,
+                      ),
                     ),
                   ),
-                  StreamBuilder(
-                    stream: widget.documentReference.snapshots(),
-                    builder: (ctx, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CupertinoActivityIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return const Center(
-                          child: Text('Something went wrong'),
-                        );
-                      }
-                      Timestamp? timeStamp =
-                          snapshot.data!.data()!['createdAt'];
-                      timeStamp ??= Timestamp.fromMicrosecondsSinceEpoch(
-                          DateTime.now().millisecondsSinceEpoch);
-                      final item = Item.fromJson(
-                        snapshot.data!.data()!,
-                        snapshot.data!,
-                        snapshot.data!.reference,
-                      );
-
-                      return item.isAvailable
-                          ? ChatMessageTextField(
-                              scrollDown: scrollDown,
-                              documentReference: widget.documentReference,
-                              chatFocusNode: chatFocusNode,
-                              name: widget.name,
-                              senderId: widget.senderId,
-                              recieverId: widget.recieverId,
-                              item: item,
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: CupertinoColors.systemGrey,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, bottom: 10, left: 10, right: 10),
-                                  child: Center(
-                                    child: Text(
-                                      "Item Sold Out....",
-                                      style: GoogleFonts.roboto(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                    },
-                  ),
+                  textFieldOrContainer(),
                 ],
               ),
             );
@@ -984,6 +946,17 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                 );
           },
         );
+        try {
+          final functions = FirebaseFunctions.instance;
+          await functions.httpsCallable('myFunction').call({
+            'chatId': "${widget.senderId}_${item.id}",
+            'recipientUid': widget.recieverId,
+            'message': message,
+          });
+        } catch (e) {
+           print('Error sending message: $e');
+        }
+        widget.scrollDown();
       } catch (e) {
         if (Platform.isAndroid) {
           showDialog(

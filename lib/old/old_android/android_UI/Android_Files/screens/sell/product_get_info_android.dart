@@ -623,7 +623,6 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
                 final result = await FlutterImageCompress.compressAndGetFile(
                     ref.read(imageProvider)[i].path, targetPath,
                     quality: 50);
-                print(result);
                 String uniqueName =
                     '${authHandler.newUser.user!.uid}/$uuid/$i.jpeg';
                 UploadTask task =

@@ -118,7 +118,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
+                    const Icon(
                       CupertinoIcons.wifi_slash,
                       color: CupertinoColors.activeBlue,
                       size: 40,
@@ -151,7 +151,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                         const Icon(
                             CupertinoIcons.wifi_slash,
                             color: CupertinoColors.activeBlue,
                             size: 40,
@@ -187,8 +187,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CupertinoActivityIndicator(),
-                                SizedBox(
+                              const  CupertinoActivityIndicator(),
+                              const  SizedBox(
                                   height: 10,
                                 ),
                                 Text(
@@ -201,7 +201,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                         }
                         if (snapshot.hasError) {
                           // TODO need to handle this error case
-                          return Center(
+                          return const Center(
                             child: Text("Something went wrong"),
                           );
                         }
@@ -457,14 +457,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 error: (error, _) => Center(
                   child: Text('Error: $error'),
                 ),
-                loading: () => Center(
+                loading: () =>const Center(
                   child: CupertinoActivityIndicator(),
                 ),
               );
             }
           },
           error: (error, _) => Center(child: Text('Error: $error')),
-          loading: () => Center(child: CupertinoActivityIndicator()),
+          loading: () =>const Center(child: CupertinoActivityIndicator()),
         ),
       ),
     );

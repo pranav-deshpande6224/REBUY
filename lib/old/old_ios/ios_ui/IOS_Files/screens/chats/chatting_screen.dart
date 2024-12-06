@@ -593,7 +593,7 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                           : const SizedBox(),
                       Row(
                         children: [
-                          SizedBox(
+                         const SizedBox(
                             width: 10,
                           ),
                           Expanded(

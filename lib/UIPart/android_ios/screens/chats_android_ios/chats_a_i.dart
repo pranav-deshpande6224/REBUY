@@ -154,8 +154,7 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     if (time.isAfter(today)) {
-      return DateFormat('hh:mm a')
-          .format(time); 
+      return DateFormat('hh:mm a').format(time);
     } else if (time.isAfter(yesterday)) {
       return 'Yesterday';
     } else {

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/constants/constants.dart';
 
 class ForgetPasswordAndroid extends StatefulWidget {
@@ -42,7 +43,7 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundColor: Colors.white,
                     child: Center(
                       child: Icon(
@@ -77,15 +78,15 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                           hintText: 'Email',
                           prefixIcon: const Icon(Icons.email),
                           errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red),
+                            borderSide:const BorderSide(color: Colors.red),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide:const BorderSide(color: Colors.black),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
+                            borderSide:const BorderSide(color: Colors.black),
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
@@ -99,7 +100,7 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       SizedBox(
@@ -116,7 +117,7 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                           },
                           child: Text(
                             'Submit',
-                            style: TextStyle(color: Colors.white),
+                            style: GoogleFonts.roboto(color: Colors.white),
                           ),
                         ),
                       )

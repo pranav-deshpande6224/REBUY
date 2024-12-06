@@ -10,11 +10,11 @@ class ImageDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(),
+      navigationBar:const CupertinoNavigationBar(),
       child: SafeArea(
         child: PhotoViewGallery.builder(
-          scrollPhysics: BouncingScrollPhysics(),
-          backgroundDecoration: BoxDecoration(
+          scrollPhysics: const BouncingScrollPhysics(),
+          backgroundDecoration: const BoxDecoration(
             color: Constants.white,
           ),
           itemCount: imageUrl.length,
@@ -28,7 +28,7 @@ class ImageDetailScreen extends StatelessWidget {
             );
           },
           loadingBuilder: (context, event) {
-            return Center(
+            return const Center(
               child: CupertinoActivityIndicator(),
             );
           },

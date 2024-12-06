@@ -271,11 +271,25 @@ class AuthHandler {
             'firstName': firstName,
             'online': true,
             'lastSeen': DateTime.now().millisecondsSinceEpoch,
+            'fcmToken': ''
           },
         );
       } catch (e) {
         if (!context.mounted) return;
         showErrorDialog(context, 'Alert', e.toString());
+      }
+    }
+  }
+
+  Future<void> storeFCMToken(String token) async {
+    if (newUser.user != null) {
+      try {
+        await fireStore
+            .collection('users')
+            .doc(newUser.user!.uid)
+            .update({'fcmToken': token});
+      } catch (e) {
+        // HANDLE THIS CASE OF ERROR LATER
       }
     }
   }

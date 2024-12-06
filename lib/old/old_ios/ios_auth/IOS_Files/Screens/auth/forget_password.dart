@@ -121,9 +121,9 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                   child: Container(
                     height: 40,
                     width: 40,
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                         color: Constants.white, shape: BoxShape.circle),
-                    child: Icon(
+                    child:const Icon(
                       CupertinoIcons.back,
                       size: 30,
                       color: CupertinoColors.activeBlue,

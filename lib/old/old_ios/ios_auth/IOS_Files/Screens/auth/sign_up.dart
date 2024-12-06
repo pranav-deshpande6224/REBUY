@@ -301,9 +301,9 @@ class _SignUpState extends ConsumerState<SignUp> {
                     child: Container(
                       height: 40,
                       width: 40,
-                      decoration: BoxDecoration(
+                      decoration:const BoxDecoration(
                           color: Constants.white, shape: BoxShape.circle),
-                      child: Icon(
+                      child:const Icon(
                         CupertinoIcons.back,
                         size: 30,
                         color: CupertinoColors.activeBlue,
@@ -493,7 +493,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration:const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -504,7 +504,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordContainEightChar
-                                  ? Icon(
+                                  ?const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -512,7 +512,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                          SizedBox(
+                         const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -524,13 +524,13 @@ class _SignUpState extends ConsumerState<SignUp> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration:const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -541,7 +541,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordContainUppercase
-                                  ? Icon(
+                                  ? const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -549,7 +549,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -559,13 +559,13 @@ class _SignUpState extends ConsumerState<SignUp> {
                           )
                         ],
                       ),
-                      SizedBox(
+                     const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration:const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -576,7 +576,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordCOntainNumber
-                                  ? Icon(
+                                  ?const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -584,7 +584,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -596,13 +596,13 @@ class _SignUpState extends ConsumerState<SignUp> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -613,7 +613,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordContainSpecialChar
-                                  ? Icon(
+                                  ?const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -621,7 +621,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                          SizedBox(
+                         const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -633,7 +633,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       )
                     ],
                   ),
-                  SizedBox(
+                 const SizedBox(
                     height: 10,
                   ),
                   Consumer(

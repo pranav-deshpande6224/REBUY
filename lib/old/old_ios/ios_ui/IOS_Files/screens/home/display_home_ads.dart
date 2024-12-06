@@ -127,7 +127,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                const Icon(
                   CupertinoIcons.wifi_slash,
                   color: CupertinoColors.activeBlue,
                   size: 40,
@@ -159,7 +159,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         CupertinoIcons.wifi_slash,
                         color: CupertinoColors.activeBlue,
                         size: 40,
@@ -192,7 +192,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                   data: (homeState) {
                     if (homeState.items.isEmpty) {
                       return CustomScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
+                        physics:const AlwaysScrollableScrollPhysics(),
                         controller: homeAdScrollController,
                         slivers: [
                           CupertinoSliverRefreshControl(
@@ -200,7 +200,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               ref.read(homeAdsprovider.notifier).refreshItems();
                             },
                           ),
-                          SliverToBoxAdapter(
+                         const SliverToBoxAdapter(
                             child: SizedBox(
                               height: 10,
                             ),
@@ -217,7 +217,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               ),
                             ),
                           ),
-                          SliverToBoxAdapter(
+                        const  SliverToBoxAdapter(
                             child: SizedBox(
                               height: 15,
                             ),
@@ -313,14 +313,14 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                     }
                     return CustomScrollView(
                       controller: homeAdScrollController,
-                      physics: AlwaysScrollableScrollPhysics(),
+                      physics:const AlwaysScrollableScrollPhysics(),
                       slivers: [
                         CupertinoSliverRefreshControl(
                           onRefresh: () async {
                             ref.read(homeAdsprovider.notifier).refreshItems();
                           },
                         ),
-                        SliverToBoxAdapter(
+                        const SliverToBoxAdapter(
                           child: SizedBox(
                             height: 10,
                           ),
@@ -337,7 +337,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                             ),
                           ),
                         ),
-                        SliverToBoxAdapter(
+                        const SliverToBoxAdapter(
                           child: SizedBox(
                             height: 15,
                           ),
@@ -607,7 +607,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               },
                             ),
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               childAspectRatio: 0.75,
                               crossAxisSpacing: 10,
@@ -623,10 +623,10 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    CupertinoActivityIndicator(
+                                    const CupertinoActivityIndicator(
                                       radius: 15,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10,
                                     ),
                                     Text(
@@ -649,7 +649,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          CupertinoActivityIndicator(
+                          const CupertinoActivityIndicator(
                             radius: 15,
                           ),
                           const SizedBox(
@@ -669,12 +669,12 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
               }
             },
             error: (error, _) => Center(child: Text('Error: $error')),
-            loading: () => Center(child: CupertinoActivityIndicator()),
+            loading: () => const Center(child: CupertinoActivityIndicator()),
           );
         }
       },
       error: (error, _) => Center(child: Text('Error: $error')),
-      loading: () => Center(child: CupertinoActivityIndicator()),
+      loading: () => const Center(child: CupertinoActivityIndicator()),
     );
   }
 }

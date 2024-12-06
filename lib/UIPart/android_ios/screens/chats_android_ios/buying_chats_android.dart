@@ -358,7 +358,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.roboto(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+                                                fontSize: 16,
                                               ),
                                             ),
                                             Text(
@@ -367,7 +367,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.roboto(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 15,
+                                                fontSize: 13,
                                                 color: Colors.blue,
                                               ),
                                             )

@@ -2,6 +2,7 @@ import 'dart:async';
 
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/bottom_nav_android.dart';
@@ -98,7 +99,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
               ),
               Text(
                 'An Email link  sent to the mail id',
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -111,7 +112,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   widget.email,
-                  style: TextStyle(
+                  style: GoogleFonts.roboto(
                     fontSize: 20,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
@@ -123,7 +124,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
               ),
               Text(
                 'Link is for verification of your Email',
-                style: TextStyle(
+                style: GoogleFonts.roboto(
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -151,13 +152,19 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                           return AlertDialog(
                             title: Text(
                               "Alert",
+                              style: GoogleFonts.roboto(
+                                
+                              )
                             ),
                             content: Text(
                               "A New verification link will be sent to your email address ${widget.email}",
+                              style: GoogleFonts.roboto(
+                                
+                              )
                             ),
                             actions: [
                               TextButton(
-                                child: Text("Okay"),
+                                child: Text("Okay",style: GoogleFonts.roboto(),),
                                 onPressed: () {
                                   resendEmailLink();
                                   Navigator.of(ctx).pop();
@@ -172,9 +179,9 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                           context: context,
                           builder: (ctx) {
                             return AlertDialog(
-                              title: Text('No Internet'),
+                              title: Text('No Internet',style: GoogleFonts.roboto(),),
                               content:
-                                  Text('Please check your internet connection'),
+                                  Text('Please check your internet connection',style: GoogleFonts.roboto(),),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -182,7 +189,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                                   },
                                   child: Text(
                                     'Okay',
-                                    style: TextStyle(color: Colors.blue),
+                                    style: GoogleFonts.roboto(color: Colors.blue),
                                   ),
                                 ),
                               ],
@@ -192,7 +199,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                   },
                   child: Text(
                     'ReSend Email',
-                    style: TextStyle(
+                    style: GoogleFonts.roboto(
                       color: Colors.white,
                     ),
                   ),

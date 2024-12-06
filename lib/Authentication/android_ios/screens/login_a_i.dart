@@ -784,7 +784,6 @@ class _LoginAIState extends ConsumerState<LoginAI> {
   }
 
   Widget dontHaveAccount() {
-    print("reaching here of don't have account");
     if (Platform.isAndroid) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,

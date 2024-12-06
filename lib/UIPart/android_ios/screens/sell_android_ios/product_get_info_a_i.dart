@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:resell/Authentication/Providers/error.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
@@ -461,13 +462,12 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   if (Platform.isAndroid) {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (ctx) => AdUploadedAI(
-                          categoryName: widget.categoryName,
-                        )));
+                              categoryName: widget.categoryName,
+                            )));
                   } else if (Platform.isIOS) {
                     Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (ctx) =>  AdUploadedAI(
-                          categoryName: widget.categoryName
-                        )));
+                        builder: (ctx) =>
+                            AdUploadedAI(categoryName: widget.categoryName)));
                   }
                 }
               });
@@ -624,14 +624,14 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 if (context.mounted) {
                   if (Platform.isAndroid) {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) =>  AdUploadedAI(
-                          categoryName: widget.categoryName,
-                        )));
+                        builder: (ctx) => AdUploadedAI(
+                              categoryName: widget.categoryName,
+                            )));
                   } else if (Platform.isIOS) {
                     Navigator.of(context).push(CupertinoPageRoute(
-                        builder: (ctx) =>  AdUploadedAI(
-                          categoryName: widget.categoryName,
-                        )));
+                        builder: (ctx) => AdUploadedAI(
+                              categoryName: widget.categoryName,
+                            )));
                   }
                 }
               });
@@ -793,22 +793,98 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
   }
 
   void _cameraPressed(BuildContext ctx) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 50,
-    );
-    if (image == null) return;
-    ref.read(imageProvider.notifier).addImage([XFile(image.path)]);
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+      );
+      if (image == null) return;
+      ref.read(imageProvider.notifier).addImage([XFile(image.path)]);
+    } catch (e) {
+      var status = await Permission.camera.status;
+      if (status.isDenied) {
+        settingsDialog();
+      } else {
+        debugPrint('Permission denied');
+      }
+    }
+  }
+
+  void settingsDialog() {
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(
+              'Permission Denied',
+              style: GoogleFonts.roboto(),
+            ),
+            content: Text(
+              'Please allow the permission to access the gallery',
+              style: GoogleFonts.roboto(),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  openAppSettings();
+                },
+                child: Text(
+                  'Open Settings',
+                  style: GoogleFonts.roboto(),
+                ),
+              )
+            ],
+          );
+        },
+      );
+    } else if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (ctx) {
+          return CupertinoAlertDialog(
+            title: Text(
+              'Permission Denied',
+              style: GoogleFonts.roboto(),
+            ),
+            content: Text(
+              'Please allow the permission to access the gallery',
+              style: GoogleFonts.roboto(),
+            ),
+            actions: [
+              CupertinoDialogAction(
+                onPressed: () {
+                  openAppSettings();
+                },
+                child: Text(
+                  'Open Settings',
+                  style: GoogleFonts.roboto(),
+                ),
+              )
+            ],
+          );
+        },
+      );
+    }
   }
 
   void _galleryPressed(BuildContext ctx) async {
-    final ImagePicker picker = ImagePicker();
-    final List<XFile> images = await picker.pickMultiImage();
-    if (images.isNotEmpty) {
-      ref.read(imageProvider.notifier).addImage(images);
-      if (ctx.mounted) {
-        Navigator.of(ctx).pop();
+    try {
+      final ImagePicker picker = ImagePicker();
+      final List<XFile> images = await picker.pickMultiImage();
+      if (images.isNotEmpty) {
+        ref.read(imageProvider.notifier).addImage(images);
+        if (ctx.mounted) {
+          Navigator.of(ctx).pop();
+        }
+      }
+    } catch (e) {
+      var status = await Permission.photos.status;
+      if (status.isDenied) {
+        settingsDialog();
+      } else {
+        debugPrint('Permission denied');
       }
     }
   }

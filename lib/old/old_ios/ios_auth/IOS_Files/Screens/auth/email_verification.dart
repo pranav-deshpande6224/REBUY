@@ -151,7 +151,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                                 ),
                                 actions: [
                                   CupertinoDialogAction(
-                                    child: Text("Okay"),
+                                    child:const Text("Okay"),
                                     onPressed: () {
                                       resendEmailLink();
                                       Navigator.of(ctx).pop();
@@ -166,12 +166,12 @@ class _EmailVerificationState extends State<EmailVerification> {
                             context: context,
                             builder: (ctx) {
                               return CupertinoAlertDialog(
-                                title: Text(' Alert'),
-                                content: Text(
+                                title: const Text(' Alert'),
+                                content:const Text(
                                     'No Internet Connection Please check your internet connection and try again'),
                                 actions: [
                                   CupertinoDialogAction(
-                                    child: Text("Okay"),
+                                    child:const Text("Okay"),
                                     onPressed: () {
                                       Navigator.of(ctx).pop();
                                     },

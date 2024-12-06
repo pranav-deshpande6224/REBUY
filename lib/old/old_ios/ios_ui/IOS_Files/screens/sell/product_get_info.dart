@@ -187,7 +187,6 @@ class _ProductGetInfoState extends ConsumerState<ProductGetInfo> {
                 final result = await FlutterImageCompress.compressAndGetFile(
                     ref.read(imageProvider)[i].path, targetPath,
                     quality: 50);
-                print(result);
                 String uniqueName =
                     '${handler.newUser.user!.uid}/$uuid/$i.jpeg';
                 UploadTask task =

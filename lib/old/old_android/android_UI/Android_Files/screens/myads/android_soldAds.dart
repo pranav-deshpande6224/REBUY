@@ -26,7 +26,6 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldads> {
     });
     soldAdScrollControllerAndroid.addListener(
       () {
-        print('in listener');
         double maxScroll =
             soldAdScrollControllerAndroid.position.maxScrollExtent;
         double currentScroll = soldAdScrollControllerAndroid.position.pixels;

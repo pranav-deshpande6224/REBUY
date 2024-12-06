@@ -182,7 +182,7 @@ class _ProfileState extends ConsumerState<Profile> {
                           if (index == 0) {
                             Navigator.of(context, rootNavigator: true).push(
                               CupertinoPageRoute(
-                                builder: (ctx) => MySoldAds(),
+                                builder: (ctx) => const MySoldAds(),
                               ),
                             );
                           } else if (index == 1) {

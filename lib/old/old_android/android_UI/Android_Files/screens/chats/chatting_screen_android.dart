@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/active_inactive_send.dart';
@@ -63,34 +62,34 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
     });
   }
 
-  String _formatLastSeen(int millisecondsSinceEpoch) {
-    final DateTime now = DateTime.now();
-    final DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
+  // String _formatLastSeen(int millisecondsSinceEpoch) {
+  //   final DateTime now = DateTime.now();
+  //   final DateTime dateTime =
+  //       DateTime.fromMillisecondsSinceEpoch(millisecondsSinceEpoch);
 
-    final DateFormat timeFormat =
-        DateFormat('h:mm a'); // e.g., 12:30 AM, 1:00 PM
-    final String formattedTime = timeFormat.format(dateTime);
+  //   final DateFormat timeFormat =
+  //       DateFormat('h:mm a'); // e.g., 12:30 AM, 1:00 PM
+  //   final String formattedTime = timeFormat.format(dateTime);
 
-    final Duration difference = now.difference(dateTime);
+  //   final Duration difference = now.difference(dateTime);
 
-    if (difference.inDays == 0) {
-      // Same day
-      return 'last seen today at $formattedTime';
-    } else if (difference.inDays == 1) {
-      // Yesterday
-      return 'last seen yesterday at $formattedTime';
-    } else if (difference.inDays < 7) {
-      // Within the last week
-      final String weekday =
-          DateFormat.EEEE().format(dateTime); // e.g., Monday, Tuesday
-      return 'last seen on $weekday at $formattedTime';
-    } else {
-      // More than a week ago, display date and time
-      final DateFormat dateFormat = DateFormat('yMMMd'); // e.g., Oct 24, 2024
-      return 'last seen on ${dateFormat.format(dateTime)} at $formattedTime';
-    }
-  }
+  //   if (difference.inDays == 0) {
+  //     // Same day
+  //     return 'last seen today at $formattedTime';
+  //   } else if (difference.inDays == 1) {
+  //     // Yesterday
+  //     return 'last seen yesterday at $formattedTime';
+  //   } else if (difference.inDays < 7) {
+  //     // Within the last week
+  //     final String weekday =
+  //         DateFormat.EEEE().format(dateTime); // e.g., Monday, Tuesday
+  //     return 'last seen on $weekday at $formattedTime';
+  //   } else {
+  //     // More than a week ago, display date and time
+  //     final DateFormat dateFormat = DateFormat('yMMMd'); // e.g., Oct 24, 2024
+  //     return 'last seen on ${dateFormat.format(dateTime)} at $formattedTime';
+  //   }
+  // }
 
   @override
   void dispose() {

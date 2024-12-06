@@ -7,6 +7,7 @@ import 'package:resell/UIPart/android_ios/screens/home_android_ios/home_a_i.dart
 import 'package:resell/UIPart/android_ios/screens/myads_android_ios/myads_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/profile_android_ios/profile_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/sell_a_i.dart';
+import 'package:resell/notifications/notification_service.dart';
 
 class BottomNavAI extends StatefulWidget {
   const BottomNavAI({super.key});
@@ -18,7 +19,7 @@ class BottomNavAI extends StatefulWidget {
 class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
   late AuthHandler handler;
   int currentIndex = 0;
-  final screens  = const [
+  final screens = const [
     HomeAI(),
     ChatsAI(),
     SellAI(),
@@ -28,9 +29,14 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
+    getNotifications();
     WidgetsBinding.instance.addObserver(this);
     makingOnline();
     super.initState();
+  }
+
+  void getNotifications() {
+    NotificationService().initNotifications();
   }
 
   void makingOnline() async {
@@ -152,7 +158,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
             label: 'account',
           ),
         ]),
-        tabBuilder: (context, index){
+        tabBuilder: (context, index) {
           switch (index) {
             case 0:
               return CupertinoTabView(
@@ -179,7 +185,6 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
                 builder: (context) => const HomeAI(),
               );
           }
-
         },
       ),
     );

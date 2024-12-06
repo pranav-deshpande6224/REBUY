@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/Providers/password_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
@@ -79,7 +80,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
               signUpContext,
               _nameController.text,
             );
-            return Center(
+            return  const Center(
               child: CircularProgressIndicator(
                 color: Colors.blueAccent,
               ),
@@ -129,7 +130,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       backgroundColor: Colors.white,
                       child: Center(
                         child: Icon(
@@ -160,15 +161,15 @@ class _SignupAndroidState extends State<SignupAndroid> {
                           controller: _nameController,
                           decoration: InputDecoration(
                             errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
+                              borderSide: const BorderSide(color: Colors.red),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: const BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: const BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             hintText: 'Name',
@@ -183,7 +184,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         TextFormField(
@@ -195,15 +196,15 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             hintText: 'Email',
                             prefixIcon: const Icon(Icons.email),
                             errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
+                              borderSide: const BorderSide(color: Colors.red),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: const BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: const BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
@@ -217,7 +218,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             return null;
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Consumer(
@@ -241,7 +242,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   },
                                   child: Text(
                                     !passwordProvider ? 'Show' : 'Hide',
-                                    style: TextStyle(
+                                    style:  GoogleFonts.roboto(
                                       fontSize: 16,
                                       color: Colors.blue,
                                     ),
@@ -249,15 +250,15 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 ),
                                 prefixIcon: const Icon(Icons.lock),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
+                                  borderSide: const BorderSide(color: Colors.red),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
@@ -287,7 +288,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             );
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Column(
@@ -295,7 +296,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             Row(
                               children: [
                                 AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   width: 20,
                                   height: 20,
                                   decoration: BoxDecoration(
@@ -306,7 +307,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   ),
                                   child: Center(
                                     child: isPasswordContainEightChar
-                                        ? Icon(
+                                        ? const Icon(
                                             Icons.check_circle_rounded,
                                             color: Colors.green,
                                             size: 18,
@@ -314,25 +315,25 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                         : null,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(
+                                 Text(
                                   'Contain Atleast 8 Characters!',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               children: [
                                 AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   width: 20,
                                   height: 20,
                                   decoration: BoxDecoration(
@@ -343,7 +344,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   ),
                                   child: Center(
                                     child: isPasswordContainUppercase
-                                        ? Icon(
+                                        ? const Icon(
                                             Icons.check_circle_rounded,
                                             color: Colors.green,
                                             size: 18,
@@ -351,23 +352,23 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                         : null,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(
                                   'Contain 1 Uppercase Letter',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                       color: Colors.black, fontSize: 15),
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               children: [
                                 AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   width: 20,
                                   height: 20,
                                   decoration: BoxDecoration(
@@ -378,7 +379,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   ),
                                   child: Center(
                                     child: isPasswordCOntainNumber
-                                        ? Icon(
+                                        ? const Icon(
                                             Icons.check_circle_rounded,
                                             color: Colors.green,
                                             size: 18,
@@ -386,10 +387,10 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                         : null,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(
+                                const Text(
                                   'Contain 1 Number',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -398,13 +399,13 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
                               children: [
                                 AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   width: 20,
                                   height: 20,
                                   decoration: BoxDecoration(
@@ -415,7 +416,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   ),
                                   child: Center(
                                     child: isPasswordContainSpecialChar
-                                        ? Icon(
+                                        ? const Icon(
                                             Icons.check_circle_rounded,
                                             color: Colors.green,
                                             size: 18,
@@ -423,12 +424,12 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                         : null,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text(
+                                 Text(
                                   'Contain 1 Special Character',
-                                  style: TextStyle(
+                                  style: GoogleFonts.roboto(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
@@ -461,7 +462,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   },
                                   child: Text(
                                     !showConfirmPassword ? 'Show' : 'Hide',
-                                    style: TextStyle(
+                                    style: GoogleFonts.roboto(
                                       fontSize: 16,
                                       color: Colors.blue,
                                     ),
@@ -469,15 +470,15 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 ),
                                 prefixIcon: const Icon(Icons.lock),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red),
+                                  borderSide: const BorderSide(color: Colors.red),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.black),
+                                  borderSide: const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
@@ -510,7 +511,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             },
                             child: Text(
                               'Sign Up',
-                              style: TextStyle(color: Colors.white),
+                              style: GoogleFonts.roboto(color: Colors.white),
                             ),
                           ),
                         ),

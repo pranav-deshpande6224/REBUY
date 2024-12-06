@@ -354,7 +354,7 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.roboto(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20,
+                                                fontSize: 16,
                                               ),
                                             ),
                                             Text(
@@ -363,7 +363,7 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.roboto(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 15,
+                                                fontSize: 13,
                                                 color: Colors.blue,
                                               ),
                                             )
@@ -412,6 +412,7 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
                                   return const Divider(
                                     color: Colors.black,
                                     height: 0.5,
+                                    thickness: 1,
                                   );
                                 },
                                 itemCount: snapshot.data!.length,

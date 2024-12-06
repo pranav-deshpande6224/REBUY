@@ -32,7 +32,6 @@ class ShowOtherAds extends StateNotifier<AsyncValue<OtherAdState>> {
     if (_isLoadingHome) return;
     _isLoadingHome = true;
     if (handler.newUser.user != null) {
-      print("before fetching initial items");
       try {
         final firestore = handler.fireStore;
         Query<Map<String, dynamic>> query = firestore
@@ -42,7 +41,6 @@ class ShowOtherAds extends StateNotifier<AsyncValue<OtherAdState>> {
             .orderBy('createdAt', descending: true)
             .limit(_itemsPerPageOtherAd);
         QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
-        print(querySnapshot.docs.length);
         List<Item> items = [];
         for (var doc in querySnapshot.docs) {
           DocumentReference<Map<String, dynamic>> ref = doc['adReference'];
@@ -50,7 +48,6 @@ class ShowOtherAds extends StateNotifier<AsyncValue<OtherAdState>> {
           final item = Item.fromJson(dataDoc.data()!, doc, ref);
           items.add(item);
         }
-        print(items.length);
         if (querySnapshot.docs.isNotEmpty) {
           _lastHomeDocument = querySnapshot.docs.last;
         }

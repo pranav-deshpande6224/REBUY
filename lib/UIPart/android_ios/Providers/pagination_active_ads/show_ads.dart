@@ -54,7 +54,6 @@ class ShowActiveAds extends StateNotifier<AsyncValue<ActiveAdsState>> {
         _hasMore = querySnapshot.docs.length == _itemsPerPage;
         state = AsyncValue.data(ActiveAdsState(items: docs));
       } catch (error, stack) {
-        print(error);
         state = AsyncValue.error(error, stack);
       } finally {
         _isLoading = false;

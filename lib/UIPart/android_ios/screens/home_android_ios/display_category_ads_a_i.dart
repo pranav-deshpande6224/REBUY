@@ -346,9 +346,15 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                 placeholder: (context, url) {
                   return Center(
                     child: Platform.isAndroid
-                        ? const Icon(Icons.photo)
+                        ? const Icon(
+                            Icons.photo,
+                            color: Colors.black,
+                          )
                         : Platform.isIOS
-                            ? const Icon(CupertinoIcons.photo)
+                            ? const Icon(
+                                CupertinoIcons.photo,
+                                color: CupertinoColors.black,
+                              )
                             : const SizedBox(),
                   );
                 },
