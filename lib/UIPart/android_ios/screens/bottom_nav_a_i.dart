@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
@@ -32,7 +33,27 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
     getNotifications();
     WidgetsBinding.instance.addObserver(this);
     makingOnline();
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      if (message.data['navigate_to'] == 'chats') {
+        setState(() {
+          currentIndex = 1;
+        });
+      }
+    });
+    recievingNotifications();
     super.initState();
+  }
+
+  void recievingNotifications() async {
+    RemoteMessage? message =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (message != null) {
+      if (message.data['navigate_to'] == 'chats') {
+        setState(() {
+          currentIndex = 1;
+        });
+      }
+    }
   }
 
   void getNotifications() {

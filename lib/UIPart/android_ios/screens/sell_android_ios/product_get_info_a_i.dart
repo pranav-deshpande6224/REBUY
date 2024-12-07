@@ -201,6 +201,20 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         }
         unfocusFields();
         saveMyAdToDB(Constants.mobileChargerLaptopCharger);
+      } else if (widget.subCategoryName == '') {
+        adTitleErrorText();
+        adDescriptionErrorText();
+        priceErrorText();
+        if (ref.read(adTitleError).isEmpty &&
+            ref.read(adDescriptionError).isEmpty &&
+            ref.read(priceError).isEmpty) {
+          if (checkAtleastOneImage()) {
+            uploadImageDialog();
+            return;
+          }
+          unfocusFields();
+          saveOtherAdToDB(Constants.other);
+        }
       } else {
         if (!_remainingKey.currentState!.validate()) return;
         if (checkAtleastOneImage()) {
@@ -272,7 +286,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveAdToDB(Constants.other);
+          saveOtherAdToDB(Constants.other);
         }
       } else {
         adTitleErrorText();
@@ -337,7 +351,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
     }
   }
 
-  void saveAdToDB(String categoryName) async {
+  void saveOtherAdToDB(String categoryName) async {
     List<String> url = [];
     if (ref.read(imageProvider).length <= 3) {
       final fbStorage = handler.storage;

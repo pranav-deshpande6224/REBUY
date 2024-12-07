@@ -2,12 +2,11 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
 exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}/chats/{chatId}/messages/{messageId}",async (event) => {
-    const messageData = event.data; // New message data
-    console.log("Message data:", messageData);
+    const messageData = event.data;
+    const snapshot = messageData.data();
+    const textMessage = snapshot['text'];
     const { recipientUid, chatId } = event.params;
     const [senderUid] = chatId.split("_");
-    console.log("Recipient UID:", recipientUid);
-    console.log("Sender UID:", senderUid);
     try {
         const recipientDoc = await admin.firestore().collection("users").doc(recipientUid).get();
         if (!recipientDoc.exists) {
@@ -16,7 +15,6 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
         }
       const recipientData = recipientDoc.data();
       const recipientFcmToken = recipientData.fcmToken;
-      console.log("Recipient FCM token:", recipientFcmToken);
       if(recipientFcmToken == ''){
         return;
       }
@@ -31,16 +29,20 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
         token: recipientFcmToken,
         notification: {
           title: `Message from ${senderName}`,
-          body: messageData.text || "You have a new message.",
-          click_action: "FLUTTER_NOTIFICATION_CLICK",
+          body: textMessage,
         },
         data: {
           senderUid: senderUid,
           recipientUid: recipientUid,
           messageId: event.params.messageId,
+          "navigate_to": 'chats',
+          "click_action": "FLUTTER_NOTIFICATION_CLICK",
+          "sound": "default", 
         },
+        android: {
+          priority: "high",
+        }
       };
-      // Send the message
       const response = await admin.messaging().send(message);
       console.log("Notification sent successfully:", response);
     }catch (error) {

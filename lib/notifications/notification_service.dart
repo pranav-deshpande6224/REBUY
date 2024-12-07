@@ -17,14 +17,12 @@ class NotificationService {
       final fcmToken = await messaging.getToken();
       if (fcmToken != null) {
         await authHandler.storeFCMToken(fcmToken);
-        authHandler.newUser.fcmToken = fcmToken;
         FirebaseMessaging.instance.onTokenRefresh.listen(
           (newToken) async {
             await authHandler.fireStore
                 .collection('users')
                 .doc(authHandler.newUser.user!.uid)
                 .update({'fcmToken': newToken});
-            authHandler.newUser.fcmToken = newToken;
           },
         );
       }

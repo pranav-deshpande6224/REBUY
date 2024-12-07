@@ -57,6 +57,12 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
   void logout(BuildContext signOutContext) async {
     try {
       await handler.changeTheLastSeenTime();
+      await handler.fireStore
+          .collection('users')
+          .doc(handler.newUser.user!.uid)
+          .update({
+            'fcmToken' : ''
+          });
       await Future.delayed(const Duration(milliseconds: 900));
       await handler.firebaseAuth.signOut();
       final sharedPref = await SharedPreferences.getInstance();

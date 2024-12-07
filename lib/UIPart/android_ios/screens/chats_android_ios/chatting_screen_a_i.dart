@@ -840,6 +840,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
     chatController.clear();
     ref.read(messageReplyProvider.notifier).update((state) => null);
     ref.read(activeInactiveSendProvider.notifier).reset();
+    final messageId = const Uuid().v1();
     if (handler.newUser.user != null) {
       try {
         await handler.fireStore.runTransaction(
@@ -851,7 +852,6 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                 .get();
             final name = somedoc.data()!['firstName'];
             var timeSent = DateTime.now();
-            final messageId = const Uuid().v1();
             final postedAdContact = Contact(
                 id: "${widget.recieverId}_${item.id}",
                 contactId: widget.recieverId,
@@ -945,16 +945,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                 );
           },
         );
-        try {
-          final functions = FirebaseFunctions.instance;
-          await functions.httpsCallable('myFunction').call({
-            'chatId': "${widget.senderId}_${item.id}",
-            'recipientUid': widget.recieverId,
-            'message': message,
-          });
-        } catch (e) {
-           print('Error sending message: $e');
-        }
+        await callingFbFunction(item, messageId);
         widget.scrollDown();
       } catch (e) {
         if (Platform.isAndroid) {
@@ -1012,6 +1003,24 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
             CupertinoPageRoute(builder: (ctx) => const LoginAI()),
             (Route<dynamic> route) => false);
       }
+    }
+  }
+
+  Future<void> callingFbFunction(Item item, String messageId) async {
+    if (handler.newUser.user != null) {
+      try {
+        final functions = FirebaseFunctions.instance;
+      await functions.httpsCallable('myFunction').call({
+          'chatId': "${widget.senderId}_${item.id}",
+          'recipientUid': widget.recieverId,
+          'messageId': messageId,
+        });
+        
+      } catch (e) {
+        print('Error sending message: ${e.toString()}');
+      }
+    } else {
+      print('user not logged in');
     }
   }
 
