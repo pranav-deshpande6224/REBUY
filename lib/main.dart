@@ -1,20 +1,31 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:resell/Authentication/Android_Files/android.dart';
-import 'package:resell/Authentication/IOS_Files/Screens/ios.dart';
-import 'package:resell/Authentication/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/android.dart';
+import 'package:resell/Authentication/android_ios/ios.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+Future<void> handleBackgroundMessage(RemoteMessage message) async {
+    if (message.notification != null) {
+      print(message.notification!.title);
+      print(message.notification!.body);
+      print(message.data);
+    } else {
+      print("notification is null");
+    }
+  }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
   final isUserLoggedIn = await checkUserLoggedIn();
   runApp(
     ProviderScope(

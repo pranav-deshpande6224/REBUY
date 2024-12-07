@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GIDClientID</key>
+	<!-- TODO Replace this value: -->
+	<!-- Copied from GoogleService-Info.plist key CLIENT_ID -->
+	<string>80836629544-oata8u1q8b9d2qqo8evg69a6gbbi25oo.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!-- TODO Replace this value: -->
+				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
+				<string>com.googleusercontent.apps.80836629544-oata8u1q8b9d2qqo8evg69a6gbbi25oo</string>
+			</array>
+		</dict>
+	</array>
     <key>NSCameraUsageDescription</key>
 	<string>Revyb needs access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
