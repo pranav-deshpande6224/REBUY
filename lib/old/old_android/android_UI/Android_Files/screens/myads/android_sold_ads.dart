@@ -7,14 +7,14 @@ import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/widgets/ad_card.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_sold_ads.dart';
 
-class AndroidSoldads extends ConsumerStatefulWidget {
-  const AndroidSoldads({super.key});
+class AndroidSoldAds extends ConsumerStatefulWidget {
+  const AndroidSoldAds({super.key});
 
   @override
-  ConsumerState<AndroidSoldads> createState() => _AndroidSoldadsState();
+  ConsumerState<AndroidSoldAds> createState() => _AndroidSoldadsState();
 }
 
-class _AndroidSoldadsState extends ConsumerState<AndroidSoldads> {
+class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
   late AuthHandler handler;
   final ScrollController soldAdScrollControllerAndroid = ScrollController();
 

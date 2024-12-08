@@ -231,6 +231,29 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
     }
   }
 
+  Widget retryAgain() {
+   return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Something went wrong',
+            style: GoogleFonts.roboto(color: Colors.blue),
+          ),
+          CupertinoButton(
+            onPressed: () {
+              setState(() {});
+            },
+            child: Text(
+              'Retry',
+              style: GoogleFonts.roboto(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget ios() {
     final connectivityState = ref.watch(connectivityProvider);
     final internetState = ref.watch(internetCheckerProvider);
@@ -310,9 +333,7 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
                                   );
                                 }
                                 if (snapshot.hasError) {
-                                  return const Center(
-                                    child: Text('Something went wrong'),
-                                  );
+                                  return retryAgain();
                                 }
                                 return Expanded(
                                   child: snapshot.data!.isEmpty
@@ -610,18 +631,14 @@ class _ChatsAIState extends ConsumerState<ChatsAI> {
                 loading: () => const Center(
                   child: CupertinoActivityIndicator(),
                 ),
-                error: (error, stackTrace) => const Center(
-                  child: Text('Error'),
-                ),
+                error: (error, stackTrace) => retryAgain()
               );
             }
           },
           loading: () => const Center(
             child: CupertinoActivityIndicator(),
           ),
-          error: (error, stackTrace) => const Center(
-            child: Text('Error'),
-          ),
+          error: (error, stackTrace) => retryAgain()
         ),
       ),
     );

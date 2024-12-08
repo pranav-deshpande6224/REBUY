@@ -1046,10 +1046,10 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
           'messageId': messageId,
         });
       } catch (e) {
-        print('Error sending message: ${e.toString()}');
+        debugPrint('Error sending message: ${e.toString()}');
       }
     } else {
-      print('user not logged in');
+      debugPrint('user not logged in');
     }
   }
 

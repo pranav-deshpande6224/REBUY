@@ -9,7 +9,6 @@ final itemStreamProvider =
       (snapshot) {
         final data = snapshot.data();
         if (data == null) {
-          print("data is null");
           throw Exception('Document does not exist');
         }
         Timestamp? timeStamp = data['createdAt'];
@@ -20,7 +19,6 @@ final itemStreamProvider =
           snapshot,
           snapshot.reference,
         );
-        print('data is parsed');
         return item; // Parse the data into an Item object
       },
     );

@@ -51,6 +51,9 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
+    if(handler.newUser.user == null){
+      moveToLogin();
+    }
     super.initState();
   }
 

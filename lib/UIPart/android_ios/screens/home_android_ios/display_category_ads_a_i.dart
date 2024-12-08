@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/other_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';
@@ -30,10 +31,25 @@ class DisplayCategoryAdsAI extends ConsumerStatefulWidget {
 class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
   late AuthHandler handler;
   final ScrollController categoryAdScrollController = ScrollController();
+  void moveToLogin() {
+    if (Platform.isAndroid) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+          CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
-    super.initState();
+    if (handler.newUser.user == null) {
+      moveToLogin();
+      return;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.categoryName == Constants.other) {
         ref.read(otherAdsprovider.notifier).fetchInitialItems();
@@ -58,6 +74,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
         }
       }
     });
+    super.initState();
   }
 
   @override
@@ -68,8 +85,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
 
   String getDate(Timestamp timestamp) {
     DateTime dateTime = timestamp.toDate();
-    String formattedDate =
-        DateFormat('dd-MM-yy').format(dateTime);
+    String formattedDate = DateFormat('dd-MM-yy').format(dateTime);
     return formattedDate;
   }
 
@@ -551,7 +567,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                         child: scrollView(catAdState),
                       );
                     },
-                    error: (error, _) =>retry(),
+                    error: (error, _) => retry(),
                     loading: spinner,
                   );
                 }

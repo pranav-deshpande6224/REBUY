@@ -200,7 +200,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                           );
                         }
                         if (snapshot.hasError) {
-                          // TODO need to handle this error case
+                         
                           return const Center(
                             child: Text("Something went wrong"),
                           );

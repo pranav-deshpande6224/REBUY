@@ -1,93 +1,159 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:college_project/Authentication/handlers/auth_handler.dart';
-// import 'package:college_project/UIPart/IOS_Files/model/message.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/UIPart/android_ios/model/message.dart';
 
-// final newMessagesProvider =
-//     StreamProvider.family<List<Message>, String>((ref, reciever) {
-//   return getMessages(recieverId,itemId);
-// });
+class ChatParams {
+  final String userId;
+  final String receiverId;
+  final String itemId;
+  ChatParams({
+    required this.userId,
+    required this.receiverId,
+    required this.itemId,
+  });
+}
 
-// Stream<List<Message>> getMessages(String recieverId, String itemId) {
-//   final handler = AuthHandler.authHandlerInstance;
-//   return handler.fireStore
-//       .collection('users')
-//       .doc(handler.newUser.user!.uid)
-//       .collection('chats')
-//       .doc("${recieverId}_$itemId")
-//       .collection('messages')
-//       .orderBy('timeSent', descending: true)
-//       .snapshots()
-//       .map((snapshot) {
-//     return snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList();
-//   });
+class MessagesState {
+  final List<Message> messages;
+  final DocumentSnapshot? lastDocument;
+  final bool hasMore;
 
-//   // handler.fireStore
-//   //       .collection('users')
-//   //       .doc(handler.newUser.user!.uid)
-//   //       .collection('chats')
-//   //       .doc("${receiverId}_$itemid")
-//   //       .collection('messages')
-//   //       .orderBy('timeSent', descending: false)
-//   //       .snapshots()
-// }
+  MessagesState({
+    required this.messages,
+    this.lastDocument,
+    this.hasMore = true,
+  });
 
-// final chatProvider =
-//     StateNotifierProvider.family<ChatNotifier, List<Message>, String>(
-//         (ref, chatId) {
-//   return ChatNotifier(chatId);
-// });
+  MessagesState copyWith({
+    List<Message>? messages,
+    DocumentSnapshot? lastDocument,
+    bool? hasMore,
+  }) {
+    return MessagesState(
+      messages: messages ?? this.messages,
+      lastDocument: lastDocument ?? this.lastDocument,
+      hasMore: hasMore ?? this.hasMore,
+    );
+  }
+}
 
-// class ChatNotifier extends StateNotifier<List<Message>> {
-//   ChatNotifier(this.chatId) : super([]) {
-//     loadInitialMessages();
-//   }
-//   final String chatId;
-//   final int _messagesPerPage = 20;
-//   DocumentSnapshot? _lastMessageSnapshot;
-//   bool _hasMoreMessages = true;
-//   bool _isLoading = false;
-//   AuthHandler handler = AuthHandler.authHandlerInstance;
+class ShowMessageData extends StateNotifier<AsyncValue<MessagesState>> {
+  final String userId;
+  final String receiverId;
+  final String itemId;
+  final int pageSize;
+  AuthHandler handler = AuthHandler.authHandlerInstance;
+  StreamSubscription? _streamSubscription;
 
+  ShowMessageData({
+    required this.userId,
+    required this.receiverId,
+    required this.itemId,
+    this.pageSize = 12, 
+  }) : super(const AsyncValue.loading()) {
+    _listenToNewMessages();
+  }
 
-//   Future<void> loadInitialMessages() async {
-//     if (_isLoading) return;
-//     _isLoading = true;
-//     final snapshot = await FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(handler.newUser.user!.uid)
-//         .collection('chats')
-//         .doc(chatId)
-//         .collection('messages')
-//         .orderBy('timeSent', descending: true)
-//         .limit(_messagesPerPage)
-//         .get();
+  Future<void> fetchInitialMessages() async {
+    state = const AsyncValue.loading();
 
-//     final messages = snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList();
-//     state = messages;
-//     _lastMessageSnapshot = snapshot.docs.isNotEmpty ? snapshot.docs.last : null;
-//     _hasMoreMessages = snapshot.docs.length == _messagesPerPage;
-//     _isLoading = false;
-//   }
-//   Future<void> loadMoreMessages() async {
-//     if (_isLoading || !_hasMoreMessages || _lastMessageSnapshot == null) return;
+    try {
+      final query = handler.fireStore
+          .collection('users')
+          .doc(userId)
+          .collection('chats')
+          .doc("${receiverId}_$itemId")
+          .collection('messages')
+          .orderBy('timeSent', descending: true)
+          .limit(pageSize);
 
-//     _isLoading = true;
-//     final snapshot = await FirebaseFirestore.instance
-//         .collection('users')
-//         .doc(handler.newUser.user!.uid)
-//         .collection('chats')
-//         .doc(chatId)
-//         .collection('messages')
-//         .orderBy('timeSent', descending: true)
-//         .startAfterDocument(_lastMessageSnapshot!)
-//         .limit(_messagesPerPage)
-//         .get();
+      final snapshot = await query.get();
+      final messages =
+          snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList();
 
-//     final newMessages = snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList();
-//     state = [...state, ...newMessages];
-//     _lastMessageSnapshot = snapshot.docs.isNotEmpty ? snapshot.docs.last : null;
-//     _hasMoreMessages = snapshot.docs.length == _messagesPerPage;
-//     _isLoading = false;
-//   }
-// }
+      state = AsyncValue.data(MessagesState(
+        messages: messages,
+        lastDocument: snapshot.docs.isNotEmpty ? snapshot.docs.last : null,
+        hasMore: snapshot.docs.length == pageSize,
+      ));
+    } catch (e, stackTrace) {
+      state = AsyncValue.error(e, stackTrace);
+    }
+  }
+
+  Future<void> fetchMoreMessages() async {
+    if (!state.hasValue || state.isLoading) return;
+
+    final currentState = state.value!;
+    if (!currentState.hasMore) return;
+
+    try {
+      final query = handler.fireStore
+          .collection('users')
+          .doc(userId)
+          .collection('chats')
+          .doc("${receiverId}_$itemId")
+          .collection('messages')
+          .orderBy('timeSent', descending: true)
+          .startAfterDocument(currentState.lastDocument!)
+          .limit(pageSize);
+
+      final snapshot = await query.get();
+      final newMessages = snapshot.docs
+          .map((doc) => Message.fromJson(doc.data()))
+          .toList();
+
+      state = AsyncValue.data(currentState.copyWith(
+        messages: [...currentState.messages, ...newMessages],
+        lastDocument: snapshot.docs.isNotEmpty ? snapshot.docs.last : null,
+        hasMore: snapshot.docs.length == pageSize,
+      ));
+    } catch (e, stackTrace) {
+      state = AsyncValue.error(e, stackTrace);
+    }
+  }
+
+  void _listenToNewMessages() {
+    final query = handler.fireStore
+        .collection('users')
+        .doc(userId)
+        .collection('chats')
+        .doc("${receiverId}_$itemId")
+        .collection('messages')
+        .orderBy('timeSent', descending: false);
+
+    _streamSubscription = query.snapshots().listen((snapshot) {
+      final newMessages = snapshot.docChanges
+          .where((change) => change.type == DocumentChangeType.added)
+          .map((change) => Message.fromJson(change.doc.data() as Map<String, dynamic>))
+          .toList();
+
+      if (newMessages.isNotEmpty) {
+        if (state.hasValue) {
+          final currentState = state.value!;
+          state = AsyncValue.data(currentState.copyWith(
+            messages: [...newMessages, ...currentState.messages],
+          ));
+        }
+      }
+    });
+  }
+  @override
+  void dispose() {
+    _streamSubscription?.cancel();
+    super.dispose();
+  }
+}
+
+final messagesProvider =
+    StateNotifierProvider.family<ShowMessageData, AsyncValue<MessagesState>, ChatParams>(
+  (ref, params) {
+    return ShowMessageData(
+      userId: params.userId,
+      receiverId: params.receiverId,
+      itemId: params.itemId,
+    );
+  },
+);

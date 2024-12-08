@@ -279,7 +279,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                   );
                                 }
                                 if (snapshot.hasError) {
-                                  //TODO : Handle Error
+                                 
                                   return const Center(
                                     child: Text('Something went wrong'),
                                   );

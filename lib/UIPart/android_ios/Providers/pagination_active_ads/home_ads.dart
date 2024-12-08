@@ -32,34 +32,30 @@ class ShowHomeAds extends StateNotifier<AsyncValue<HomeAdState>> {
   Future<void> fetchInitialItems() async {
     if (_isLoadingHome) return;
     _isLoadingHome = true;
-    if (handler.newUser.user != null) {
-      try {
-        final firestore = handler.fireStore;
-        Query<Map<String, dynamic>> query =  firestore
-            .collection('AllAds')
-            .orderBy('createdAt', descending: true)
-            .limit(_itemsPerPageHome);
-        QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
-          List<Item> items = [];
-          for (var doc in querySnapshot.docs) {
-            DocumentReference<Map<String, dynamic>> ref = doc['adReference'];
-            DocumentSnapshot<Map<String, dynamic>> dataDoc = await ref.get();
-            final item = Item.fromJson(dataDoc.data()!, doc, ref);
-            items.add(item);
-          }
-          if(querySnapshot.docs.isNotEmpty){
-            _lastHomeDocument = querySnapshot.docs.last;
-          }
-          _hasMoreHome = querySnapshot.docs.length == _itemsPerPageHome;
-         state = AsyncValue.data(HomeAdState(items: items));
-      } catch (error, stack) {
-        state = AsyncValue.error(error, stack);
-      } finally {
-        _isLoadingHome = false;
+
+    try {
+      final firestore = handler.fireStore;
+      Query<Map<String, dynamic>> query = firestore
+          .collection('AllAds')
+          .orderBy('createdAt', descending: true)
+          .limit(_itemsPerPageHome);
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
+      List<Item> items = [];
+      for (var doc in querySnapshot.docs) {
+        DocumentReference<Map<String, dynamic>> ref = doc['adReference'];
+        DocumentSnapshot<Map<String, dynamic>> dataDoc = await ref.get();
+        final item = Item.fromJson(dataDoc.data()!, doc, ref);
+        items.add(item);
       }
-    } else {
-      // TODO Handle the case when the user is not authenticated
-      return;
+      if (querySnapshot.docs.isNotEmpty) {
+        _lastHomeDocument = querySnapshot.docs.last;
+      }
+      _hasMoreHome = querySnapshot.docs.length == _itemsPerPageHome;
+      state = AsyncValue.data(HomeAdState(items: items));
+    } catch (error, stack) {
+      state = AsyncValue.error(error, stack);
+    } finally {
+      _isLoadingHome = false;
     }
   }
 
@@ -86,36 +82,33 @@ class ShowHomeAds extends StateNotifier<AsyncValue<HomeAdState>> {
     }
     state = AsyncValue.data(state.asData!.value.copyWith(isLoadingMore: true));
     final fireStore = handler.fireStore;
-    if (handler.newUser.user != null) {
-      try {
-        await Future.delayed(const Duration(seconds: 1));
-        Query<Map<String, dynamic>> query = fireStore
-            .collection('AllAds')
-            .orderBy('createdAt', descending: true)
-            .startAfterDocument(_lastHomeDocument!)
-            .limit(_itemsPerPageHome);
-        QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
-        List<Item> moreHomeItems =
-            await Future.wait(querySnapshot.docs.map((doc) async {
-          DocumentReference<Map<String, dynamic>> ref = doc['adReference'];
-          DocumentSnapshot<Map<String, dynamic>> dataDoc = await ref.get();
-          return Item.fromJson(dataDoc.data()!, doc, ref);
-        }).toList());
-        if (moreHomeItems.isNotEmpty) {
-          _lastHomeDocument = querySnapshot.docs.last;
-        }
-        _hasMoreHome = moreHomeItems.length == _itemsPerPageHome;
-        state = AsyncValue.data(
-          state.asData!.value.copyWith(
-            items: [...state.asData!.value.items, ...moreHomeItems],
-            isLoadingMore: false,
-          ),
-        );
-      } catch (e, stack) {
-        state = AsyncValue.error(e, stack);
+
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      Query<Map<String, dynamic>> query = fireStore
+          .collection('AllAds')
+          .orderBy('createdAt', descending: true)
+          .startAfterDocument(_lastHomeDocument!)
+          .limit(_itemsPerPageHome);
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await query.get();
+      List<Item> moreHomeItems =
+          await Future.wait(querySnapshot.docs.map((doc) async {
+        DocumentReference<Map<String, dynamic>> ref = doc['adReference'];
+        DocumentSnapshot<Map<String, dynamic>> dataDoc = await ref.get();
+        return Item.fromJson(dataDoc.data()!, doc, ref);
+      }).toList());
+      if (moreHomeItems.isNotEmpty) {
+        _lastHomeDocument = querySnapshot.docs.last;
       }
-    } else {
-      // TODO Navigate to login screen
+      _hasMoreHome = moreHomeItems.length == _itemsPerPageHome;
+      state = AsyncValue.data(
+        state.asData!.value.copyWith(
+          items: [...state.asData!.value.items, ...moreHomeItems],
+          isLoadingMore: false,
+        ),
+      );
+    } catch (e, stack) {
+      state = AsyncValue.error(e, stack);
     }
   }
 }

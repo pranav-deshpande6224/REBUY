@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/chats/android_chats.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/home/android_home.dart';
-import 'package:resell/old/old_android/android_UI/Android_Files/screens/myads/android_myAds.dart';
+import 'package:resell/old/old_android/android_UI/Android_Files/screens/myads/android_my_ads.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/profile/android_profile.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/sell/android_sell.dart';
 

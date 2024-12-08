@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 
 class NotificationService {
@@ -27,7 +28,7 @@ class NotificationService {
         );
       }
     } else if (settings.authorizationStatus == AuthorizationStatus.denied) {
-      print("denied");
+      debugPrint("denied");
     }
   }
 }

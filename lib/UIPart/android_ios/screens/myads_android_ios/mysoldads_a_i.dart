@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/widgets/ad_card.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_sold_ads.dart';
 
@@ -23,6 +24,10 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
   @override
   void initState() {
     super.initState();
+    if (handler.newUser.user == null) {
+      moveToLogin();
+      return;
+    }
     handler = AuthHandler.authHandlerInstance;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
@@ -39,6 +44,18 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
         }
       },
     );
+  }
+
+  void moveToLogin() {
+    if (Platform.isAndroid) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+          CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   @override
@@ -343,8 +360,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                           },
                         );
                       },
-                      error: (error, stack) =>
-                         retry(),
+                      error: (error, stack) => retry(),
                       loading: spinner,
                     );
                   }
@@ -390,8 +406,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                           child: scrollView(soldAdState),
                         );
                       },
-                      error: (error, stack) =>
-                          retry(),
+                      error: (error, stack) => retry(),
                       loading: spinner,
                     );
                   }

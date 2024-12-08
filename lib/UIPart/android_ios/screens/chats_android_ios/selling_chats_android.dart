@@ -165,6 +165,31 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
     );
   }
 
+  Widget retryAgain() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'SomethingWent Wrong',
+            style: GoogleFonts.roboto(),
+          ),
+          TextButton(
+            child: Text(
+              'Retry',
+              style: GoogleFonts.roboto(color: Colors.blue),
+            ),
+            onPressed: () async {
+              final _ = await ref.refresh(connectivityProvider.future);
+              final x = ref.refresh(internetCheckerProvider.future);
+              debugPrint(x.toString());
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final connectivityState = ref.watch(connectivityProvider);
@@ -191,30 +216,7 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
                         );
                       }
                       if (snapshot.hasError) {
-                        return Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'SomethingWent Wrong',
-                                style: GoogleFonts.roboto(),
-                              ),
-                              TextButton(
-                                child: Text(
-                                  'Retry',
-                                  style: GoogleFonts.roboto(color: Colors.blue),
-                                ),
-                                onPressed: () async {
-                                  final _ = await ref
-                                      .refresh(connectivityProvider.future);
-                                  final x = ref
-                                      .refresh(internetCheckerProvider.future);
-                                  debugPrint(x.toString());
-                                },
-                              ),
-                            ],
-                          ),
-                        );
+                        return retryAgain();
                       }
                       return snapshot.data!.isEmpty
                           ? Center(
@@ -427,9 +429,7 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
                   color: Colors.blue,
                 ),
               ),
-              error: (error, stackTrace) => const Center(
-                child: Text('Error'),
-              ),
+              error: (error, stackTrace) => retryAgain()
             );
           }
         },
@@ -438,239 +438,8 @@ class _SellingChatsAndroidState extends ConsumerState<SellingChatsAndroid> {
             color: Colors.blue,
           ),
         ),
-        error: (error, stackTrace) => const Center(
-          child: Text('Error'),
-        ),
+        error: (error, stackTrace) => retryAgain()
       ),
     );
   }
 }
-
-
-
-
-// ListView.builder(
-//                               itemCount: snapshot.data!.length,
-//                               itemBuilder: (ctx, index) {
-//                                 final obj = snapshot.data![index];
-//                                 return Padding(
-//                                   padding: const EdgeInsets.only(
-//                                       left: 8, right: 8, bottom: 8),
-//                                   child: Slidable(
-//                                     endActionPane: ActionPane(
-//                                       motion: const ScrollMotion(),
-//                                       children: [
-//                                         SlidableAction(
-//                                           backgroundColor: Colors.red,
-//                                           foregroundColor: Colors.white,
-//                                           icon: Icons.delete,
-//                                           label: 'Delete',
-//                                           onPressed: (ctx) {
-//                                             showDialog(
-//                                               context: ctx,
-//                                               builder: (dialogContext) {
-//                                                 return AlertDialog(
-//                                                   title: const Text('Alert!'),
-//                                                   content: const Text(
-//                                                     'Are you sure you want to delete this chat?',
-//                                                   ),
-//                                                   actions: [
-//                                                     TextButton(
-//                                                       child: const Text(
-//                                                         'Cancel',
-//                                                         style: TextStyle(
-//                                                             color: Colors.blue),
-//                                                       ),
-//                                                       onPressed: () {
-//                                                         Navigator.pop(
-//                                                             dialogContext);
-//                                                       },
-//                                                     ),
-//                                                     TextButton(
-//                                                       onPressed: () {
-//                                                         Navigator.pop(
-//                                                             dialogContext);
-//                                                         // deleteConversation(
-//                                                         //     obj.id);
-//                                                       },
-//                                                       child: const Text(
-//                                                         'Delete',
-//                                                         style: TextStyle(
-//                                                           color: Colors.red,
-//                                                         ),
-//                                                       ),
-//                                                     )
-//                                                   ],
-//                                                 );
-//                                               },
-//                                             );
-//                                           },
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     child: GestureDetector(
-//                                       onTap: () {},
-//                                       child: Column(
-//                                         children: [
-//                                           SizedBox(
-//                                             height: 73,
-//                                             child: Row(
-//                                               crossAxisAlignment:
-//                                                   CrossAxisAlignment.start,
-//                                               children: [
-//                                                 Container(
-//                                                   height: 60,
-//                                                   width: 60,
-//                                                   decoration: BoxDecoration(
-//                                                     shape: BoxShape.circle,
-//                                                     border: Border.all(
-//                                                         color: Colors.black),
-//                                                   ),
-//                                                   child: ClipOval(
-//                                                     child: CachedNetworkImage(
-//                                                       imageUrl: obj.adImage,
-//                                                       fit: BoxFit.contain,
-//                                                       placeholder:
-//                                                           (context, url) {
-//                                                         return const Center(
-//                                                           child: Icon(
-//                                                             Icons.photo,
-//                                                             size: 30,
-//                                                             color: Colors.black,
-//                                                           ),
-//                                                         );
-//                                                       },
-//                                                       errorWidget: (context,
-//                                                           url, error) {
-//                                                         return const Center(
-//                                                           child: Icon(
-//                                                             Icons.photo,
-//                                                             size: 30,
-//                                                             color: Colors.black,
-//                                                           ),
-//                                                         );
-//                                                       },
-//                                                     ),
-//                                                   ),
-//                                                 ),
-//                                                 const SizedBox(
-//                                                   width: 10,
-//                                                 ),
-//                                                 Expanded(
-//                                                   child: Container(
-//                                                     decoration:
-//                                                         const BoxDecoration(
-//                                                       border: Border(
-//                                                         bottom: BorderSide(
-//                                                           width: 0.5,
-//                                                         ),
-//                                                       ),
-//                                                     ),
-//                                                     child: Column(
-//                                                       crossAxisAlignment:
-//                                                           CrossAxisAlignment
-//                                                               .start,
-//                                                       children: [
-//                                                         Row(
-//                                                           mainAxisAlignment:
-//                                                               MainAxisAlignment
-//                                                                   .spaceBetween,
-//                                                           children: [
-//                                                             Expanded(
-//                                                               child: Text(
-//                                                                 maxLines: 1,
-//                                                                 overflow:
-//                                                                     TextOverflow
-//                                                                         .ellipsis,
-//                                                                 obj.nameOfContact,
-//                                                                 style: GoogleFonts.roboto(
-//                                                                     fontWeight:
-//                                                                         FontWeight
-//                                                                             .bold),
-//                                                               ),
-//                                                             ),
-//                                                             Padding(
-//                                                               padding:
-//                                                                   const EdgeInsets
-//                                                                       .only(
-//                                                                       right: 8),
-//                                                               child: Text(
-//                                                                 getTime(obj
-//                                                                     .timeSent),
-//                                                                 style: GoogleFonts.roboto(
-//                                                                     fontWeight:
-//                                                                         FontWeight
-//                                                                             .w500),
-//                                                               ),
-//                                                             ),
-//                                                           ],
-//                                                         ),
-//                                                         Text(
-//                                                           obj.adTitle,
-//                                                           maxLines: 1,
-//                                                           overflow: TextOverflow
-//                                                               .ellipsis,
-//                                                           style: GoogleFonts
-//                                                               .roboto(
-//                                                             fontSize: 14,
-//                                                           ),
-//                                                         ),
-//                                                         const SizedBox(
-//                                                           height: 8,
-//                                                         ),
-//                                                         obj.lastMessageId ==
-//                                                                 handler.newUser
-//                                                                     .user!.uid
-//                                                             ? Row(
-//                                                                 children: [
-//                                                                   Icon(
-//                                                                     Icons
-//                                                                         .done_all,
-//                                                                     color: obj
-//                                                                             .isSeen
-//                                                                         ? Colors
-//                                                                             .blue
-//                                                                         : Colors
-//                                                                             .grey,
-//                                                                   ),
-//                                                                   const SizedBox(
-//                                                                     width: 10,
-//                                                                   ),
-//                                                                   Expanded(
-//                                                                     child: Text(
-//                                                                       obj.lastMessage,
-//                                                                       maxLines:
-//                                                                           1,
-//                                                                       overflow:
-//                                                                           TextOverflow
-//                                                                               .ellipsis,
-//                                                                     ),
-//                                                                   )
-//                                                                 ],
-//                                                               )
-//                                                             : Expanded(
-//                                                                 child: Text(
-//                                                                   obj.lastMessage,
-//                                                                   maxLines: 1,
-//                                                                   overflow:
-//                                                                       TextOverflow
-//                                                                           .ellipsis,
-//                                                                 ),
-//                                                               )
-//                                                       ],
-//                                                     ),
-//                                                   ),
-//                                                 )
-//                                               ],
-//                                             ),
-//                                           ),
-//                                           const SizedBox(
-//                                             height: 10,
-//                                           )
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 );
-//                               },
-//                             );

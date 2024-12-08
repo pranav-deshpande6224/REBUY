@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/fetch_category_ads_a_i.dart';
@@ -137,10 +138,25 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
     });
   }
 
+  void moveToLogin() {
+    if (Platform.isAndroid) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+          CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
-    super.initState();
+    if (handler.newUser.user == null) {
+      moveToLogin();
+      return;
+    }
     fetchInitialData();
     homeAdScrollController.addListener(
       () {
@@ -152,6 +168,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         }
       },
     );
+    super.initState();
   }
 
   Widget progressIndicator() {

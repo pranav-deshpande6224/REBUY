@@ -471,7 +471,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // TODO SignIN WITH APPLE
+                        
                       },
                       child: CircleAvatar(
                         backgroundColor: CupertinoColors.white,

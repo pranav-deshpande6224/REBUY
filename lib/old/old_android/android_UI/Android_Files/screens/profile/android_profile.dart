@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
-import 'package:resell/old/old_android/android_UI/Android_Files/screens/myads/android_soldAds.dart';
+import 'package:resell/old/old_android/android_UI/Android_Files/screens/myads/android_sold_ads.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/profile/about_android.dart';
 import 'package:resell/old/old_android/android_UI/Android_Files/screens/profile/policies_android.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
@@ -41,12 +41,10 @@ class _AndroidProfileState extends State<AndroidProfile> {
       handler.newUser.user = null;
       if (context.mounted) {
         Navigator.of(logoutContext).pop();
-        
       }
     } catch (e) {
       if (context.mounted) {
         Navigator.of(logoutContext).pop();
-        
       }
     }
   }
@@ -135,7 +133,7 @@ class _AndroidProfileState extends State<AndroidProfile> {
                       if (index == 0) {
                         Navigator.of(context, rootNavigator: true).push(
                           MaterialPageRoute(
-                            builder: (ctx) => const AndroidSoldads(),
+                            builder: (ctx) => const AndroidSoldAds(),
                           ),
                         );
                       } else if (index == 1) {
@@ -151,9 +149,7 @@ class _AndroidProfileState extends State<AndroidProfile> {
                             builder: (ctx) => const PoliciesAndroid(),
                           ),
                         );
-                      } else {
-                        
-                      }
+                      } else {}
                     },
                     child: Column(
                       children: [

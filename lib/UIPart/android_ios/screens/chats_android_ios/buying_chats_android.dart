@@ -165,6 +165,36 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
     });
   }
 
+  Widget retryAgain() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Something went wrong',
+            style: GoogleFonts.roboto(),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          TextButton(
+            onPressed: () async {
+              final _ = await ref.refresh(connectivityProvider.future);
+              final x = ref.refresh(internetCheckerProvider.future);
+              debugPrint(x.toString());
+            },
+            child: Text(
+              'Retry',
+              style: GoogleFonts.roboto(
+                color: Colors.blue,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final connectivityState = ref.watch(connectivityProvider);
@@ -191,35 +221,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                         );
                       }
                       if (snapshot.hasError) {
-                        return Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Something went wrong',
-                                style: GoogleFonts.roboto(),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              TextButton(
-                                onPressed: () async {
-                                  final _ = await ref
-                                      .refresh(connectivityProvider.future);
-                                  final x = ref
-                                      .refresh(internetCheckerProvider.future);
-                                  debugPrint(x.toString());
-                                },
-                                child: Text(
-                                  'Retry',
-                                  style: GoogleFonts.roboto(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
+                        return retryAgain();
                       }
                       return snapshot.data!.isEmpty
                           ? Center(
@@ -429,9 +431,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                   color: Colors.blue,
                 ),
               ),
-              error: (error, stackTrace) => const Center(
-                child: Text('Error'),
-              ),
+              error: (error, stackTrace) => retryAgain()
             );
           }
         },
@@ -440,9 +440,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
             color: Colors.blue,
           ),
         ),
-        error: (error, stackTrace) => const Center(
-          child: Text('Error'),
-        ),
+        error: (error, stackTrace) => retryAgain()
       ),
     );
   }

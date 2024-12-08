@@ -28,6 +28,10 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
   void initState() {
     super.initState();
     handler = AuthHandler.authHandlerInstance;
+    if (handler.newUser.user == null) {
+      moveToLogin();
+      return;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(showActiveAdsProvider.notifier).fetchInitialItems();
     });
@@ -39,6 +43,18 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
         ref.read(showActiveAdsProvider.notifier).fetchMoreItems();
       }
     });
+  }
+
+  void moveToLogin() {
+    if (Platform.isAndroid) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+          CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   @override
@@ -583,7 +599,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                               child: scrollView(adState),
                             );
                           },
-                          error: (error, stack) =>retry(),
+                          error: (error, stack) => retry(),
                           loading: spinner,
                         );
                       }
