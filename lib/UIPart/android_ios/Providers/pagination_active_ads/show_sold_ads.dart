@@ -26,7 +26,7 @@ class ShowSoldAds extends StateNotifier<AsyncValue<SoldAdState>> {
   DocumentSnapshot<Map<String, dynamic>>? _soldLastDocument;
   bool _hasMoreSold = true;
   bool _isLoadingSold = false;
-  final int _itemsPerPage = 5;
+  final int _itemsPerPage = 8;
   AuthHandler handler = AuthHandler.authHandlerInstance;
   Future<void> fetchInitialItems() async {
     if (_isLoadingSold) return;

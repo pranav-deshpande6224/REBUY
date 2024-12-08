@@ -535,8 +535,35 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                 ),
               );
       },
-      error: (error, stackTrace) => const Center(
-        child: Text('Error in the code'),
+      error: (error, stackTrace) => Center(
+        child: Platform.isAndroid
+            ? TextButton(
+                onPressed: () {
+                  final _ =
+                      ref.refresh(itemStreamProvider(widget.documentReference));
+                },
+                child: Text(
+                  'Retry',
+                  style: GoogleFonts.roboto(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : CupertinoButton(
+                onPressed: () {
+                  final _ = ref.refresh(
+                    itemStreamProvider(widget.documentReference),
+                  );
+                },
+                child: Text(
+                  'Retry',
+                  style: GoogleFonts.roboto(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
       ),
       loading: () => const Center(
         child: CircularProgressIndicator(
@@ -837,6 +864,9 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
 
   Future<void> sendMessageToDb(
       String message, Item item, MessageReply? messageReply) async {
+    if (message.isEmpty) {
+      return;
+    }
     chatController.clear();
     ref.read(messageReplyProvider.notifier).update((state) => null);
     ref.read(activeInactiveSendProvider.notifier).reset();
@@ -1010,12 +1040,11 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
     if (handler.newUser.user != null) {
       try {
         final functions = FirebaseFunctions.instance;
-      await functions.httpsCallable('myFunction').call({
+        await functions.httpsCallable('myFunction').call({
           'chatId': "${widget.senderId}_${item.id}",
           'recipientUid': widget.recieverId,
           'messageId': messageId,
         });
-        
       } catch (e) {
         print('Error sending message: ${e.toString()}');
       }
@@ -1154,7 +1183,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                           await InternetConnection().hasInternetAccess;
                       if (internetCheck) {
                         sendMessageToDb(
-                            chatController.text, item, messageReply);
+                            chatController.text.trim(), item, messageReply);
                       } else {
                         showCupertinoDialog(
                           context: context,

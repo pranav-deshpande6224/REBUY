@@ -693,6 +693,50 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
     );
   }
 
+  Widget retry() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Something went wrong',
+            style: GoogleFonts.roboto(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Platform.isAndroid
+              ? TextButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(homeAdsprovider.notifier).refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(),
+                  ),
+                )
+              : CupertinoButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(homeAdsprovider.notifier).refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(),
+                  ),
+                )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final connectivityState = ref.watch(connectivityProvider);
@@ -723,17 +767,17 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                     }
                     return const SizedBox();
                   },
-                  error: (error, _) => Center(child: Text('Error: $error')),
+                  error: (error, _) => retry(),
                   loading: spinner,
                 );
               }
             },
-            error: (error, _) => Center(child: Text('Error: $error')),
+            error: (error, _) => retry(),
             loading: progressIndicator,
           );
         }
       },
-      error: (error, _) => Center(child: Text('Error: $error')),
+      error: (error, _) => retry(),
       loading: progressIndicator,
     );
   }

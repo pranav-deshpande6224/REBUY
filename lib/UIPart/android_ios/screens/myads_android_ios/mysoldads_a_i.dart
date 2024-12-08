@@ -47,6 +47,47 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
     super.dispose();
   }
 
+  Widget retry() {
+    return Center(
+      child: Column(
+        children: [
+          Text('Something went wrong',
+              style: GoogleFonts.roboto(color: Colors.blue)),
+          const SizedBox(
+            height: 10,
+          ),
+          Platform.isAndroid
+              ? TextButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(showSoldAdsProvider.notifier).refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+              : CupertinoButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(showSoldAdsProvider.notifier).refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+        ],
+      ),
+    );
+  }
+
   Widget progressIndicator() {
     if (Platform.isAndroid) {
       return const Center(
@@ -303,19 +344,17 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                         );
                       },
                       error: (error, stack) =>
-                          Center(child: Text('Error: $error')),
+                         retry(),
                       loading: spinner,
                     );
                   }
                 },
-                error: (error, stack) => Center(
-                  child: Text('Error: $error'),
-                ),
+                error: (error, stack) => retry(),
                 loading: progressIndicator,
               );
             }
           },
-          error: (error, stack) => Center(child: Text('Error: $error')),
+          error: (error, stack) => retry(),
           loading: progressIndicator,
         ),
       ),
@@ -352,21 +391,17 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                         );
                       },
                       error: (error, stack) =>
-                          Center(child: Text('Error: $error')),
+                          retry(),
                       loading: spinner,
                     );
                   }
                 },
-                error: (error, stack) => Center(
-                  child: Text('Error: $error'),
-                ),
+                error: (error, stack) => retry(),
                 loading: progressIndicator,
               );
             }
           },
-          error: (error, stack) => Center(
-            child: Text('Error: $error'),
-          ),
+          error: (error, stack) => retry(),
           loading: progressIndicator,
         ),
       ),

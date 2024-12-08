@@ -69,7 +69,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
   String getDate(Timestamp timestamp) {
     DateTime dateTime = timestamp.toDate();
     String formattedDate =
-        DateFormat('dd-MM-yy').format(dateTime); // Format DateTime
+        DateFormat('dd-MM-yy').format(dateTime);
     return formattedDate;
   }
 
@@ -531,7 +531,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                         child: otherScrollView(otherAdState),
                       );
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) => retry(),
                     loading: spinner,
                   );
                 } else {
@@ -551,18 +551,18 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                         child: scrollView(catAdState),
                       );
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) =>retry(),
                     loading: spinner,
                   );
                 }
               }
             },
-            error: (error, _) => Center(child: Text('Error: $error')),
+            error: (error, _) => retry(),
             loading: progressIndicator,
           );
         }
       },
-      error: (error, _) => Center(child: Text('Error: $error')),
+      error: (error, _) => retry(),
       loading: progressIndicator,
     );
   }
@@ -586,7 +586,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                     data: (otherAdState) {
                       return otherScrollView(otherAdState);
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) => retry(),
                     loading: spinner,
                   );
                 } else {
@@ -595,19 +595,68 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                     data: (catAdState) {
                       return scrollView(catAdState);
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) => retry(),
                     loading: spinner,
                   );
                 }
               }
             },
-            error: (error, _) => Center(child: Text('Error: $error')),
+            error: (error, _) => retry(),
             loading: progressIndicator,
           );
         }
       },
-      error: (error, _) => Center(child: Text('Error: $error')),
+      error: (error, _) => retry(),
       loading: progressIndicator,
+    );
+  }
+
+  Widget retry() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Something went wrong',
+            style: GoogleFonts.roboto(color: Colors.black),
+          ),
+          const SizedBox(height: 10),
+          Platform.isAndroid
+              ? TextButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(showCatAdsProvider.notifier).refreshItems(
+                          widget.categoryName,
+                          widget.subCategoryName,
+                        );
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+              : CupertinoButton(
+                  child: Text(
+                    'Retry',
+                    style:
+                        GoogleFonts.roboto(color: CupertinoColors.activeBlue),
+                  ),
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref.read(showCatAdsProvider.notifier).refreshItems(
+                          widget.categoryName,
+                          widget.subCategoryName,
+                        );
+                  },
+                )
+        ],
+      ),
     );
   }
 

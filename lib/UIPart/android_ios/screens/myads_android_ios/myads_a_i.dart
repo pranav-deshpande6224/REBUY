@@ -498,6 +498,51 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
     );
   }
 
+  Widget retry() {
+    return Center(
+      child: Column(
+        children: [
+          Text('Something went wrong',
+              style: GoogleFonts.roboto(color: Colors.blue)),
+          const SizedBox(
+            height: 10,
+          ),
+          Platform.isAndroid
+              ? TextButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref
+                        .read(showActiveAdsProvider.notifier)
+                        .refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+              : CupertinoButton(
+                  onPressed: () async {
+                    final x = ref.refresh(connectivityProvider);
+                    final y = ref.refresh(internetCheckerProvider);
+                    debugPrint(x.toString());
+                    debugPrint(y.toString());
+                    await ref
+                        .read(showActiveAdsProvider.notifier)
+                        .refreshItems();
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final connectivityState = ref.watch(connectivityProvider);
@@ -538,18 +583,16 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                               child: scrollView(adState),
                             );
                           },
-                          error: (error, stack) => Center(
-                            child: Text('Error: $error'),
-                          ),
+                          error: (error, stack) =>retry(),
                           loading: spinner,
                         );
                       }
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) => retry(),
                     loading: progressIndicator);
               }
             },
-            error: (error, _) => Center(child: Text('Error: $error')),
+            error: (error, _) => retry(),
             loading: progressIndicator,
           ),
         ),
@@ -579,18 +622,16 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                           data: (adState) {
                             return scrollView(adState);
                           },
-                          error: (error, stack) => Center(
-                            child: Text('Error: $error'),
-                          ),
+                          error: (error, stack) => retry(),
                           loading: spinner,
                         );
                       }
                     },
-                    error: (error, _) => Center(child: Text('Error: $error')),
+                    error: (error, _) => retry(),
                     loading: progressIndicator);
               }
             },
-            error: (error, _) => Center(child: Text('Error: $error')),
+            error: (error, _) => retry(),
             loading: progressIndicator,
           ),
         ),

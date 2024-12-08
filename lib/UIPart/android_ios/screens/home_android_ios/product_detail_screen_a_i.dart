@@ -226,27 +226,62 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                           return loading();
                         }
                         if (snapshot.hasError) {
-                          return Center(
-                            child: Text('Error: ${snapshot.error}'),
-                          );
+                          return retry();
                         }
                         return data(snapshot);
                       },
                     );
                   }
                 },
-                error: (error, stack) => Center(
-                  child: Text('Error: $error'),
-                ),
+                error: (error, stack) => retry(),
                 loading: progressIndicator,
               );
             }
           },
-          error: (error, stack) => Center(
-            child: Text('Error: $error'),
-          ),
+          error: (error, stack) => retry(),
           loading: progressIndicator,
         ),
+      ),
+    );
+  }
+
+  Widget retry() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Something went wrong',
+            style: GoogleFonts.roboto(),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Platform.isAndroid
+              ? TextButton(
+                  onPressed: () async {
+                    final _ = await ref.refresh(connectivityProvider.future);
+                    final x = ref.refresh(internetCheckerProvider.future);
+                    debugPrint(x.toString());
+                  },
+                  child: Text(
+                    'Retry',
+                    style: GoogleFonts.roboto(color: Colors.blue),
+                  ),
+                )
+              : CupertinoButton(
+                  child: Text(
+                    'Retry',
+                    style:
+                        GoogleFonts.roboto(color: CupertinoColors.activeBlue),
+                  ),
+                  onPressed: () async {
+                    final _ = await ref.refresh(connectivityProvider.future);
+                    final x = ref.refresh(internetCheckerProvider.future);
+                    debugPrint(x.toString());
+                  },
+                )
+        ],
       ),
     );
   }
@@ -280,25 +315,19 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                           return loading();
                         }
                         if (snapshot.hasError) {
-                          return Center(
-                            child: Text('Error: ${snapshot.error}'),
-                          );
+                          return retry();
                         }
                         return data(snapshot);
                       },
                     );
                   }
                 },
-                error: (error, stack) => Center(
-                  child: Text('Error: $error'),
-                ),
+                error: (error, stack) => retry(),
                 loading: progressIndicator,
               );
             }
           },
-          error: (error, stack) => Center(
-            child: Text('Error: $error'),
-          ),
+          error: (error, stack) =>retry(),
           loading: progressIndicator,
         ),
       ),
