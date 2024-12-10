@@ -30,7 +30,9 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
-    getNotifications();
+    if (Platform.isAndroid) {
+      getNotifications();
+    }
     WidgetsBinding.instance.addObserver(this);
     makingOnline();
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
