@@ -355,9 +355,11 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                       height: 20,
                     ),
                     Text(
-                      'An Email link has been sent to the mail id',
+                      'An Email link  sent to the mail id',
                       style: GoogleFonts.roboto(
-                          fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -378,13 +380,19 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                       height: 10,
                     ),
                     Text(
-                      'Link is for verification of your Email',
-                      style: GoogleFonts.roboto(),
+                      !isVerified
+                          ? 'Link is for verification of your Email'
+                          : "Email Successfully Verified",
+                      style: GoogleFonts.roboto(
+                        fontSize: 16,
+                        color: CupertinoColors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
-                    emailReVerifyButton()
+                    !isVerified ? emailReVerifyButton() : const SizedBox()
                   ],
                 ),
               ),

@@ -728,56 +728,41 @@ class _LoginAIState extends ConsumerState<LoginAI> {
         ),
       );
     } else if (Platform.isIOS) {
-      return Row(
-        children: [
-          const Spacer(),
-          GestureDetector(
-            onTap: () {
-              late BuildContext googleSignInContext;
-              showCupertinoDialog(
-                context: context,
-                builder: (ctx) {
-                  googleSignInContext = ctx;
-                  handler.googleSignIn(ref, context, googleSignInContext);
-                  return const Center(
-                    child: CupertinoActivityIndicator(
-                      radius: 15,
-                    ),
-                  );
-                },
-              );
-            },
-            child: CircleAvatar(
-              backgroundColor: CupertinoColors.white,
-              radius: 30,
-              child: Image.asset(
-                width: 50,
-                height: 50,
-                'assets/images/g_transparent.png',
-                fit: BoxFit.cover,
+      return SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: CupertinoButton(
+          color: CupertinoColors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/g_transparent.png',
+                  height: 30, width: 30),
+              const SizedBox(
+                width: 10,
               ),
-            ),
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-          GestureDetector(
-            onTap: () {
-              // TODO SignIN WITH APPLE
-            },
-            child: CircleAvatar(
-              backgroundColor: CupertinoColors.white,
-              radius: 30,
-              child: Image.asset(
-                width: 50,
-                height: 50,
-                'assets/images/apple_a.png',
-                fit: BoxFit.fill,
+              Text(
+                'Sign in With Google',
+                style: GoogleFonts.roboto(color: CupertinoColors.black),
               ),
-            ),
+            ],
           ),
-          const Spacer()
-        ],
+          onPressed: () {
+            late BuildContext googleSignInContext;
+            showCupertinoDialog(
+              context: context,
+              builder: (ctx) {
+                googleSignInContext = ctx;
+                handler.googleSignIn(ref, context, googleSignInContext);
+                return const Center(
+                  child: CupertinoActivityIndicator(
+                    radius: 15,
+                  ),
+                );
+              },
+            );
+          },
+        ),
       );
     }
     return const SizedBox();
@@ -909,7 +894,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                 ),
                 seperator(),
                 const SizedBox(
-                  height: 30,
+                  height: 50,
                 ),
                 googleSignInAndApple(),
                 const SizedBox(

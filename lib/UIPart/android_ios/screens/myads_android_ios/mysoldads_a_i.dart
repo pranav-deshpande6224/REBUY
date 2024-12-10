@@ -24,11 +24,11 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
   @override
   void initState() {
     super.initState();
+    handler = AuthHandler.authHandlerInstance;
     if (handler.newUser.user == null) {
       moveToLogin();
       return;
     }
-    handler = AuthHandler.authHandlerInstance;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         ref.read(showSoldAdsProvider.notifier).fetchInitialItems();
