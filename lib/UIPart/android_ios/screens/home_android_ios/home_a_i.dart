@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/display_home_ads_a_i.dart';
 
 class HomeAI extends StatelessWidget {
@@ -38,11 +37,10 @@ class HomeAI extends StatelessWidget {
   Widget ios() {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          'ReVYB',
-          style: GoogleFonts.roboto(
-            fontWeight: FontWeight.w600,
-          ),
+        middle: Image.asset(
+          'assets/images/branding6.png',
+          height: 50,
+          width: 150,
         ),
       ),
       child: displayHome(),
