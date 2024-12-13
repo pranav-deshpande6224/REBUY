@@ -90,6 +90,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
         noInternetDialog();
       } else {
         showDialog(
+          barrierDismissible: false,
           context: context,
           builder: (ctx) {
             signUpContext = ctx;
@@ -186,6 +187,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
         } else {
           showCupertinoDialog(
             context: context,
+            barrierDismissible: false,
             builder: (ctx) {
               signUpContext = ctx;
               handler.signUp(

@@ -23,6 +23,7 @@ class AuthHandler {
     if (Platform.isIOS) {
       showCupertinoDialog(
           context: context,
+          barrierDismissible: false,
           builder: (ctx) {
             return CupertinoAlertDialog(
               title: Text(
@@ -50,6 +51,7 @@ class AuthHandler {
     } else if (Platform.isAndroid) {
       showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (ctx) {
           return AlertDialog(
             title: Text(
@@ -348,6 +350,7 @@ class AuthHandler {
     if (Platform.isAndroid) {
       showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (ctx) {
           return AlertDialog(
             title: Text(
@@ -378,6 +381,7 @@ class AuthHandler {
     } else if (Platform.isIOS) {
       showCupertinoDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) => CupertinoAlertDialog(
           title: Text(
             'Alert',

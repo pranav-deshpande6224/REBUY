@@ -290,6 +290,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                           } else {
                             showDialog(
                               context: context,
+                              barrierDismissible: false,
                               builder: (ctx) {
                                 return AlertDialog(
                                   title: const Text(
@@ -351,6 +352,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                               } else {
                                 showCupertinoDialog(
                                   context: context,
+                                  barrierDismissible: false,
                                   builder: (ctx) {
                                     return CupertinoAlertDialog(
                                       title: Text('Alert',

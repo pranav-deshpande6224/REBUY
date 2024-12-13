@@ -531,6 +531,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               await fbCloudFireStore.runTransaction((_) async {
                 if (Platform.isAndroid) {
                   showDialog(
+                    barrierDismissible: false,
                       context: context,
                       builder: (ctx) {
                         popContext = ctx;
@@ -543,6 +544,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 } else if (Platform.isIOS) {
                   showCupertinoDialog(
                       context: context,
+                      barrierDismissible: false,
                       builder: (ctx) {
                         popContext = ctx;
                         return const Center(

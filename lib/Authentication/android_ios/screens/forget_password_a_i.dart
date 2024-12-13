@@ -110,6 +110,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
         late BuildContext forgetPasswordContext;
         showDialog(
             context: context,
+            barrierDismissible: false,
             builder: (ctx) {
               forgetPasswordContext = ctx;
               forgetPasswordContext = ctx;
@@ -147,6 +148,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
           late BuildContext forgetPasswordContext;
           showCupertinoDialog(
             context: context,
+            barrierDismissible: false,
             builder: (ctx) {
               forgetPasswordContext = ctx;
               handler.forgetPassword(

@@ -135,6 +135,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
           if (Platform.isAndroid) {
             showDialog(
               context: context,
+              barrierDismissible: false,
               builder: (ctx) {
                 return AlertDialog(
                   title: const Text('No Internet Connection'),
@@ -157,6 +158,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
           } else if (Platform.isIOS) {
             showCupertinoDialog(
               context: context,
+              barrierDismissible: false,
               builder: (ctx) {
                 return CupertinoAlertDialog(
                   title: const Text('No Internet Connection'),
@@ -178,6 +180,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
           try {
             if (Platform.isAndroid) {
               showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (ctx) {
                   sellContext = ctx;
@@ -191,6 +194,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             } else if (Platform.isIOS) {
               showCupertinoDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (ctx) {
                   sellContext = ctx;
                   return const Center(
@@ -218,6 +222,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             if (Platform.isAndroid) {
               showDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (ctx) {
                   return AlertDialog(
                     title: Text(
@@ -247,6 +252,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             } else if (Platform.isIOS) {
               showCupertinoDialog(
                 context: context,
+                barrierDismissible: false,
                 builder: (ctx) {
                   return CupertinoAlertDialog(
                     title: Text(

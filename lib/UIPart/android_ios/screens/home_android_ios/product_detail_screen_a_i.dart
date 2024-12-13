@@ -7,9 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
+import 'package:resell/UIPart/android_ios/Providers/mark_as_fav_provider.dart';
 import 'package:resell/UIPart/android_ios/model/item.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chatting_screen_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/image_detail_screen_a_i.dart';
@@ -327,7 +330,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
               );
             }
           },
-          error: (error, stack) =>retry(),
+          error: (error, stack) => retry(),
           loading: progressIndicator,
         ),
       ),
@@ -536,47 +539,203 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
     );
   }
 
+  ButtonStyle buttonStyle(Color color) {
+    return ElevatedButton.styleFrom(
+      backgroundColor: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  void moveToLogin() {
+    if (Platform.isAndroid) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    } else if (Platform.isIOS) {
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+          CupertinoPageRoute(builder: (ctx) => const LoginAI()),
+          (Route<dynamic> route) => false);
+    }
+  }
+
+  void errorAlert(String e) {
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: const Text('Alert'),
+            content: Text(e.toString()),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text('Okay'),
+              )
+            ],
+          );
+        },
+      );
+    } else if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (ctx) {
+          return CupertinoAlertDialog(
+            title: Text('Alert', style: GoogleFonts.roboto()),
+            content: Text(e.toString(), style: GoogleFonts.roboto()),
+            actions: [
+              CupertinoDialogAction(
+                child: Text('Okay', style: GoogleFonts.roboto()),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> storeinDB(BuildContext favContext) async {
+    try {
+      final userDocRef =
+          handler.fireStore.collection('users').doc(handler.newUser.user!.uid);
+      final favCollectionRef = userDocRef.collection('favourites');
+      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await favCollectionRef.limit(1).get();
+      if (querySnapshot.docs.isEmpty) {
+        await favCollectionRef.add({
+          'reference': widget.documentReference,
+        });
+      } else {
+        await favCollectionRef.add({
+          'reference': widget.documentReference,
+        });
+      }
+      Navigator.pop(favContext);
+      ref.read(favProvider.notifier).markAsFav();
+    } catch (e) {
+      Navigator.pop(favContext);
+      errorAlert(e.toString());
+    }
+  }
+
+  void favouriteItem() async {
+    if (handler.newUser.user != null) {
+      late BuildContext favContext;
+      if (Platform.isAndroid) {
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (ctx) {
+            favContext = ctx;
+            storeinDB(favContext);
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            );
+          },
+        );
+      } else if (Platform.isIOS) {
+        showCupertinoDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (ctx) {
+            favContext = ctx;
+            storeinDB(favContext);
+            return Center(
+              child: CupertinoActivityIndicator(),
+            );
+          },
+        );
+      }
+    } else {
+      moveToLogin();
+    }
+  }
+
   Widget chatNowButton(Item item) {
     if (Platform.isAndroid) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: 50,
-          width: double.infinity,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+      return Row(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  style: buttonStyle(Colors.blue),
+                  onPressed: item.isAvailable
+                      ? () {
+                          Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => ChattingScreenAI(
+                                name: item.postedBy,
+                                documentReference: widget.documentReference,
+                                recieverId: item.userid,
+                                senderId: handler.newUser.user!.uid,
+                                adImageUrl: item.images[0],
+                                adTitle: item.adTitle,
+                                adId: item.id,
+                                price: item.price,
+                              ),
+                            ),
+                          );
+                        }
+                      : null,
+                  child: Text(
+                    style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.bold,
+                      color: item.isAvailable ? Colors.white : Colors.grey,
+                    ),
+                    item.isAvailable ? 'Chat Now' : "SOLD OUT",
+                  ),
+                ),
               ),
-            ),
-            onPressed: item.isAvailable
-                ? () {
-                    Navigator.of(context, rootNavigator: true).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => ChattingScreenAI(
-                          name: item.postedBy,
-                          documentReference: widget.documentReference,
-                          recieverId: item.userid,
-                          senderId: handler.newUser.user!.uid,
-                          adImageUrl: item.images[0],
-                          adTitle: item.adTitle,
-                          adId: item.id,
-                          price: item.price,
-                        ),
-                      ),
-                    );
-                  }
-                : null,
-            child: Text(
-              style: GoogleFonts.roboto(
-                fontWeight: FontWeight.bold,
-                color: item.isAvailable ? Colors.white : Colors.grey,
-              ),
-              item.isAvailable ? 'Chat Now' : "SOLD OUT",
             ),
           ),
-        ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: SizedBox(
+                height: 50,
+                child: Consumer(
+                  builder: (context, ref, child) {
+                    final isFav = ref.watch(favProvider);
+                    return ElevatedButton(
+                      style: buttonStyle(Colors.green),
+                      onPressed: () async {
+                        final hasInternet =
+                            await InternetConnection().hasInternetAccess;
+                        if (hasInternet) {
+                          favouriteItem();
+                        } else {
+                          errorAlert("No Internet Connection");
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            isFav
+                                ? Icons.favorite
+                                : Icons.favorite_border_outlined,
+                            color: isFav ? Colors.red : Colors.white,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          )
+        ],
       );
     } else if (Platform.isIOS) {
       return Padding(

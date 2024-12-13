@@ -174,6 +174,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
       final internetCheck = await InternetConnection().hasInternetAccess;
       if (internetCheck) {
         showDialog(
+          barrierDismissible: false,
           context: context,
           builder: (ctx) {
             loginContext = ctx;
@@ -218,6 +219,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
         final internetChecker = await InternetConnection().hasInternetAccess;
         if (internetChecker) {
           showCupertinoDialog(
+            barrierDismissible: false,
             context: context,
             builder: (ctx) {
               loginContext = ctx;

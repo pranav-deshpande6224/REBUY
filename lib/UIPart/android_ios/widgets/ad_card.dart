@@ -43,6 +43,7 @@ class AdCard extends ConsumerWidget {
               if (Platform.isIOS) {
                 showCupertinoDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (ctx) {
                     return CupertinoAlertDialog(
                       title: Text(
@@ -80,6 +81,7 @@ class AdCard extends ConsumerWidget {
               } else if (Platform.isAndroid) {
                 showDialog(
                   context: context,
+                  barrierDismissible: false,
                   builder: (ctx) {
                     return AlertDialog(
                       title: Text(
