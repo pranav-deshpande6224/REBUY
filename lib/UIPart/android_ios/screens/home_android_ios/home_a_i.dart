@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/display_home_ads_a_i.dart';
+import 'package:resell/UIPart/android_ios/screens/home_android_ios/favourite_screen.dart';
 
 class HomeAI extends StatelessWidget {
   const HomeAI({super.key});
@@ -19,22 +20,39 @@ class HomeAI extends StatelessWidget {
     );
   }
 
-  Widget android() {
+  Widget android(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 3,
-          centerTitle: true,
-          backgroundColor: Colors.grey[200],
-          title: Image.asset(
-            'assets/images/branding6.png',
-            height: 50,
-            width: 150,
-          )),
+        elevation: 3,
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.favorite,
+              size: 35,
+              color: Colors.redAccent,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => const FavouriteScreen(),
+                ),
+              );
+            },
+          )
+        ],
+        backgroundColor: Colors.grey[200],
+        title: Image.asset(
+          'assets/images/branding6.png',
+          height: 50,
+          width: 150,
+        ),
+      ),
       body: displayHome(),
     );
   }
 
-  Widget ios() {
+  Widget ios(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Image.asset(
@@ -50,10 +68,10 @@ class HomeAI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      return android();
+      return android(context);
     }
     if (Platform.isIOS) {
-      return ios();
+      return ios(context);
     }
     return const Placeholder();
   }

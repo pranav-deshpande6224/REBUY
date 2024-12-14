@@ -118,7 +118,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
             label: 'Add',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.star),
             label: 'MyAds',
           ),
           BottomNavigationBarItem(
@@ -166,10 +166,10 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(
-              CupertinoIcons.heart_fill,
+              CupertinoIcons.star_fill,
               color: CupertinoColors.activeBlue,
             ),
-            icon: Icon(CupertinoIcons.heart),
+            icon: Icon(CupertinoIcons.star),
             label: 'My ADS',
           ),
           BottomNavigationBarItem(

@@ -600,30 +600,6 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
     }
   }
 
-  Future<void> storeinDB(BuildContext favContext) async {
-    try {
-      final userDocRef =
-          handler.fireStore.collection('users').doc(handler.newUser.user!.uid);
-      final favCollectionRef = userDocRef.collection('favourites');
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await favCollectionRef.limit(1).get();
-      if (querySnapshot.docs.isEmpty) {
-        await favCollectionRef.add({
-          'reference': widget.documentReference,
-        });
-      } else {
-        await favCollectionRef.add({
-          'reference': widget.documentReference,
-        });
-      }
-      Navigator.pop(favContext);
-      ref.read(favProvider.notifier).markAsFav();
-    } catch (e) {
-      Navigator.pop(favContext);
-      errorAlert(e.toString());
-    }
-  }
-
   void favouriteItem() async {
     if (handler.newUser.user != null) {
       late BuildContext favContext;
@@ -633,7 +609,9 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           context: context,
           builder: (ctx) {
             favContext = ctx;
-            storeinDB(favContext);
+            ref
+                .read(favouriteProvider.notifier)
+                .toggleFavourite(widget.documentReference, favContext);
             return Center(
               child: CircularProgressIndicator(
                 color: Colors.blue,
@@ -647,7 +625,9 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           context: context,
           builder: (ctx) {
             favContext = ctx;
-            storeinDB(favContext);
+            ref
+                .read(favouriteProvider.notifier)
+                .toggleFavourite(widget.documentReference, favContext);
             return Center(
               child: CupertinoActivityIndicator(),
             );
@@ -659,7 +639,50 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
     }
   }
 
+  void showItemNotAvailableAlert() {
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: const Text('Alert'),
+            content: const Text('Item is not available'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text('Okay'),
+              )
+            ],
+          );
+        },
+      );
+    } else if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (ctx) {
+          return CupertinoAlertDialog(
+            title: Text('Alert', style: GoogleFonts.roboto()),
+            content: Text('Item is not available', style: GoogleFonts.roboto()),
+            actions: [
+              CupertinoDialogAction(
+                child: Text('Okay', style: GoogleFonts.roboto()),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              )
+            ],
+          );
+        },
+      );
+    }
+  }
+
   Widget chatNowButton(Item item) {
+    ref
+        .read(favouriteProvider.notifier)
+        .checkFavourite(widget.documentReference);
     if (Platform.isAndroid) {
       return Row(
         children: [
@@ -706,29 +729,40 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                 height: 50,
                 child: Consumer(
                   builder: (context, ref, child) {
-                    final isFav = ref.watch(favProvider);
+                    final favouriteState = ref.watch(favouriteProvider);
                     return ElevatedButton(
                       style: buttonStyle(Colors.green),
-                      onPressed: () async {
-                        final hasInternet =
-                            await InternetConnection().hasInternetAccess;
-                        if (hasInternet) {
-                          favouriteItem();
-                        } else {
-                          errorAlert("No Internet Connection");
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            isFav
-                                ? Icons.favorite
-                                : Icons.favorite_border_outlined,
-                            color: isFav ? Colors.red : Colors.white,
-                          ),
-                        ],
-                      ),
+                      onPressed: item.isAvailable
+                          ? favouriteState == FavouriteState.loading
+                              ? () {}
+                              : () async {
+                                  final hasInternet = await InternetConnection()
+                                      .hasInternetAccess;
+                                  if (hasInternet) {
+                                    favouriteItem();
+                                  } else {
+                                    errorAlert("No Internet Connection");
+                                  }
+                                }
+                          : showItemNotAvailableAlert,
+                      child: favouriteState == FavouriteState.loading
+                          ? CircularProgressIndicator(
+                              color: Colors.blue,
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  favouriteState == FavouriteState.favourite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border_outlined,
+                                  color:
+                                      favouriteState == FavouriteState.favourite
+                                          ? Colors.red
+                                          : Colors.white,
+                                ),
+                              ],
+                            ),
                     );
                   },
                 ),
@@ -787,10 +821,20 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      return android();
+      return PopScope(
+        onPopInvokedWithResult: (didPop, result) {
+          ref.read(favouriteProvider.notifier).resetState();
+        },
+        child: android(),
+      );
     }
     if (Platform.isIOS) {
-      return ios();
+      return PopScope(
+        onPopInvokedWithResult: (didPop, result) {
+          ref.read(favouriteProvider.notifier).resetState();
+        },
+        child: ios(),
+      );
     }
     return const Placeholder();
   }

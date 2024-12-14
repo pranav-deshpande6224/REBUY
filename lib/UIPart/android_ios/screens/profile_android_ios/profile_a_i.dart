@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
+import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/favourite_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/home_ads.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_ads.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/show_sold_ads.dart';
@@ -51,7 +52,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
-    if(handler.newUser.user == null){
+    if (handler.newUser.user == null) {
       moveToLogin();
     }
     super.initState();
@@ -63,9 +64,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       await handler.fireStore
           .collection('users')
           .doc(handler.newUser.user!.uid)
-          .update({
-            'fcmToken' : ''
-          });
+          .update({'fcmToken': ''});
       await Future.delayed(const Duration(milliseconds: 900));
       await handler.firebaseAuth.signOut();
       final sharedPref = await SharedPreferences.getInstance();
@@ -75,6 +74,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       ref.read(showSoldAdsProvider.notifier).resetState();
       ref.read(homeAdsprovider.notifier).resetState();
       ref.read(showCatAdsProvider.notifier).resetState();
+      ref.read(favouriteAdsProvider.notifier).resetState();
       if (!signOutContext.mounted) return;
       Navigator.pop(signOutContext);
       moveToLogin();
