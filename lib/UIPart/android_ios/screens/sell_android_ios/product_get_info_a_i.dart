@@ -172,6 +172,90 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
     }
   }
 
+  void confirmationDialog() {
+    if (Platform.isAndroid) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text("Confirmation of Price", style: GoogleFonts.roboto()),
+            content: Text("PRICE : ${_priceController.text}"),
+            actions: [
+              TextButton(
+                child: Text(
+                  "Cancel",
+                  style: GoogleFonts.roboto(color: Colors.blue),
+                ),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  if (widget.subCategoryName == Constants.mobilePhone) {
+                    saveMyAdToDB(Constants.mobilePhone);
+                  } else if (widget.subCategoryName == Constants.tablet) {
+                    saveMyAdToDB(Constants.tablet);
+                  } else if (widget.subCategoryName == '') {
+                    saveOtherAdToDB(Constants.other);
+                  } else {
+                    saveMyAdToDB('');
+                  }
+                },
+                child: Text(
+                  "Sell",
+                  style: GoogleFonts.roboto(color: Colors.blue),
+                ),
+              )
+            ],
+          );
+        },
+      );
+    } else if (Platform.isIOS) {
+      showCupertinoDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              title: Text("Confirmation of Price", style: GoogleFonts.roboto()),
+              content: Text(
+                "Price : ${_priceController.text}",
+                style: GoogleFonts.roboto(),
+              ),
+              actions: [
+                CupertinoDialogAction(
+                  child: Text(
+                    "Cancel",
+                    style: GoogleFonts.roboto(),
+                  ),
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                ),
+                CupertinoDialogAction(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                    if (widget.subCategoryName == Constants.mobilePhone) {
+                      saveMyAdToDB(Constants.mobilePhone);
+                    } else if (widget.subCategoryName == Constants.tablet) {
+                      saveMyAdToDB(Constants.tablet);
+                    } else if (widget.subCategoryName == '') {
+                      saveOtherAdToDB(Constants.other);
+                    } else {
+                      saveMyAdToDB('');
+                    }
+                  },
+                  child: Text(
+                    "Sell",
+                    style: GoogleFonts.roboto(),
+                  ),
+                )
+              ],
+            );
+          });
+    }
+  }
+
   void _nextPressed() {
     if (Platform.isAndroid) {
       if (widget.subCategoryName == Constants.mobilePhone) {
@@ -181,7 +265,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return;
         }
         unfocusFields();
-        saveMyAdToDB(Constants.mobilePhone);
+        confirmationDialog();
+        // saveMyAdToDB(Constants.mobilePhone);
       } else if (widget.subCategoryName == Constants.tablet) {
         ipadSelectionErrorText();
         if (!_tabletFormKey.currentState!.validate()) return;
@@ -190,7 +275,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return;
         }
         unfocusFields();
-        saveMyAdToDB(Constants.tablet);
+        confirmationDialog();
+        // saveMyAdToDB(Constants.tablet);
       } else if (widget.subCategoryName ==
           Constants.mobileChargerLaptopCharger) {
         chargerSelectionErrorText();
@@ -200,7 +286,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return;
         }
         unfocusFields();
-        saveMyAdToDB(Constants.mobileChargerLaptopCharger);
+        confirmationDialog();
+        //saveMyAdToDB(Constants.mobileChargerLaptopCharger);
       } else if (widget.subCategoryName == '') {
         adTitleErrorText();
         adDescriptionErrorText();
@@ -213,7 +300,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveOtherAdToDB(Constants.other);
+          confirmationDialog();
+          // saveOtherAdToDB(Constants.other);
         }
       } else {
         if (!_remainingKey.currentState!.validate()) return;
@@ -222,7 +310,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return;
         }
         unfocusFields();
-        saveMyAdToDB('');
+        confirmationDialog();
+        // saveMyAdToDB('');
       }
     } else if (Platform.isIOS) {
       if (widget.subCategoryName == Constants.mobilePhone) {
@@ -239,7 +328,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveMyAdToDB(Constants.mobilePhone);
+          confirmationDialog();
+          // saveMyAdToDB(Constants.mobilePhone);
         }
       } else if (widget.subCategoryName == Constants.tablet) {
         ipadSelectionErrorText();
@@ -255,7 +345,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveMyAdToDB(Constants.tablet);
+          confirmationDialog();
+          // saveMyAdToDB(Constants.tablet);
         }
       } else if (widget.subCategoryName ==
           Constants.mobileChargerLaptopCharger) {
@@ -272,7 +363,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveMyAdToDB(Constants.mobileChargerLaptopCharger);
+          confirmationDialog();
+          // saveMyAdToDB(Constants.mobileChargerLaptopCharger);
         }
       } else if (widget.subCategoryName == '') {
         adTitleErrorText();
@@ -286,7 +378,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveOtherAdToDB(Constants.other);
+          confirmationDialog();
+          // saveOtherAdToDB(Constants.other);
         }
       } else {
         adTitleErrorText();
@@ -300,7 +393,8 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             return;
           }
           unfocusFields();
-          saveMyAdToDB('');
+          confirmationDialog();
+          //saveMyAdToDB('');
         }
       }
     }
@@ -531,7 +625,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               await fbCloudFireStore.runTransaction((_) async {
                 if (Platform.isAndroid) {
                   showDialog(
-                    barrierDismissible: false,
+                      barrierDismissible: false,
                       context: context,
                       builder: (ctx) {
                         popContext = ctx;

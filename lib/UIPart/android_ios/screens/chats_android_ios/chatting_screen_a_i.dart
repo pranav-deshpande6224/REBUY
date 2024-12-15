@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:intl/intl.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/active_inactive_send.dart';
@@ -50,6 +51,7 @@ class ChattingScreenAI extends ConsumerStatefulWidget {
 class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
   final chatFocusNode = FocusNode();
   final messageController = ScrollController();
+  final player = AudioPlayer();
   late AuthHandler handler;
   @override
   void initState() {
@@ -95,6 +97,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
   void dispose() {
     messageController.dispose();
     chatFocusNode.dispose();
+    player.dispose();
     super.dispose();
   }
 
@@ -512,6 +515,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                 senderId: widget.senderId,
                 recieverId: widget.recieverId,
                 item: item,
+                player: player,
               )
             : Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -830,6 +834,7 @@ class ChatMessageTextField extends ConsumerStatefulWidget {
   final String senderId;
   final Item item;
   final void Function() scrollDown;
+  final AudioPlayer player;
 
   const ChatMessageTextField({
     required this.scrollDown,
@@ -839,6 +844,7 @@ class ChatMessageTextField extends ConsumerStatefulWidget {
     required this.documentReference,
     required this.recieverId,
     required this.senderId,
+    required this.player,
     super.key,
   });
 
@@ -949,6 +955,9 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                             : name,
                   ).toJson(),
                 );
+            await AudioPlayer.clearAssetCache();
+            await widget.player.setAsset('assets/sounds/sen.mp3');
+            await widget.player.play();
             await firestore
                 .collection('users')
                 .doc(widget.recieverId)
@@ -975,6 +984,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                 );
           },
         );
+
         await callingFbFunction(item, messageId);
         widget.scrollDown();
       } catch (e) {

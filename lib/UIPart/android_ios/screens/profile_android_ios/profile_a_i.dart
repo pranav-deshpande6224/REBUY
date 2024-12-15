@@ -152,6 +152,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
     if (Platform.isAndroid) {
       if (hasInternet) {
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: (ctx) {
               signOutContext = ctx;
@@ -178,6 +179,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       if (hasInternet) {
         showCupertinoDialog(
             context: context,
+            barrierDismissible: false,
             builder: (ctx) {
               signOutContext = ctx;
               logout(signOutContext);
