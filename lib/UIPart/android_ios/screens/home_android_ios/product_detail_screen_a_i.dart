@@ -35,6 +35,9 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
+    ref
+        .read(favouriteProvider.notifier)
+        .checkFavourite(widget.documentReference);
     super.initState();
   }
 
@@ -533,7 +536,68 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
             ? const SizedBox()
             : Expanded(
                 flex: 1,
-                child: chatNowButton(item),
+                child: Row(
+                  children: [
+                    chatNowButton(item),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: SizedBox(
+                          height: 50,
+                          child: Consumer(
+                            builder: (context, ref, child) {
+                              final favouriteState =
+                                  ref.watch(favouriteProvider);
+                              return ElevatedButton(
+                                style: buttonStyle(Colors.green),
+                                onPressed: favouriteState ==
+                                        FavouriteState.loading
+                                    ? () {}
+                                    : () async {
+                                        final hasInternet =
+                                            await InternetConnection()
+                                                .hasInternetAccess;
+                                        if (hasInternet) {
+                                          favouriteItem();
+                                        } else {
+                                          errorAlert("No Internet Connection");
+                                        }
+                                      },
+                                child: favouriteState == FavouriteState.loading
+                                    ? CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      )
+                                    : Row(
+                                        spacing: 5,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            favouriteState ==
+                                                    FavouriteState.favourite
+                                                ? Icons.favorite
+                                                : Icons
+                                                    .favorite_border_outlined,
+                                            color: favouriteState ==
+                                                    FavouriteState.favourite
+                                                ? Colors.red
+                                                : Colors.white,
+                                          ),
+                                          Text(
+                                            "Favourite",
+                                            style: GoogleFonts.roboto(
+                                                color: Colors.white),
+                                          ),
+                                        ],
+                                      ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               )
       ],
     );
@@ -680,96 +744,42 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
   }
 
   Widget chatNowButton(Item item) {
-    ref
-        .read(favouriteProvider.notifier)
-        .checkFavourite(widget.documentReference);
     if (Platform.isAndroid) {
-      return Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 50,
-                child: ElevatedButton(
-                  style: buttonStyle(Colors.blue),
-                  onPressed: item.isAvailable
-                      ? () {
-                          Navigator.of(context, rootNavigator: true).push(
-                            MaterialPageRoute(
-                              builder: (ctx) => ChattingScreenAI(
-                                name: item.postedBy,
-                                documentReference: widget.documentReference,
-                                recieverId: item.userid,
-                                senderId: handler.newUser.user!.uid,
-                                adImageUrl: item.images[0],
-                                adTitle: item.adTitle,
-                                adId: item.id,
-                                price: item.price,
-                              ),
-                            ),
-                          );
-                        }
-                      : null,
-                  child: Text(
-                    style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.bold,
-                      color: item.isAvailable ? Colors.white : Colors.grey,
-                    ),
-                    item.isAvailable ? 'Chat Now' : "SOLD OUT",
-                  ),
+      return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 50,
+            child: ElevatedButton(
+              style: buttonStyle(Colors.blue),
+              onPressed: item.isAvailable
+                  ? () {
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (ctx) => ChattingScreenAI(
+                            name: item.postedBy,
+                            documentReference: widget.documentReference,
+                            recieverId: item.userid,
+                            senderId: handler.newUser.user!.uid,
+                            adImageUrl: item.images[0],
+                            adTitle: item.adTitle,
+                            adId: item.id,
+                            price: item.price,
+                          ),
+                        ),
+                      );
+                    }
+                  : null,
+              child: Text(
+                style: GoogleFonts.roboto(
+                  fontWeight: FontWeight.bold,
+                  color: item.isAvailable ? Colors.white : Colors.grey,
                 ),
+                item.isAvailable ? 'Chat Now' : "SOLD OUT",
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: SizedBox(
-                height: 50,
-                child: Consumer(
-                  builder: (context, ref, child) {
-                    final favouriteState = ref.watch(favouriteProvider);
-                    return ElevatedButton(
-                      style: buttonStyle(Colors.green),
-                      onPressed: item.isAvailable
-                          ? favouriteState == FavouriteState.loading
-                              ? () {}
-                              : () async {
-                                  final hasInternet = await InternetConnection()
-                                      .hasInternetAccess;
-                                  if (hasInternet) {
-                                    favouriteItem();
-                                  } else {
-                                    errorAlert("No Internet Connection");
-                                  }
-                                }
-                          : showItemNotAvailableAlert,
-                      child: favouriteState == FavouriteState.loading
-                          ? CircularProgressIndicator(
-                              color: Colors.blue,
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  favouriteState == FavouriteState.favourite
-                                      ? Icons.favorite
-                                      : Icons.favorite_border_outlined,
-                                  color:
-                                      favouriteState == FavouriteState.favourite
-                                          ? Colors.red
-                                          : Colors.white,
-                                ),
-                              ],
-                            ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          )
-        ],
+        ),
       );
     } else if (Platform.isIOS) {
       return Padding(

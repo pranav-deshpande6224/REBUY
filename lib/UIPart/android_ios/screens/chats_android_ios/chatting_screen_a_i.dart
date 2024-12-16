@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -9,10 +10,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:intl/intl.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
 import 'package:resell/UIPart/android_ios/Providers/active_inactive_send.dart';
+import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.dart';
 import 'package:resell/UIPart/android_ios/Providers/item_object_stream.dart';
 import 'package:resell/UIPart/android_ios/Providers/message_reply_provider.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
@@ -48,14 +49,19 @@ class ChattingScreenAI extends ConsumerStatefulWidget {
   ConsumerState<ChattingScreenAI> createState() => _ChattingScreenAIState();
 }
 
-class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
+class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
+    with SingleTickerProviderStateMixin {
   final chatFocusNode = FocusNode();
   final messageController = ScrollController();
   final player = AudioPlayer();
   late AuthHandler handler;
+  late DateTime time;
+
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
+    time = DateTime.now();
+    //  ref.read(activeChatProvider.notifier).state = widget.recieverId;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       chatFocusNode.addListener(() {
         if (chatFocusNode.hasFocus) {
@@ -65,6 +71,11 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
       Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
     });
     super.initState();
+  }
+
+  Future<void> playRecievingMessageSound() async {
+    String path = 'sounds/rec.mp3';
+    await player.play(AssetSource(path));
   }
 
   void scrollDown() {
@@ -206,6 +217,11 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
       List<Message> messages = [];
       for (var doc in event.docs) {
         var message = Message.fromJson(doc.data());
+        if (message.senderId != handler.newUser.user!.uid &&
+            (message.timeSent.isAfter(time) ||
+                message.timeSent.isAtSameMomentAs(time)) && !message.isSeen) {
+          playRecievingMessageSound();
+        }
         messages.add(message);
       }
       return messages.reversed.toList();
@@ -382,6 +398,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
       body: PopScope(
         onPopInvokedWithResult: (didPop, result) {
           ref.read(messageReplyProvider.notifier).update((state) => null);
+          ref.read(activeChatProvider.notifier).state = null;
         },
         child: StreamBuilder(
           stream: getMessages(widget.recieverId, widget.adId),
@@ -448,13 +465,17 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI> {
                                           message: message.text, isMe: true),
                                     );
                               },
-                              child: ChatBubble(
-                                message: message.text,
-                                date: message.timeSent,
-                                isSender: true,
-                                isRead: message.isSeen,
-                                repliedText: message.repliedMessage,
-                                userName: message.repliedTo,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                                child: ChatBubble(
+                                  message: message.text,
+                                  date: message.timeSent,
+                                  isSender: true,
+                                  isRead: message.isSeen,
+                                  repliedText: message.repliedMessage,
+                                  userName: message.repliedTo,
+                                ),
                               ),
                             );
                           }
@@ -868,6 +889,11 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
     super.dispose();
   }
 
+  Future<void> playSendMessageSound() async {
+    String path = 'sounds/sen.mp3';
+    await widget.player.play(AssetSource(path));
+  }
+
   Future<void> sendMessageToDb(
       String message, Item item, MessageReply? messageReply) async {
     if (message.isEmpty) {
@@ -955,9 +981,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                             : name,
                   ).toJson(),
                 );
-            await AudioPlayer.clearAssetCache();
-            await widget.player.setAsset('assets/sounds/sen.mp3');
-            await widget.player.play();
+            await playSendMessageSound();
             await firestore
                 .collection('users')
                 .doc(widget.recieverId)
@@ -988,6 +1012,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
         await callingFbFunction(item, messageId);
         widget.scrollDown();
       } catch (e) {
+        print(e.toString());
         if (Platform.isAndroid) {
           showDialog(
             context: context,
@@ -1001,7 +1026,8 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                     Text('Failed to send message', style: GoogleFonts.roboto()),
                 actions: [
                   TextButton(
-                    child: Text('Okay', style: GoogleFonts.roboto()),
+                    child: Text('Okay',
+                        style: GoogleFonts.roboto(color: Colors.blue)),
                     onPressed: () {
                       Navigator.of(ctx).pop();
                     },

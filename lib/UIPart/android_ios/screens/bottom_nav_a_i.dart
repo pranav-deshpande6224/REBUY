@@ -32,6 +32,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
     handler = AuthHandler.authHandlerInstance;
     if (Platform.isAndroid) {
       getNotifications();
+
     }
     WidgetsBinding.instance.addObserver(this);
     makingOnline();
@@ -60,6 +61,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
 
   void getNotifications() {
     NotificationService().initNotifications();
+    NotificationService().initLocalNotificationsAndroid();
   }
 
   void makingOnline() async {

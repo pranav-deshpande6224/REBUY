@@ -26,19 +26,22 @@ class HomeAI extends StatelessWidget {
         elevation: 3,
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.favorite,
-              size: 35,
-              color: Colors.redAccent,
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: Icon(
+                Icons.favorite,
+                size: 35,
+                color: Colors.redAccent,
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const FavouriteScreen(),
+                  ),
+                );
+              },
             ),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (ctx) => const FavouriteScreen(),
-                ),
-              );
-            },
           )
         ],
         backgroundColor: Colors.grey[200],
