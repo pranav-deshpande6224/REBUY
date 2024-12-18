@@ -524,7 +524,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                               LinearGradient(
                                                             colors: [
                                                               Colors.black
-                                                                  .withOpacity(
+                                                                  .withValues(alpha: 
                                                                 0.08,
                                                               ),
                                                               Colors

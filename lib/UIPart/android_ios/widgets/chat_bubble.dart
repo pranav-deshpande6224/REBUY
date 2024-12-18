@@ -118,7 +118,7 @@ class ChatBubble extends StatelessWidget {
                       size: 16,
                       color: isRead
                           ? Colors.blueAccent
-                          : textColor.withOpacity(0.6),
+                          : textColor.withValues(alpha: 0.6),
                     ),
                 ],
               )

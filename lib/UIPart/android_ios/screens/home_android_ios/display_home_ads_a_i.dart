@@ -550,7 +550,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          Colors.black.withOpacity(
+                                          Colors.black.withValues(alpha: 
                                             0.08,
                                           ),
                                           Colors.transparent,

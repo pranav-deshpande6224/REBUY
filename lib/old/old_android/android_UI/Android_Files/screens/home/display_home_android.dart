@@ -447,7 +447,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.grey
-                                                        .withOpacity(0.3),
+                                                        .withValues(alpha:0.3),
                                                     blurRadius: 10,
                                                     offset: const Offset(0, 5),
                                                   )
@@ -505,7 +505,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                                   LinearGradient(
                                                                 colors: [
                                                                   Colors.black
-                                                                      .withOpacity(
+                                                                      .withValues(alpha: 
                                                                     0.08,
                                                                   ),
                                                                   Colors
