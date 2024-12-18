@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
+import 'package:resell/UIPart/android_ios/Providers/unread_count.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chatting_screen_a_i.dart';
 
@@ -201,247 +202,336 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
     final internetState = ref.watch(internetCheckerProvider);
     return SafeArea(
       child: connectivityState.when(
-        data: (connectivityResult) {
-          if (connectivityResult == ConnectivityResult.none) {
-            return netIssue();
-          } else {
-            return internetState.when(
-              data: (hasInternet) {
-                if (!hasInternet) {
-                  return netIssue();
-                } else {
-                  return StreamBuilder(
-                    stream: getContactsBuying(),
-                    builder: (ctx, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.blue,
-                          ),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return retryAgain();
-                      }
-                      return snapshot.data!.isEmpty
-                          ? Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/emoji.png',
-                                    height: 80,
-                                    width: 80,
-                                  ),
-                                  Text(
-                                    'No Buying Chats',
-                                    style:
-                                        GoogleFonts.roboto(color: Colors.blue),
-                                  ),
-                                ],
+          data: (connectivityResult) {
+            if (connectivityResult == ConnectivityResult.none) {
+              return netIssue();
+            } else {
+              return internetState.when(
+                  data: (hasInternet) {
+                    if (!hasInternet) {
+                      return netIssue();
+                    } else {
+                      return StreamBuilder(
+                        stream: getContactsBuying(),
+                        builder: (ctx, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.blue,
                               ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: ListView.separated(
-                                itemBuilder: (ctx, index) {
-                                  final obj = snapshot.data![index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (ctx) => ChattingScreenAI(
-                                            name: obj.nameOfContact,
-                                            recieverId: obj.contactId,
-                                            senderId: handler.newUser.user!.uid,
-                                            documentReference: obj.reference,
-                                            adImageUrl: obj.adImage,
-                                            adTitle: obj.adTitle,
-                                            adId: obj.adId,
-                                            price: obj.adPrice,
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return retryAgain();
+                          }
+                          return snapshot.data!.isEmpty
+                              ? Center(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/emoji.png',
+                                        height: 80,
+                                        width: 80,
+                                      ),
+                                      Text(
+                                        'No Buying Chats',
+                                        style: GoogleFonts.roboto(
+                                            color: Colors.blue),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: ListView.separated(
+                                    itemBuilder: (ctx, index) {
+                                      final obj = snapshot.data![index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (ctx) =>
+                                                  ChattingScreenAI(
+                                                name: obj.nameOfContact,
+                                                recieverId: obj.contactId,
+                                                senderId:
+                                                    handler.newUser.user!.uid,
+                                                documentReference:
+                                                    obj.reference,
+                                                adImageUrl: obj.adImage,
+                                                adTitle: obj.adTitle,
+                                                adId: obj.adId,
+                                                price: obj.adPrice,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Slidable(
+                                          endActionPane: ActionPane(
+                                            motion: const ScrollMotion(),
+                                            children: [
+                                              SlidableAction(
+                                                backgroundColor: Colors.red,
+                                                foregroundColor: Colors.white,
+                                                icon: Icons.delete,
+                                                label: 'Delete',
+                                                onPressed: (ctx) {
+                                                  showDialog(
+                                                    context: ctx,
+                                                    builder: (dialogContext) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'Alert!'),
+                                                        content: const Text(
+                                                          'Are you sure you want to delete this chat?',
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                            child: const Text(
+                                                              'Cancel',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .blue),
+                                                            ),
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  dialogContext);
+                                                            },
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  dialogContext);
+                                                              deleteConversation(
+                                                                  obj.id);
+                                                            },
+                                                            child: const Text(
+                                                              'Delete',
+                                                              style: TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                          child: ListTile(
+                                            leading: ClipOval(
+                                              child: CachedNetworkImage(
+                                                imageUrl: obj.adImage,
+                                                placeholder: (context, url) =>
+                                                    Container(
+                                                  width: 60,
+                                                  height: 60,
+                                                  color: Colors.grey[300],
+                                                  child: const Icon(
+                                                    Icons.photo,
+                                                    size: 30,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Container(
+                                                  width: 60,
+                                                  height: 60,
+                                                  color: Colors.grey[300],
+                                                  child: const Icon(
+                                                    Icons.photo,
+                                                    size: 30,
+                                                  ),
+                                                ),
+                                                width:
+                                                    60, // Set the desired width and height
+                                                height: 60,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            title: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  obj.nameOfContact,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.roboto(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  obj.adTitle,
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.roboto(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 13,
+                                                    color: Colors.blue,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            subtitle: obj.lastMessageId ==
+                                                    handler.newUser.user!.uid
+                                                ? Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.done_all,
+                                                        color: obj.isSeen
+                                                            ? Colors.blue
+                                                            : Colors.grey,
+                                                      ),
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Expanded(
+                                                        child: Text(
+                                                          obj.lastMessage,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                : Text(
+                                                    obj.lastMessage,
+                                                    maxLines: 1,
+                                                    style: GoogleFonts.roboto(),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                            trailing: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  getTime(obj.timeSent),
+                                                  style: GoogleFonts.roboto(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                StreamBuilder(
+                                                  stream: getUnreadCount(
+                                                      obj.id, obj.contactId),
+                                                  builder: (ctx, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return const SizedBox
+                                                          .shrink();
+                                                    }
+                                                    if (snapshot.hasError) {
+                                                      return const SizedBox
+                                                          .shrink();
+                                                    }
+                                                    if (snapshot.data! == 0) {
+                                                      return const SizedBox
+                                                          .shrink();
+                                                    } else {
+                                                      String displayCount;
+                                                      double circleSize;
+                                                      if (snapshot.data! <=
+                                                          99) {
+                                                        displayCount = snapshot
+                                                            .data!
+                                                            .toString();
+                                                        circleSize = 25;
+                                                      } else {
+                                                        displayCount = snapshot
+                                                                    .data! >
+                                                                99
+                                                            ? (snapshot.data! >
+                                                                    999
+                                                                ? '999+'
+                                                                : '99+')
+                                                            : snapshot.data!
+                                                                .toString();
+                                                        circleSize =
+                                                            snapshot.data! > 999
+                                                                ? 40
+                                                                : 35;
+                                                      }
+                                                      return Container(
+                                                        width: circleSize,
+                                                        height: circleSize,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.green,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: Text(
+                                                          displayCount,
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: snapshot
+                                                                        .data! >
+                                                                    999
+                                                                ? 16
+                                                                : snapshot.data! >
+                                                                        99
+                                                                    ? 14
+                                                                    : 12, // Adjust the font sizes as needed.
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                )
+                                                // UnreadCountCircle(docIdInsideChat: obj.id,receiverId: obj.contactId,)
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       );
                                     },
-                                    child: Slidable(
-                                      endActionPane: ActionPane(
-                                        motion: const ScrollMotion(),
-                                        children: [
-                                          SlidableAction(
-                                            backgroundColor: Colors.red,
-                                            foregroundColor: Colors.white,
-                                            icon: Icons.delete,
-                                            label: 'Delete',
-                                            onPressed: (ctx) {
-                                              showDialog(
-                                                context: ctx,
-                                                builder: (dialogContext) {
-                                                  return AlertDialog(
-                                                    title: const Text('Alert!'),
-                                                    content: const Text(
-                                                      'Are you sure you want to delete this chat?',
-                                                    ),
-                                                    actions: [
-                                                      TextButton(
-                                                        child: const Text(
-                                                          'Cancel',
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.blue),
-                                                        ),
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              dialogContext);
-                                                        },
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              dialogContext);
-                                                          deleteConversation(
-                                                              obj.id);
-                                                        },
-                                                        child: const Text(
-                                                          'Delete',
-                                                          style: TextStyle(
-                                                            color: Colors.red,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      child: ListTile(
-                                        leading: ClipOval(
-                                          child: CachedNetworkImage(
-                                            imageUrl: obj.adImage,
-                                            placeholder: (context, url) =>
-                                                Container(
-                                              width: 60,
-                                              height: 60,
-                                              color: Colors.grey[300],
-                                              child: const Icon(
-                                                Icons.photo,
-                                                size: 30,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Container(
-                                              width: 60,
-                                              height: 60,
-                                              color: Colors.grey[300],
-                                              child: const Icon(
-                                                Icons.photo,
-                                                size: 30,
-                                              ),
-                                            ),
-                                            width:
-                                                60, // Set the desired width and height
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        title: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              obj.nameOfContact,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.roboto(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            Text(
-                                              obj.adTitle,
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.roboto(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 13,
-                                                color: Colors.blue,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        subtitle: obj.lastMessageId ==
-                                                handler.newUser.user!.uid
-                                            ? Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.done_all,
-                                                    color: obj.isSeen
-                                                        ? Colors.blue
-                                                        : Colors.grey,
-                                                  ),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Expanded(
-                                                    child: Text(
-                                                      obj.lastMessage,
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  )
-                                                ],
-                                              )
-                                            : Text(
-                                                obj.lastMessage,
-                                                maxLines: 1,
-                                                style: GoogleFonts.roboto(),
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                        trailing: Text(
-                                          getTime(obj.timeSent),
-                                          style: GoogleFonts.roboto(
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (ctx, inddex) {
-                                  return const Divider(
-                                    color: Colors.black,
-                                    height: 0.5,
-                                  );
-                                },
-                                itemCount: snapshot.data!.length,
-                              ),
-                            );
-                    },
-                  );
-                }
-              },
-              loading: () => const Center(
+                                    separatorBuilder: (ctx, inddex) {
+                                      return const Divider(
+                                        color: Colors.black,
+                                        height: 0.5,
+                                      );
+                                    },
+                                    itemCount: snapshot.data!.length,
+                                  ),
+                                );
+                        },
+                      );
+                    }
+                  },
+                  loading: () => const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.blue,
+                        ),
+                      ),
+                  error: (error, stackTrace) => retryAgain());
+            }
+          },
+          loading: () => const Center(
                 child: CircularProgressIndicator(
                   color: Colors.blue,
                 ),
               ),
-              error: (error, stackTrace) => retryAgain()
-            );
-          }
-        },
-        loading: () => const Center(
-          child: CircularProgressIndicator(
-            color: Colors.blue,
-          ),
-        ),
-        error: (error, stackTrace) => retryAgain()
-      ),
+          error: (error, stackTrace) => retryAgain()),
     );
   }
 }

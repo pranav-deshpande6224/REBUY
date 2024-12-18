@@ -219,7 +219,8 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
         var message = Message.fromJson(doc.data());
         if (message.senderId != handler.newUser.user!.uid &&
             (message.timeSent.isAfter(time) ||
-                message.timeSent.isAtSameMomentAs(time)) && !message.isSeen) {
+                message.timeSent.isAtSameMomentAs(time)) &&
+            !message.isSeen) {
           playRecievingMessageSound();
         }
         messages.add(message);
@@ -892,6 +893,21 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
   Future<void> playSendMessageSound() async {
     String path = 'sounds/sen.mp3';
     await widget.player.play(AssetSource(path));
+  }
+
+  Future<int> fetchUnreadCount(Item item) async {
+    DocumentSnapshot<Map<String, dynamic>> data = await handler.fireStore
+        .collection('users')
+        .doc(widget.recieverId)
+        .collection('chats')
+        .doc("${widget.senderId}_${item.id}")
+        .get();
+    if (data.exists) {
+      int unreadCount = data['unreadCount'] ?? 0;
+      return unreadCount;
+    } else {
+      return 1;
+    }
   }
 
   Future<void> sendMessageToDb(
