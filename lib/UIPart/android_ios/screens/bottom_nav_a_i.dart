@@ -32,7 +32,6 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
     handler = AuthHandler.authHandlerInstance;
     if (Platform.isAndroid) {
       getNotifications();
-
     }
     WidgetsBinding.instance.addObserver(this);
     makingOnline();
@@ -54,6 +53,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
       if (message.data['navigate_to'] == 'chats') {
         setState(() {
           currentIndex = 1;
+          message = null;
         });
       }
     }

@@ -280,6 +280,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                 onPressed: (ctx) {
                                                   showDialog(
                                                     context: ctx,
+                                                    barrierDismissible: false,
                                                     builder: (dialogContext) {
                                                       return AlertDialog(
                                                         title: const Text(

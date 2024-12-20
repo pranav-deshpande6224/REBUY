@@ -2104,35 +2104,33 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   ),
                   SizedBox(
                     height: 40,
-                    child: Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: chargers.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  ref
-                                      .read(selectChargerProvider.notifier)
-                                      .updateSelectedItem(index);
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: chargers.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ref
+                                    .read(selectChargerProvider.notifier)
+                                    .updateSelectedItem(index);
+                              },
+                              child: Consumer(
+                                builder: (context, ref, child) {
+                                  final selectedIndex =
+                                      ref.watch(selectChargerProvider);
+                                  return getContainer(
+                                      chargers[index], selectedIndex, index);
                                 },
-                                child: Consumer(
-                                  builder: (context, ref, child) {
-                                    final selectedIndex =
-                                        ref.watch(selectChargerProvider);
-                                    return getContainer(
-                                        chargers[index], selectedIndex, index);
-                                  },
-                                ),
                               ),
-                              const SizedBox(
-                                width: 10,
-                              )
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                   chargerNotSelectedError(),
@@ -2341,38 +2339,36 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   ),
                   SizedBox(
                     height: 30,
-                    child: Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _tabletBrands.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  ref
-                                      .read(selectedIpadProvider.notifier)
-                                      .updateSelectedItem(index);
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _tabletBrands.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                ref
+                                    .read(selectedIpadProvider.notifier)
+                                    .updateSelectedItem(index);
+                              },
+                              child: Consumer(
+                                builder: (context, ref, child) {
+                                  final selectedIndex =
+                                      ref.watch(selectedIpadProvider);
+                                  return getContainer(
+                                    _tabletBrands[index],
+                                    selectedIndex,
+                                    index,
+                                  );
                                 },
-                                child: Consumer(
-                                  builder: (context, ref, child) {
-                                    final selectedIndex =
-                                        ref.watch(selectedIpadProvider);
-                                    return getContainer(
-                                      _tabletBrands[index],
-                                      selectedIndex,
-                                      index,
-                                    );
-                                  },
-                                ),
                               ),
-                              const SizedBox(
-                                width: 10,
-                              )
-                            ],
-                          );
-                        },
-                      ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                   ipadNotSelectedError(),
