@@ -47,9 +47,7 @@ class NotificationService {
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
         final message = notificationResponse.payload;
-        if (message != null) {
           debugPrint(message);
-        }
       },
     );
   }

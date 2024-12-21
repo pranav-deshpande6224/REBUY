@@ -8,6 +8,7 @@ class Message {
   final String repliedMessage;
   final String repliedTo;
   final String recieverId_adId;
+  final String postedBy;
 
   Message({
     required this.messageId,
@@ -19,6 +20,7 @@ class Message {
     required this.repliedMessage,
     required this.repliedTo,
     required this.recieverId_adId,
+    required this.postedBy,
   });
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
@@ -31,6 +33,7 @@ class Message {
       repliedMessage: json['repliedMessage'],
       repliedTo: json['repliedTo'],
       recieverId_adId: json['recieverId_adId'],
+      postedBy: json['postedBy'],
     );
   }
   Map<String, dynamic> toJson() {
@@ -44,6 +47,7 @@ class Message {
       'repliedMessage': repliedMessage,
       'repliedTo': repliedTo,
       'recieverId_adId': recieverId_adId,
+      'postedBy': postedBy,
     };
   }
 }

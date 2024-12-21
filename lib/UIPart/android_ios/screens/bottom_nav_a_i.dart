@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:resell/UIPart/android_ios/screens/myads_android_ios/myads_a_i.da
 import 'package:resell/UIPart/android_ios/screens/profile_android_ios/profile_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/sell_a_i.dart';
 import 'package:resell/notifications/notification_service.dart';
+
 
 class BottomNavAI extends ConsumerStatefulWidget {
   const BottomNavAI({super.key});
@@ -78,7 +80,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
             NotificationService().showNotification(
               title: message.notification!.title ?? 'New Message',
               body: message.notification!.body ?? '',
-              payload: null,
+              payload: jsonEncode({}),
             );
           }
         }

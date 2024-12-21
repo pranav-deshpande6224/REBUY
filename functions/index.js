@@ -8,6 +8,8 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
     const messageSentById = snapshot['senderId']
     const messageReciviedById = snapshot['receiverId']
     const recId_adId = snapshot['recieverId_adId']
+    const adId = recId_adId.split("_")[1]
+    const adPostedBy = snapshot['postedBy']
     const { recipientUid, chatId } = event.params;
     const [senderUid] = chatId.split("_");
     try {
@@ -35,12 +37,11 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
           body: textMessage,
         },
         data: {
-          senderUid: senderUid,
-          recipientUid: recipientUid,
-          messageId: event.params.messageId,
           messageSentById: messageSentById,
           messageReciviedById: messageReciviedById,
           recId_adId: recId_adId,
+          postedBy: adPostedBy,
+          adId: adId,
           "navigate_to": 'chats',
           "click_action": "FLUTTER_NOTIFICATION_CLICK",
           "sound": "default", 

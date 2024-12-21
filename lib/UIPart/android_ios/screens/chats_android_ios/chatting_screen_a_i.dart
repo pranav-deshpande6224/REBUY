@@ -994,6 +994,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                     text: message,
                     timeSent: timeSent,
                     isSeen: false,
+                    postedBy: item.userid,
                     recieverId_adId: '${widget.recieverId}_${widget.adId}',
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,
@@ -1019,6 +1020,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                     receiverId: widget.recieverId,
                     text: message,
                     timeSent: timeSent,
+                    postedBy: item.userid,
                     recieverId_adId: '${widget.senderId}_${widget.adId}',
                     isSeen: false,
                     repliedMessage:

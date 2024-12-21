@@ -186,6 +186,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                     text: message,
                     timeSent: timeSent,
                     recieverId_adId: '',
+                    postedBy: '',
                     isSeen: false,
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,
@@ -209,6 +210,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                     senderId: widget.senderId,
                     receiverId: widget.recieverId,
                     recieverId_adId: '',
+                    postedBy: '',
                     text: message,
                     timeSent: timeSent,
                     isSeen: false,
