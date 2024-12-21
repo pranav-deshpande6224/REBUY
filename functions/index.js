@@ -5,6 +5,9 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
     const messageData = event.data;
     const snapshot = messageData.data();
     const textMessage = snapshot['text'];
+    const messageSentById = snapshot['senderId']
+    const messageReciviedById = snapshot['receiverId']
+    const recId_adId = snapshot['recieverId_adId']
     const { recipientUid, chatId } = event.params;
     const [senderUid] = chatId.split("_");
     try {
@@ -35,6 +38,9 @@ exports.myFunction = functions.firestore.onDocumentCreated("users/{recipientUid}
           senderUid: senderUid,
           recipientUid: recipientUid,
           messageId: event.params.messageId,
+          messageSentById: messageSentById,
+          messageReciviedById: messageReciviedById,
+          recId_adId: recId_adId,
           "navigate_to": 'chats',
           "click_action": "FLUTTER_NOTIFICATION_CLICK",
           "sound": "default", 

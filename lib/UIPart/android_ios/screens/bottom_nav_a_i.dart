@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chats_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/home_android_ios/home_a_i.dart';
 import 'package:resell/UIPart/android_ios/screens/myads_android_ios/myads_a_i.dart';
@@ -10,14 +12,14 @@ import 'package:resell/UIPart/android_ios/screens/profile_android_ios/profile_a_
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/sell_a_i.dart';
 import 'package:resell/notifications/notification_service.dart';
 
-class BottomNavAI extends StatefulWidget {
+class BottomNavAI extends ConsumerStatefulWidget {
   const BottomNavAI({super.key});
 
   @override
-  State<BottomNavAI> createState() => _BottomNavAIState();
+  ConsumerState<BottomNavAI> createState() => _BottomNavAIState();
 }
 
-class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
+class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingObserver {
   late AuthHandler handler;
   int currentIndex = 0;
   final screens = const [
@@ -42,6 +44,7 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
         });
       }
     });
+    onforegroundNotification();
     recievingNotifications();
     super.initState();
   }
@@ -57,6 +60,30 @@ class _BottomNavAIState extends State<BottomNavAI> with WidgetsBindingObserver {
         });
       }
     }
+  }
+
+  void onforegroundNotification() {
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) {
+        if (message.notification != null) {
+          Map<String, dynamic> data = message.data;
+          print(message.data);
+          final msgSentById = data['messageSentById'];
+          final recId_adId = data['recId_adId'];
+          final getRecId_adId = ref.read(globalRecIdAdIdProvider);
+          print('the recid_adId from notification is $recId_adId');
+          print('the recid_aid from provider is $getRecId_adId');
+          if (msgSentById != handler.newUser.user!.uid && getRecId_adId
+               != recId_adId) {
+            NotificationService().showNotification(
+              title: message.notification!.title ?? 'New Message',
+              body: message.notification!.body ?? '',
+              payload: null,
+            );
+          }
+        }
+      },
+    );
   }
 
   void getNotifications() {

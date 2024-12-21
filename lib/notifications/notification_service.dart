@@ -54,7 +54,7 @@ class NotificationService {
     );
   }
 
-  Future<void> showNotification({int id = 0, required String title, required String body, required String payload}) async {
+  Future<void> showNotification({int id = 0, required String title, required String body, String? payload}) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channel_id', 'channel_name',
             importance: Importance.max,

@@ -61,8 +61,11 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
   void initState() {
     handler = AuthHandler.authHandlerInstance;
     time = DateTime.now();
-    //  ref.read(activeChatProvider.notifier).state = widget.recieverId;
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+        .read(globalRecIdAdIdProvider.notifier)
+        .setAdId('${widget.recieverId}_${widget.adId}');
       chatFocusNode.addListener(() {
         if (chatFocusNode.hasFocus) {
           Future.delayed(const Duration(milliseconds: 200), () => scrollDown());
@@ -141,7 +144,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                   size: 30,
                 ),
               ),
-              width: 50, // Set the desired width and height
+              width: 50,
               height: 50,
               fit: BoxFit.cover,
             ),
@@ -399,7 +402,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
       body: PopScope(
         onPopInvokedWithResult: (didPop, result) {
           ref.read(messageReplyProvider.notifier).update((state) => null);
-          ref.read(activeChatProvider.notifier).state = null;
+          ref.read(globalRecIdAdIdProvider.notifier).clearAdId();
         },
         child: StreamBuilder(
           stream: getMessages(widget.recieverId, widget.adId),
@@ -538,6 +541,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                 recieverId: widget.recieverId,
                 item: item,
                 player: player,
+                adId: widget.adId,
               )
             : Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -857,6 +861,7 @@ class ChatMessageTextField extends ConsumerStatefulWidget {
   final Item item;
   final void Function() scrollDown;
   final AudioPlayer player;
+  final String adId;
 
   const ChatMessageTextField({
     required this.scrollDown,
@@ -867,6 +872,7 @@ class ChatMessageTextField extends ConsumerStatefulWidget {
     required this.recieverId,
     required this.senderId,
     required this.player,
+    required this.adId,
     super.key,
   });
 
@@ -988,6 +994,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                     text: message,
                     timeSent: timeSent,
                     isSeen: false,
+                    recieverId_adId: '${widget.recieverId}_${widget.adId}',
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,
                     repliedTo: messageReply == null
@@ -1012,6 +1019,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                     receiverId: widget.recieverId,
                     text: message,
                     timeSent: timeSent,
+                    recieverId_adId: '${widget.senderId}_${widget.adId}',
                     isSeen: false,
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,

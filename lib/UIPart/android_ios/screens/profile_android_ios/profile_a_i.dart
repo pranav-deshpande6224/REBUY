@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
+import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/category_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/favourite_ads_pagination.dart';
 import 'package:resell/UIPart/android_ios/Providers/pagination_active_ads/home_ads.dart';
@@ -75,6 +76,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       ref.read(homeAdsprovider.notifier).resetState();
       ref.read(showCatAdsProvider.notifier).resetState();
       ref.read(favouriteAdsProvider.notifier).resetState();
+      ref.read(globalRecIdAdIdProvider.notifier).clearAdId();
       if (!signOutContext.mounted) return;
       Navigator.pop(signOutContext);
       moveToLogin();

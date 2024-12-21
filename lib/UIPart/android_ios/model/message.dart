@@ -7,7 +7,7 @@ class Message {
   final bool isSeen;
   final String repliedMessage;
   final String repliedTo;
-
+  final String recieverId_adId;
 
   Message({
     required this.messageId,
@@ -17,7 +17,8 @@ class Message {
     required this.timeSent,
     required this.isSeen,
     required this.repliedMessage,
-    required this.repliedTo
+    required this.repliedTo,
+    required this.recieverId_adId,
   });
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
@@ -29,6 +30,7 @@ class Message {
       isSeen: json['isSeen'],
       repliedMessage: json['repliedMessage'],
       repliedTo: json['repliedTo'],
+      recieverId_adId: json['recieverId_adId'],
     );
   }
   Map<String, dynamic> toJson() {
@@ -41,6 +43,7 @@ class Message {
       'isSeen': isSeen,
       'repliedMessage': repliedMessage,
       'repliedTo': repliedTo,
+      'recieverId_adId': recieverId_adId,
     };
   }
 }

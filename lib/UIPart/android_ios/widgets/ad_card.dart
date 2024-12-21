@@ -164,8 +164,8 @@ class AdCard extends ConsumerWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          width: 0.5,
-          color: Colors.black87,
+          width: 0.75,
+          color: const Color.fromARGB(255, 200, 179, 172),
         ),
         boxShadow: const [
           BoxShadow(

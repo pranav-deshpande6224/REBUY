@@ -171,6 +171,7 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
                     text: message,
                     timeSent: timeSent,
                     isSeen: false,
+                    recieverId_adId: '',
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,
                     repliedTo: messageReply == null
@@ -195,6 +196,7 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
                     text: message,
                     timeSent: timeSent,
                     isSeen: false,
+                    recieverId_adId: '',
                     repliedMessage:
                         messageReply == null ? '' : messageReply.message,
                     repliedTo: messageReply == null
