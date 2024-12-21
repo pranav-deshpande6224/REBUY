@@ -76,12 +76,12 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -119,7 +119,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           ),
           Text(
             item.brand,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -142,7 +142,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           ),
           Text(
             item.tabletType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -165,7 +165,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           ),
           Text(
             item.chargerType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -190,7 +190,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
           ),
           Text(
             'Loading...',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           )
         ],
       ),
@@ -207,7 +207,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
         backgroundColor: Colors.grey[200],
         title: Text(
           'Product Details',
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.lato(
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
@@ -258,7 +258,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
         children: [
           Text(
             'Something went wrong',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           const SizedBox(
             height: 10,
@@ -272,14 +272,13 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
               : CupertinoButton(
                   child: Text(
                     'Retry',
-                    style:
-                        GoogleFonts.roboto(color: CupertinoColors.activeBlue),
+                    style: GoogleFonts.lato(color: CupertinoColors.activeBlue),
                   ),
                   onPressed: () async {
                     final _ = await ref.refresh(connectivityProvider.future);
@@ -299,7 +298,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'Product Details',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -444,7 +443,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                   ),
                   Text(
                     '₹ ${item.price.toInt()}',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       color: Colors.green[700],
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -455,7 +454,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                   ),
                   Text(
                     item.adTitle,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 20,
                     ),
                   ),
@@ -472,7 +471,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                   ),
                   Text(
                     item.adDescription,
-                    style: GoogleFonts.roboto(fontSize: 22),
+                    style: GoogleFonts.lato(fontSize: 22),
                   ),
                   const SizedBox(
                     height: 10,
@@ -498,7 +497,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                         handler.newUser.user!.uid == item.userid
                             ? 'You'
                             : item.postedBy,
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 22,
                         ),
                       ),
@@ -512,7 +511,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                     children: [
                       Text(
                         'Posted At',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Colors.blue,
@@ -520,7 +519,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                       ),
                       Text(
                         getDate(item.timestamp),
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                         ),
@@ -585,7 +584,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                                           ),
                                           Text(
                                             "Favourite",
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                                 color: Colors.white),
                                           ),
                                         ],
@@ -648,11 +647,11 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
         context: context,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
-            content: Text(e.toString(), style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
+            content: Text(e.toString(), style: GoogleFonts.lato()),
             actions: [
               CupertinoDialogAction(
-                child: Text('Okay', style: GoogleFonts.roboto()),
+                child: Text('Okay', style: GoogleFonts.lato()),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
@@ -727,11 +726,11 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
         context: context,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
-            content: Text('Item is not available', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
+            content: Text('Item is not available', style: GoogleFonts.lato()),
             actions: [
               CupertinoDialogAction(
-                child: Text('Okay', style: GoogleFonts.roboto()),
+                child: Text('Okay', style: GoogleFonts.lato()),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
@@ -771,7 +770,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                     }
                   : null,
               child: Text(
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontWeight: FontWeight.bold,
                   color: item.isAvailable ? Colors.white : Colors.grey,
                 ),
@@ -808,7 +807,7 @@ class _ProductDetailScreenAIState extends ConsumerState<ProductDetailScreenAI> {
                   }
                 : null,
             child: Text(
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
                 color: item.isAvailable
                     ? CupertinoColors.white

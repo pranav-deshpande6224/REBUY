@@ -58,7 +58,7 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
           elevation: 10,
           title: Text(
             'My Sold Ads',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         body: SafeArea(
@@ -76,12 +76,12 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
                       ),
                       Text(
                         'No Internet Connection',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       TextButton(
                         child: Text(
                           'Retry',
-                          style: GoogleFonts.roboto(color: Colors.blue),
+                          style: GoogleFonts.lato(color: Colors.blue),
                         ),
                         onPressed: () async {
                           final x = ref.refresh(connectivityProvider);
@@ -111,12 +111,12 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
                             ),
                             Text(
                               'No Internet Connection',
-                              style: GoogleFonts.roboto(),
+                              style: GoogleFonts.lato(),
                             ),
                             TextButton(
                               child: Text(
                                 'Retry',
-                                style: GoogleFonts.roboto(color: Colors.blue),
+                                style: GoogleFonts.lato(color: Colors.blue),
                               ),
                               onPressed: () async {
                                 final x = ref.refresh(connectivityProvider);
@@ -154,7 +154,7 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
                                               ),
                                               Text(
                                                 'No Sold Ads',
-                                                style: GoogleFonts.roboto(
+                                                style: GoogleFonts.lato(
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -194,7 +194,7 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
                                             ),
                                             Text(
                                               'Fetching Content...',
-                                              style: GoogleFonts.roboto(
+                                              style: GoogleFonts.lato(
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             )
@@ -227,7 +227,7 @@ class _AndroidSoldadsState extends ConsumerState<AndroidSoldAds> {
                                 ),
                                 Text(
                                   'Loading...',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )

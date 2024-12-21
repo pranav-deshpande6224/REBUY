@@ -42,7 +42,7 @@ class MessageReplyPreview extends ConsumerWidget {
                   messageReply!.isMe ? 'Me' : recieverName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.bold,
                   ),
                 ),

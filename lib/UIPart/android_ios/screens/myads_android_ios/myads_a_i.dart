@@ -148,7 +148,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                       },
                       child: Text(
                         'OK',
-                        style: GoogleFonts.roboto(color: Colors.blue),
+                        style: GoogleFonts.lato(color: Colors.blue),
                       ),
                     ),
                   ],
@@ -227,11 +227,11 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                   return AlertDialog(
                     title: Text(
                       'Alert',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     content: Text(
                       e.toString(),
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     actions: [
                       TextButton(
@@ -240,7 +240,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                         },
                         child: Text(
                           'Okay',
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             color: Colors.blue,
                           ),
                         ),
@@ -257,11 +257,11 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                   return CupertinoAlertDialog(
                     title: Text(
                       'Alert',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     content: Text(
                       e.toString(),
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     actions: [
                       CupertinoDialogAction(
@@ -270,7 +270,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                         },
                         child: Text(
                           'Okay',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                       )
                     ],
@@ -323,7 +323,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -343,7 +343,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -374,12 +374,12 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -422,7 +422,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             const SizedBox(height: 24),
             Text(
               'No Active Ads',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800],
@@ -432,7 +432,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
             Text(
               'You don’t have any active ads yet. Add one now!',
               textAlign: TextAlign.center,
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 16,
                 color: Colors.grey[600],
               ),
@@ -483,7 +483,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
               const SizedBox(height: 10),
               Text(
                 'Fetching Content...',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[700],
@@ -525,7 +525,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
       child: Column(
         children: [
           Text('Something went wrong',
-              style: GoogleFonts.roboto(color: Colors.blue)),
+              style: GoogleFonts.lato(color: Colors.blue)),
           const SizedBox(
             height: 10,
           ),
@@ -542,7 +542,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
               : CupertinoButton(
@@ -557,7 +557,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
         ],
@@ -577,8 +577,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
           backgroundColor: Colors.grey[200],
           title: Text(
             'My Active Ads',
-            style:
-                GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.bold),
+            style: GoogleFonts.lato(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
         body: SafeArea(
@@ -625,7 +624,7 @@ class _MyadsAIState extends ConsumerState<MyadsAI> {
         navigationBar: CupertinoNavigationBar(
           middle: Text(
             'My Active Ads',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         child: SafeArea(

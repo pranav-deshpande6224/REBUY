@@ -134,12 +134,12 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                 ),
                 Text(
                   'No Internet Connection',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 CupertinoButton(
                     child: Text(
                       'Retry',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     onPressed: () async {
                       final x = ref.refresh(connectivityProvider);
@@ -166,12 +166,12 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                       ),
                       Text(
                         'No Internet Connection',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       CupertinoButton(
                         child: Text(
                           'Retry',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () async {
                           final x = ref.refresh(connectivityProvider);
@@ -192,7 +192,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                   data: (homeState) {
                     if (homeState.items.isEmpty) {
                       return CustomScrollView(
-                        physics:const AlwaysScrollableScrollPhysics(),
+                        physics: const AlwaysScrollableScrollPhysics(),
                         controller: homeAdScrollController,
                         slivers: [
                           CupertinoSliverRefreshControl(
@@ -200,7 +200,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               ref.read(homeAdsprovider.notifier).refreshItems();
                             },
                           ),
-                         const SliverToBoxAdapter(
+                          const SliverToBoxAdapter(
                             child: SizedBox(
                               height: 10,
                             ),
@@ -210,14 +210,14 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
                                 'Browse Categories',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20,
                                 ),
                               ),
                             ),
                           ),
-                        const  SliverToBoxAdapter(
+                          const SliverToBoxAdapter(
                             child: SizedBox(
                               height: 15,
                             ),
@@ -274,7 +274,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                           TextAlign.center,
                                                       categoryList[index]
                                                           .categoryTitle,
-                                                      style: GoogleFonts.roboto(
+                                                      style: GoogleFonts.lato(
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         fontSize: 14,
@@ -301,7 +301,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
                                 'Fresh Recomendations',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 20,
                                 ),
@@ -313,7 +313,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                     }
                     return CustomScrollView(
                       controller: homeAdScrollController,
-                      physics:const AlwaysScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       slivers: [
                         CupertinoSliverRefreshControl(
                           onRefresh: () async {
@@ -330,7 +330,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               'Browse Categories',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20,
                               ),
@@ -393,7 +393,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                     textAlign: TextAlign.center,
                                                     categoryList[index]
                                                         .categoryTitle,
-                                                    style: GoogleFonts.roboto(
+                                                    style: GoogleFonts.lato(
                                                       fontWeight:
                                                           FontWeight.w600,
                                                       fontSize: 14,
@@ -420,7 +420,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                             padding: const EdgeInsets.only(left: 10),
                             child: Text(
                               'Fresh Recomendations',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20,
                               ),
@@ -524,8 +524,8 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                               LinearGradient(
                                                             colors: [
                                                               Colors.black
-                                                                  .withValues(alpha: 
-                                                                0.08,
+                                                                  .withValues(
+                                                                alpha: 0.08,
                                                               ),
                                                               Colors
                                                                   .transparent,
@@ -556,8 +556,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                     children: [
                                                       Text(
                                                         '₹ ${ad.price.toInt()}',
-                                                        style:
-                                                            GoogleFonts.roboto(
+                                                        style: GoogleFonts.lato(
                                                           fontWeight:
                                                               FontWeight.bold,
                                                           fontSize: 22,
@@ -570,8 +569,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                         maxLines: 1,
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                        style:
-                                                            GoogleFonts.roboto(
+                                                        style: GoogleFonts.lato(
                                                           fontSize: 17,
                                                           fontWeight:
                                                               FontWeight.w600,
@@ -584,8 +582,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                                         maxLines: 1,
                                                         overflow: TextOverflow
                                                             .ellipsis,
-                                                        style:
-                                                            GoogleFonts.roboto(
+                                                        style: GoogleFonts.lato(
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontSize: 15,
@@ -631,7 +628,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                                     ),
                                     Text(
                                       'Fetching Content...',
-                                      style: GoogleFonts.roboto(
+                                      style: GoogleFonts.lato(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     )
@@ -657,7 +654,7 @@ class _DisplayHomeAdsState extends ConsumerState<DisplayHomeAds> {
                           ),
                           Text(
                             'Loading...',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               fontWeight: FontWeight.bold,
                             ),
                           )

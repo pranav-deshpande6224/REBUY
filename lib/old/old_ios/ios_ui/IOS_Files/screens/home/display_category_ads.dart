@@ -56,7 +56,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
   }
 
   String getDate(Timestamp timestamp) {
-    DateTime dateTime = timestamp.toDate(); 
+    DateTime dateTime = timestamp.toDate();
     String formattedDate =
         DateFormat('dd-MM-yy').format(dateTime); // Format DateTime
     return formattedDate;
@@ -78,19 +78,19 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                 const  Icon(
+                  const Icon(
                     CupertinoIcons.wifi_slash,
                     color: CupertinoColors.activeBlue,
                     size: 40,
                   ),
                   Text(
                     'No Internet Connection',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   CupertinoButton(
                     child: Text(
                       'Retry',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     onPressed: () async {
                       final x = ref.refresh(connectivityProvider);
@@ -112,19 +112,19 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                       const Icon(
+                        const Icon(
                           CupertinoIcons.wifi_slash,
                           color: CupertinoColors.activeBlue,
                           size: 40,
                         ),
                         Text(
                           'No Internet Connection',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         CupertinoButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(),
+                              style: GoogleFonts.lato(),
                             ),
                             onPressed: () async {
                               final x = ref.refresh(connectivityProvider);
@@ -168,10 +168,10 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                         width: 100,
                                         height: 100,
                                       ),
-                                     const SizedBox(height: 16),
+                                      const SizedBox(height: 16),
                                       Text(
                                         'No Ads Found',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.blueGrey[800],
@@ -211,9 +211,8 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                                 BorderRadius.circular(10),
                                             color: Colors.white,
                                             border: Border.all(
-                                              color: Colors
-                                                  .grey, 
-                                              width: 1, 
+                                              color: Colors.grey,
+                                              width: 1,
                                             ),
                                             boxShadow: const [
                                               BoxShadow(
@@ -259,7 +258,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                                   children: [
                                                     Text(
                                                       '₹ ${catAd.price}',
-                                                      style: GoogleFonts.roboto(
+                                                      style: GoogleFonts.lato(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         fontSize: 20,
@@ -273,7 +272,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                                       maxLines: 2,
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                      style: GoogleFonts.roboto(
+                                                      style: GoogleFonts.lato(
                                                         fontSize: 16,
                                                         color: Colors.black87,
                                                       ),
@@ -303,7 +302,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                                     const SizedBox(height: 4),
                                                     Text(
                                                       getDate(catAd.timestamp),
-                                                      style: GoogleFonts.roboto(
+                                                      style: GoogleFonts.lato(
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         color: Colors.black87,
@@ -334,7 +333,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                                     const SizedBox(height: 10),
                                     Text(
                                       'Fetching Content...',
-                                      style: GoogleFonts.roboto(
+                                      style: GoogleFonts.lato(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -360,7 +359,7 @@ class _DisplayCategoryAdsState extends ConsumerState<DisplayCategoryAds> {
                           Text(
                             'Loading...',
                             style:
-                                GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                                GoogleFonts.lato(fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

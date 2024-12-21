@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -102,17 +101,17 @@ class _LoginIosState extends ConsumerState<LoginIos> {
               return CupertinoAlertDialog(
                 title: Text(
                   'No Internet',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Please check your internet connection and try again',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   CupertinoDialogAction(
                     child: Text(
                       'OK',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     onPressed: () {
                       Navigator.of(ctx).pop();
@@ -153,7 +152,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
               children: [
                 Text(
                   'Login',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -163,7 +162,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                 ),
                 Text(
                   'Welcome Back',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 20,
                     color: CupertinoColors.activeBlue,
                     fontWeight: FontWeight.w600,
@@ -193,7 +192,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                               children: [
                                 TextSpan(
                                   text: '*',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.bold,
                                     color: CupertinoColors.systemRed,
                                   ),
@@ -245,7 +244,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
                               emailError,
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: CupertinoColors.systemRed,
                                 fontSize: 16,
                               ),
@@ -277,7 +276,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                               children: [
                                 TextSpan(
                                   text: '*',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.bold,
                                     color: CupertinoColors.systemRed,
                                   ),
@@ -347,7 +346,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
                               passwordError,
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: CupertinoColors.systemRed,
                                 fontSize: 16,
                               ),
@@ -375,7 +374,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                       },
                       child: Text(
                         'Forget Password?',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                           color: CupertinoColors.activeBlue,
@@ -397,7 +396,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                     },
                     child: Text(
                       'Login',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
@@ -420,7 +419,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: Text(
                         'Or Sign in with',
-                        style: GoogleFonts.roboto(fontWeight: FontWeight.w400),
+                        style: GoogleFonts.lato(fontWeight: FontWeight.w400),
                       ),
                     ),
                     const Expanded(
@@ -470,9 +469,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                       width: 30,
                     ),
                     GestureDetector(
-                      onTap: () {
-                        
-                      },
+                      onTap: () {},
                       child: CircleAvatar(
                         backgroundColor: CupertinoColors.white,
                         radius: 30,
@@ -495,7 +492,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                   children: [
                     Text(
                       'Don\'t have an account?',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     CupertinoButton(
                       onPressed: () {
@@ -511,7 +508,7 @@ class _LoginIosState extends ConsumerState<LoginIos> {
                       },
                       child: Text(
                         'Sign Up',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

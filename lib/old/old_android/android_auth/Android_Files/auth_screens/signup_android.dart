@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -80,7 +79,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
               signUpContext,
               _nameController.text,
             );
-            return  const Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.blueAccent,
               ),
@@ -242,7 +241,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   },
                                   child: Text(
                                     !passwordProvider ? 'Show' : 'Hide',
-                                    style:  GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontSize: 16,
                                       color: Colors.blue,
                                     ),
@@ -250,15 +249,18 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 ),
                                 prefixIcon: const Icon(Icons.lock),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.red),
+                                  borderSide:
+                                      const BorderSide(color: Colors.red),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
@@ -318,9 +320,9 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                 Text(
+                                Text(
                                   'Contain Atleast 8 Characters!',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
@@ -357,7 +359,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 ),
                                 Text(
                                   'Contain 1 Uppercase Letter',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                       color: Colors.black, fontSize: 15),
                                 )
                               ],
@@ -427,9 +429,9 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                 Text(
+                                Text(
                                   'Contain 1 Special Character',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
@@ -462,7 +464,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                   },
                                   child: Text(
                                     !showConfirmPassword ? 'Show' : 'Hide',
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontSize: 16,
                                       color: Colors.blue,
                                     ),
@@ -470,15 +472,18 @@ class _SignupAndroidState extends State<SignupAndroid> {
                                 ),
                                 prefixIcon: const Icon(Icons.lock),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.red),
+                                  borderSide:
+                                      const BorderSide(color: Colors.red),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Colors.black),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black),
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                               ),
@@ -511,7 +516,7 @@ class _SignupAndroidState extends State<SignupAndroid> {
                             },
                             child: Text(
                               'Sign Up',
-                              style: GoogleFonts.roboto(color: Colors.white),
+                              style: GoogleFonts.lato(color: Colors.white),
                             ),
                           ),
                         ),

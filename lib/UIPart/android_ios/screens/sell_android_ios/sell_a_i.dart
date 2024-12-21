@@ -141,7 +141,7 @@ class _SellAIState extends State<SellAI> {
             FittedBox(
               child: Text(
                 category.categoryTitle,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: Platform.isAndroid
                       ? Colors.black87
                       : Platform.isIOS
@@ -248,7 +248,7 @@ class _SellAIState extends State<SellAI> {
           backgroundColor: Colors.grey[200],
           title: Text(
             'What are you selling?',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
@@ -262,7 +262,7 @@ class _SellAIState extends State<SellAI> {
         navigationBar: CupertinoNavigationBar(
           middle: Text(
             'What are you selling?',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         child: body(),

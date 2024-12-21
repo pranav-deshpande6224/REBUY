@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/constants/constants.dart';
@@ -78,15 +77,15 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                           hintText: 'Email',
                           prefixIcon: const Icon(Icons.email),
                           errorBorder: OutlineInputBorder(
-                            borderSide:const BorderSide(color: Colors.red),
+                            borderSide: const BorderSide(color: Colors.red),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           border: OutlineInputBorder(
-                            borderSide:const BorderSide(color: Colors.black),
+                            borderSide: const BorderSide(color: Colors.black),
                             borderRadius: BorderRadius.circular(5),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide:const BorderSide(color: Colors.black),
+                            borderSide: const BorderSide(color: Colors.black),
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
@@ -117,7 +116,7 @@ class _ForgetPasswordAndroidState extends State<ForgetPasswordAndroid> {
                           },
                           child: Text(
                             'Submit',
-                            style: GoogleFonts.roboto(color: Colors.white),
+                            style: GoogleFonts.lato(color: Colors.white),
                           ),
                         ),
                       )

@@ -337,7 +337,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
               ),
             ),
           ),
-         const  SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Expanded(
@@ -348,7 +348,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                   widget.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
@@ -376,7 +376,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                         ),
                         Text(
                           isOnline ? 'online' : _formatLastSeen(lastSeen),
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                               fontSize: 13,
                               color: CupertinoColors.darkBackgroundGray),
                           maxLines: 1,
@@ -447,7 +447,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                                 widget.adTitle,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.roboto(),
+                                style: GoogleFonts.lato(),
                               ),
                             ),
                             const SizedBox(
@@ -456,7 +456,7 @@ class _ChattingScreenState extends ConsumerState<ChattingScreen> {
                             Expanded(
                               child: Text(
                                 '₹ ${widget.price.toInt()}',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -593,7 +593,7 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                           : const SizedBox(),
                       Row(
                         children: [
-                         const SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -681,7 +681,7 @@ class ModifyChatMessageTextField extends ConsumerWidget {
                     child: Center(
                       child: Text(
                         "Item Sold Out....",
-                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),

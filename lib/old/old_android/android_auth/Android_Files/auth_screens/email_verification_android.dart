@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -28,6 +27,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
     timerForVerify();
     super.initState();
   }
+
   void resendEmailLink() {
     _timer.cancel();
     sendEmailLink();
@@ -51,7 +51,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
           await pref.setString('uid', handler.newUser.user!.uid);
           if (context.mounted) {
             Navigator.of(context).pushAndRemoveUntil(
-             MaterialPageRoute(
+              MaterialPageRoute(
                 builder: (context) => const BottomNavAndroid(),
               ),
               (Route<dynamic> route) => false,
@@ -99,7 +99,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
               ),
               Text(
                 'An Email link  sent to the mail id',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -112,7 +112,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   widget.email,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 20,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
@@ -124,7 +124,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
               ),
               Text(
                 'Link is for verification of your Email',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -150,21 +150,16 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                         context: context,
                         builder: (ctx) {
                           return AlertDialog(
-                            title: Text(
-                              "Alert",
-                              style: GoogleFonts.roboto(
-                                
-                              )
-                            ),
+                            title: Text("Alert", style: GoogleFonts.lato()),
                             content: Text(
-                              "A New verification link will be sent to your email address ${widget.email}",
-                              style: GoogleFonts.roboto(
-                                
-                              )
-                            ),
+                                "A New verification link will be sent to your email address ${widget.email}",
+                                style: GoogleFonts.lato()),
                             actions: [
                               TextButton(
-                                child: Text("Okay",style: GoogleFonts.roboto(),),
+                                child: Text(
+                                  "Okay",
+                                  style: GoogleFonts.lato(),
+                                ),
                                 onPressed: () {
                                   resendEmailLink();
                                   Navigator.of(ctx).pop();
@@ -179,9 +174,14 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                           context: context,
                           builder: (ctx) {
                             return AlertDialog(
-                              title: Text('No Internet',style: GoogleFonts.roboto(),),
-                              content:
-                                  Text('Please check your internet connection',style: GoogleFonts.roboto(),),
+                              title: Text(
+                                'No Internet',
+                                style: GoogleFonts.lato(),
+                              ),
+                              content: Text(
+                                'Please check your internet connection',
+                                style: GoogleFonts.lato(),
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -189,7 +189,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                                   },
                                   child: Text(
                                     'Okay',
-                                    style: GoogleFonts.roboto(color: Colors.blue),
+                                    style: GoogleFonts.lato(color: Colors.blue),
                                   ),
                                 ),
                               ],
@@ -199,7 +199,7 @@ class _EmailVerificationAndroidState extends State<EmailVerificationAndroid> {
                   },
                   child: Text(
                     'ReSend Email',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       color: Colors.white,
                     ),
                   ),

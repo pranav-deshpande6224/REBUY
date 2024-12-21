@@ -69,7 +69,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
       child: Column(
         children: [
           Text('Something went wrong',
-              style: GoogleFonts.roboto(color: Colors.blue)),
+              style: GoogleFonts.lato(color: Colors.blue)),
           const SizedBox(
             height: 10,
           ),
@@ -84,7 +84,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
               : CupertinoButton(
@@ -97,7 +97,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
         ],
@@ -140,12 +140,12 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -180,7 +180,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -200,7 +200,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -232,7 +232,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
             ),
             Text(
               'No Sold Ads',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -280,7 +280,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
               const SizedBox(height: 10),
               Text(
                 'Fetching Content...',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[700],
@@ -327,7 +327,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
         backgroundColor: Colors.grey[200],
         title: Text(
           'My Sold Ads',
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.lato(
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
@@ -384,7 +384,7 @@ class _MysoldadsAIState extends ConsumerState<MysoldadsAI> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'MY SOLD ADS',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(

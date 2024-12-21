@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/old/old_ios/ios_ui/IOS_Files/screens/home/fetch_category_ads.dart';
@@ -54,7 +53,7 @@ class DetailScreen extends StatelessWidget {
                 ),
                 title: Text(
                   subCategoryList[index],
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
               Container(

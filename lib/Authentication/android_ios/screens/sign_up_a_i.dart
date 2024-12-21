@@ -239,17 +239,17 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
           return CupertinoAlertDialog(
             title: Text(
               'No Internet Connection',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Please check your internet connection and try again.',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -281,7 +281,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
         ),
         label: Text(
           'Name',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
         labelStyle: const TextStyle(color: Colors.black),
         floatingLabelStyle: const TextStyle(color: Colors.blue),
@@ -307,7 +307,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
       decoration: InputDecoration(
         label: Text(
           'Email',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
         labelStyle: const TextStyle(color: Colors.black),
         floatingLabelStyle: const TextStyle(color: Colors.blue),
@@ -358,7 +358,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
           decoration: InputDecoration(
             label: Text(
               "Password",
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             labelStyle: const TextStyle(color: Colors.black),
             floatingLabelStyle: const TextStyle(color: Colors.blue),
@@ -370,7 +370,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               },
               child: Text(
                 !passwordProvider ? 'Show' : 'Hide',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   color: Colors.blue,
                 ),
@@ -426,7 +426,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
           decoration: InputDecoration(
             label: Text(
               'Confirm Password',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             labelStyle: const TextStyle(color: Colors.black),
             floatingLabelStyle: const TextStyle(color: Colors.blue),
@@ -438,7 +438,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               },
               child: Text(
                 !showConfirmPassword ? 'Show' : 'Hide',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   color: Colors.blue,
                 ),
@@ -575,7 +575,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               children: [
                 TextSpan(
                   text: '*',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: CupertinoColors.systemRed,
                   ),
                 )
@@ -644,7 +644,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   fnameError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                       color: CupertinoColors.systemRed, fontSize: 16),
                 ),
               );
@@ -677,7 +677,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   emailError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                       color: CupertinoColors.systemRed, fontSize: 16),
                 ),
               );
@@ -707,7 +707,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         color: CupertinoColors.systemRed,
                       ),
                     )
@@ -781,7 +781,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   passwordError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                       color: CupertinoColors.systemRed, fontSize: 16),
                 ),
               );
@@ -820,7 +820,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain Atleast 8 Characters!',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 15,
                 ),
@@ -857,7 +857,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Uppercase Letter',
-                style: GoogleFonts.roboto(color: Colors.black, fontSize: 15),
+                style: GoogleFonts.lato(color: Colors.black, fontSize: 15),
               )
             ],
           ),
@@ -891,7 +891,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Number',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 15,
                 ),
@@ -928,7 +928,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Special Character',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: Colors.black,
                   fontSize: 15,
                 ),
@@ -967,7 +967,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain Atleast 8 Characters!',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: CupertinoColors.black,
                   fontSize: 15,
                 ),
@@ -1004,7 +1004,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Uppercase Letter',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                     color: CupertinoColors.black, fontSize: 15),
               )
             ],
@@ -1039,7 +1039,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Number',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: CupertinoColors.black,
                   fontSize: 15,
                 ),
@@ -1076,7 +1076,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
               ),
               Text(
                 'Contain 1 Special Character',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                     color: CupertinoColors.black, fontSize: 15),
               )
             ],
@@ -1109,7 +1109,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         color: CupertinoColors.systemRed,
                       ),
                     )
@@ -1182,7 +1182,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   confirmPasswordError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                       color: CupertinoColors.systemRed, fontSize: 16),
                 ),
               );
@@ -1206,7 +1206,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
           },
           child: Text(
             'Sign Up',
-            style: GoogleFonts.roboto(color: Colors.white),
+            style: GoogleFonts.lato(color: Colors.white),
           ),
         ),
       );
@@ -1219,7 +1219,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
           padding: EdgeInsets.zero,
           child: Text(
             'Sign Up',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
@@ -1276,7 +1276,7 @@ class _SignUpAIState extends ConsumerState<SignUpAI> {
                       ),
                       Text(
                         'Sign Up',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 25,
                           fontWeight: FontWeight.w500,
                         ),

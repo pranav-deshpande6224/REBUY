@@ -131,11 +131,11 @@ class _MyAdsState extends ConsumerState<MyAds> {
                 return CupertinoAlertDialog(
                   title: Text(
                     'Alert',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   content: Text(
                     e.toString(),
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   actions: [
                     CupertinoDialogAction(
@@ -144,7 +144,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
                         },
                         child: Text(
                           'Okay',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ))
                   ],
                 );
@@ -169,7 +169,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'My Active Ads',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -187,12 +187,12 @@ class _MyAdsState extends ConsumerState<MyAds> {
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     CupertinoButton(
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       onPressed: () async {
                         final x = ref.refresh(connectivityProvider);
@@ -222,12 +222,12 @@ class _MyAdsState extends ConsumerState<MyAds> {
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           CupertinoButton(
                               child: Text(
                                 'Retry',
-                                style: GoogleFonts.roboto(),
+                                style: GoogleFonts.lato(),
                               ),
                               onPressed: () {
                                 final x = ref.refresh(connectivityProvider);
@@ -270,7 +270,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
                                           const SizedBox(height: 24),
                                           Text(
                                             'No Active Ads',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.grey[800],
@@ -280,7 +280,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
                                           Text(
                                             'You don’t have any active ads yet. Add one now!',
                                             textAlign: TextAlign.center,
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 16,
                                               color: Colors.grey[600],
                                             ),
@@ -336,7 +336,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
                                         const SizedBox(height: 10),
                                         Text(
                                           'Fetching Content...',
-                                          style: GoogleFonts.roboto(
+                                          style: GoogleFonts.lato(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.grey[700],
@@ -365,7 +365,7 @@ class _MyAdsState extends ConsumerState<MyAds> {
                               ),
                               Text(
                                 'Loading...',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
                                 ),
                               )

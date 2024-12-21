@@ -50,7 +50,7 @@ class _ProductDetailScreenAndroidState
           ),
           Text(
             item.brand,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -69,7 +69,7 @@ class _ProductDetailScreenAndroidState
           ),
           Text(
             item.tabletType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -88,7 +88,7 @@ class _ProductDetailScreenAndroidState
           ),
           Text(
             item.chargerType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -106,7 +106,7 @@ class _ProductDetailScreenAndroidState
         elevation: 10,
         title: Text(
           'Product Details',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       body: SafeArea(
@@ -124,7 +124,7 @@ class _ProductDetailScreenAndroidState
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     TextButton(
                       onPressed: () async {
@@ -135,7 +135,7 @@ class _ProductDetailScreenAndroidState
                       },
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                     )
                   ],
@@ -156,12 +156,12 @@ class _ProductDetailScreenAndroidState
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           TextButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(),
+                              style: GoogleFonts.lato(),
                             ),
                             onPressed: () async {
                               final x =
@@ -192,7 +192,7 @@ class _ProductDetailScreenAndroidState
                                 ),
                                 Text(
                                   'Loading...',
-                                  style: GoogleFonts.roboto(),
+                                  style: GoogleFonts.lato(),
                                 )
                               ],
                             ),
@@ -299,7 +299,7 @@ class _ProductDetailScreenAndroidState
                                       ),
                                       Text(
                                         '₹ ${item.price.toInt()}',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           color: Colors.green[700],
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
@@ -310,7 +310,7 @@ class _ProductDetailScreenAndroidState
                                       ),
                                       Text(
                                         item.adTitle,
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           fontSize: 20,
                                         ),
                                       ),
@@ -327,7 +327,7 @@ class _ProductDetailScreenAndroidState
                                       ),
                                       Text(
                                         item.adDescription,
-                                        style: GoogleFonts.roboto(fontSize: 22),
+                                        style: GoogleFonts.lato(fontSize: 22),
                                       ),
                                       const SizedBox(
                                         height: 10,
@@ -355,7 +355,7 @@ class _ProductDetailScreenAndroidState
                                                     item.userid
                                                 ? 'You'
                                                 : item.postedBy,
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 22,
                                             ),
                                           ),
@@ -370,7 +370,7 @@ class _ProductDetailScreenAndroidState
                                         children: [
                                           Text(
                                             'Posted At',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                               color: Colors.blue,
@@ -378,7 +378,7 @@ class _ProductDetailScreenAndroidState
                                           ),
                                           Text(
                                             getDate(item.timestamp),
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 20,
                                             ),
@@ -432,7 +432,7 @@ class _ProductDetailScreenAndroidState
                                                 }
                                               : null,
                                           child: Text(
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontWeight: FontWeight.bold,
                                               color: item.isAvailable
                                                   ? Colors.white

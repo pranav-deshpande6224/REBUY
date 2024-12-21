@@ -75,13 +75,13 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
             content: Text('Please select atleast 1 image',
-                style: GoogleFonts.roboto()),
+                style: GoogleFonts.lato()),
             actions: [
               TextButton(
                 child:
-                    Text('Okay', style: GoogleFonts.roboto(color: Colors.blue)),
+                    Text('Okay', style: GoogleFonts.lato(color: Colors.blue)),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -95,12 +95,12 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
             content: Text('Please select atleast 1 image',
-                style: GoogleFonts.roboto()),
+                style: GoogleFonts.lato()),
             actions: [
               CupertinoDialogAction(
-                child: Text('Okay', style: GoogleFonts.roboto()),
+                child: Text('Okay', style: GoogleFonts.lato()),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -178,13 +178,13 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: Text("Confirmation of Price", style: GoogleFonts.roboto()),
+            title: Text("Confirmation of Price", style: GoogleFonts.lato()),
             content: Text("PRICE : ${_priceController.text}"),
             actions: [
               TextButton(
                 child: Text(
                   "Cancel",
-                  style: GoogleFonts.roboto(color: Colors.blue),
+                  style: GoogleFonts.lato(color: Colors.blue),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -205,7 +205,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 },
                 child: Text(
                   "Sell",
-                  style: GoogleFonts.roboto(color: Colors.blue),
+                  style: GoogleFonts.lato(color: Colors.blue),
                 ),
               )
             ],
@@ -217,16 +217,16 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           context: context,
           builder: (ctx) {
             return AlertDialog(
-              title: Text("Confirmation of Price", style: GoogleFonts.roboto()),
+              title: Text("Confirmation of Price", style: GoogleFonts.lato()),
               content: Text(
                 "Price : ${_priceController.text}",
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               actions: [
                 CupertinoDialogAction(
                   child: Text(
                     "Cancel",
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   onPressed: () {
                     Navigator.of(ctx).pop();
@@ -247,7 +247,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   },
                   child: Text(
                     "Sell",
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                 )
               ],
@@ -432,7 +432,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               CupertinoDialogAction(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -781,16 +781,16 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
             content: Text(
               'You are Uploading more than 3 images',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               TextButton(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Colors.blue,
                   ),
                 ),
@@ -807,14 +807,14 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
             content: Text(
               'You are Uploading more than 3 images',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
-                child: Text('Okay', style: GoogleFonts.roboto()),
+                child: Text('Okay', style: GoogleFonts.lato()),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
@@ -850,11 +850,11 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         context: context,
         builder: (ctx) {
           return CupertinoAlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
-            content: Text(e.toString(), style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
+            content: Text(e.toString(), style: GoogleFonts.lato()),
             actions: [
               CupertinoDialogAction(
-                child: Text('Okay', style: GoogleFonts.roboto()),
+                child: Text('Okay', style: GoogleFonts.lato()),
                 onPressed: () {
                   Navigator.of(ctx).pop();
                 },
@@ -929,11 +929,11 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return AlertDialog(
             title: Text(
               'Permission Denied',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Please allow the permission to access the gallery',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               TextButton(
@@ -942,7 +942,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 },
                 child: Text(
                   'Open Settings',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               )
             ],
@@ -956,11 +956,11 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return CupertinoAlertDialog(
             title: Text(
               'Permission Denied',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Please allow the permission to access the gallery',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
@@ -969,7 +969,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 },
                 child: Text(
                   'Open Settings',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               )
             ],
@@ -1037,7 +1037,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return CupertinoActionSheet(
             title: Text(
               'Select Either Camera or Gallery too Upload Images',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoActionSheetAction(
@@ -1047,7 +1047,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 },
                 child: Text(
                   'Camera',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
               CupertinoActionSheetAction(
@@ -1055,7 +1055,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   Navigator.of(ctx).pop();
                   _galleryPressed(ctx);
                 },
-                child: Text('Gallery', style: GoogleFonts.roboto()),
+                child: Text('Gallery', style: GoogleFonts.lato()),
               )
             ],
             cancelButton: CupertinoActionSheetAction(
@@ -1064,7 +1064,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               },
               child: Text(
                 'Cancel',
-                style: GoogleFonts.roboto(color: CupertinoColors.systemRed),
+                style: GoogleFonts.lato(color: CupertinoColors.systemRed),
               ),
             ),
           );
@@ -1134,7 +1134,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         floatingLabelStyle: const TextStyle(color: Colors.blue),
         label: Text(
           'Brand',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       validator: (value) {
@@ -1174,7 +1174,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           floatingLabelStyle: const TextStyle(color: Colors.blue),
           label: Text(
             'Ad Title',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         validator: (value) {
@@ -1199,7 +1199,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 RichText(
                   text: TextSpan(
                     text: 'Ad Title ',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: error == ''
@@ -1209,7 +1209,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                     children: [
                       TextSpan(
                         text: '*',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.bold,
                           color: CupertinoColors.systemRed,
                         ),
@@ -1273,7 +1273,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           floatingLabelStyle: const TextStyle(color: Colors.blue),
           label: Text(
             'Additional Info (Include Condition, features) ',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         validator: (value) {
@@ -1298,7 +1298,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 RichText(
                   text: TextSpan(
                     text: 'Additional Info (Include Condition, features) ',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: error == ''
@@ -1308,7 +1308,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                     children: [
                       TextSpan(
                         text: '*',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.bold,
                           color: CupertinoColors.systemRed,
                         ),
@@ -1371,7 +1371,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           floatingLabelStyle: const TextStyle(color: Colors.blue),
           label: Text(
             'Price',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         validator: (value) {
@@ -1399,7 +1399,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 RichText(
                   text: TextSpan(
                     text: 'Set Price ',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       color: error == ''
@@ -1409,7 +1409,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                     children: [
                       TextSpan(
                         text: '*',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.bold,
                           color: CupertinoColors.systemRed,
                         ),
@@ -1424,7 +1424,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         '₹',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 22,
                           color: CupertinoColors.black,
                         ),
@@ -1489,18 +1489,18 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           return CupertinoAlertDialog(
             title: Text(
               'Alert',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Are you sure want to delete this image?',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
                 child: Text(
                   'Yes',
                   style:
-                      GoogleFonts.roboto(color: CupertinoColors.destructiveRed),
+                      GoogleFonts.lato(color: CupertinoColors.destructiveRed),
                 ),
                 onPressed: () {
                   ref.read(imageProvider.notifier).removeImage(image);
@@ -1511,7 +1511,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               CupertinoDialogAction(
                 child: Text(
                   'No',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -1544,7 +1544,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                           ),
                           Text(
                             'Press + Button to add images',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               fontSize: 18,
                               color: Platform.isAndroid
                                   ? Colors.grey
@@ -1555,7 +1555,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                           ),
                           Text(
                             'Upload Atmost 3 images',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               fontSize: 18,
                               color: Platform.isAndroid
                                   ? Colors.grey
@@ -1751,8 +1751,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
           color: CupertinoColors.activeBlue,
           child: Text(
             'Post Your Ad',
-            style:
-                GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 18),
+            style: GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           onPressed: () {
             _nextPressed();
@@ -1776,7 +1775,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               RichText(
                 text: TextSpan(
                   text: 'Brand ',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     color: error == ''
@@ -1786,7 +1785,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -1851,7 +1850,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(color: CupertinoColors.systemRed),
+                  style: GoogleFonts.lato(color: CupertinoColors.systemRed),
                 ),
               );
       },
@@ -1868,7 +1867,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(color: CupertinoColors.systemRed),
+                  style: GoogleFonts.lato(color: CupertinoColors.systemRed),
                 ),
               );
       },
@@ -1885,7 +1884,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(color: CupertinoColors.systemRed),
+                  style: GoogleFonts.lato(color: CupertinoColors.systemRed),
                 ),
               );
       },
@@ -1902,7 +1901,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(color: CupertinoColors.systemRed),
+                  style: GoogleFonts.lato(color: CupertinoColors.systemRed),
                 ),
               );
       },
@@ -2001,7 +2000,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Platform.isAndroid
                         ? const Color.fromARGB(255, 202, 11, 7)
                         : Platform.isIOS
@@ -2026,7 +2025,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               return RichText(
                 text: TextSpan(
                   text: 'Charger Type ',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     color: error == ''
@@ -2036,7 +2035,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -2100,7 +2099,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   ),
                   Text(
                     'Charger Type',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   SizedBox(
                     height: 40,
@@ -2213,7 +2212,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         child: Center(
           child: Text(
             text,
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontWeight: index == selectedIndex ? FontWeight.bold : null,
               color: index == selectedIndex ? Colors.white : null,
             ),
@@ -2231,7 +2230,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
             ? const SizedBox()
             : Text(
                 error,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   color: Platform.isAndroid
                       ? const Color.fromARGB(255, 202, 11, 7)
                       : Platform.isIOS
@@ -2256,7 +2255,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
               return RichText(
                 text: TextSpan(
                   text: 'Type ',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     color: error == ''
@@ -2266,7 +2265,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -2332,7 +2331,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
                   ),
                   Text(
                     'Type',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   const SizedBox(
                     height: 10,
@@ -2527,7 +2526,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         backgroundColor: Colors.grey[200],
         title: Text(
           'Include some details',
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.lato(
             fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
@@ -2553,7 +2552,7 @@ class _ProductGetInfoAIState extends ConsumerState<ProductGetInfoAI> {
         padding: EdgeInsetsDirectional.zero,
         middle: Text(
           'Include some details',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
         leading: CupertinoButton(
           padding: EdgeInsetsDirectional.zero,

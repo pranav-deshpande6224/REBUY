@@ -17,7 +17,7 @@ class _HomeState extends ConsumerState<Home> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'ReVYB',
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.lato(
             fontWeight: FontWeight.w600,
           ),
         ),

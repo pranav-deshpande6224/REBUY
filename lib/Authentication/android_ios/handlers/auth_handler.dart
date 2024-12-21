@@ -28,18 +28,18 @@ class AuthHandler {
             return CupertinoAlertDialog(
               title: Text(
                 title,
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               content: Text(
                 content,
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               actions: [
                 CupertinoDialogAction(
                   isDefaultAction: true,
                   child: Text(
                     'Okay',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   onPressed: () {
                     Navigator.of(ctx).pop();
@@ -56,11 +56,11 @@ class AuthHandler {
           return AlertDialog(
             title: Text(
               title,
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               content,
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               TextButton(
@@ -69,7 +69,7 @@ class AuthHandler {
                 },
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(color: Colors.blue),
+                  style: GoogleFonts.lato(color: Colors.blue),
                 ),
               ),
             ],
@@ -355,11 +355,11 @@ class AuthHandler {
           return AlertDialog(
             title: Text(
               'Alert',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Reset Password link has been sent to your Email: $email',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               TextButton(
@@ -369,7 +369,7 @@ class AuthHandler {
                 },
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Colors.blue,
                   ),
                 ),
@@ -385,11 +385,11 @@ class AuthHandler {
         builder: (context) => CupertinoAlertDialog(
           title: Text(
             'Alert',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           content: Text(
             'Reset Password link has been sent to your Email: $email',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           actions: [
             CupertinoDialogAction(

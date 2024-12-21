@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -59,14 +58,14 @@ class _SignUpState extends ConsumerState<SignUp> {
   @override
   void dispose() {
     fnameFocusNode.dispose();
-    
+
     emailFocusNode.dispose();
     passwordFocusNode.dispose();
     confirmPasswordFocusNode.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _fnameController.dispose();
-    
+
     _confirmPasswordController.dispose();
     super.dispose();
   }
@@ -166,17 +165,17 @@ class _SignUpState extends ConsumerState<SignUp> {
               return CupertinoAlertDialog(
                 title: Text(
                   'No Internet Connection',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Please check your internet connection and try again.',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   CupertinoDialogAction(
                     child: Text(
                       'Okay',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     onPressed: () {
                       Navigator.of(ctx).pop();
@@ -198,8 +197,6 @@ class _SignUpState extends ConsumerState<SignUp> {
     confirmPasswordFocusNode.unfocus();
   }
 
- 
-
   SizedBox getTextField(String textGiven, TextEditingController controller,
       IconData data, TextInputType type, FocusNode focusNode, String error) {
     return SizedBox(
@@ -220,7 +217,7 @@ class _SignUpState extends ConsumerState<SignUp> {
               children: [
                 TextSpan(
                   text: '*',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: CupertinoColors.systemRed,
                   ),
                 )
@@ -301,9 +298,9 @@ class _SignUpState extends ConsumerState<SignUp> {
                     child: Container(
                       height: 40,
                       width: 40,
-                      decoration:const BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Constants.white, shape: BoxShape.circle),
-                      child:const Icon(
+                      child: const Icon(
                         CupertinoIcons.back,
                         size: 30,
                         color: CupertinoColors.activeBlue,
@@ -315,7 +312,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                   ),
                   Text(
                     'Sign Up',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                     ),
@@ -344,7 +341,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 fnameError,
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                     color: CupertinoColors.systemRed,
                                     fontSize: 16),
                               ),
@@ -375,7 +372,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 emailError,
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                     color: CupertinoColors.systemRed,
                                     fontSize: 16),
                               ),
@@ -406,7 +403,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 children: [
                                   TextSpan(
                                     text: '*',
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       color: CupertinoColors.systemRed,
                                     ),
                                   )
@@ -478,7 +475,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 passwordError,
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                     color: CupertinoColors.systemRed,
                                     fontSize: 16),
                               ),
@@ -493,7 +490,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration:const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -504,7 +501,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordContainEightChar
-                                  ?const Icon(
+                                  ? const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -512,12 +509,12 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                         const SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
                             'Contain Atleast 8 Characters!',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               color: CupertinoColors.black,
                               fontSize: 15,
                             ),
@@ -530,7 +527,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration:const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -554,18 +551,18 @@ class _SignUpState extends ConsumerState<SignUp> {
                           ),
                           Text(
                             'Contain 1 Uppercase Letter',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                                 color: CupertinoColors.black, fontSize: 15),
                           )
                         ],
                       ),
-                     const SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
                           AnimatedContainer(
-                            duration:const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             width: 20,
                             height: 20,
                             decoration: BoxDecoration(
@@ -576,7 +573,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordCOntainNumber
-                                  ?const Icon(
+                                  ? const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -589,7 +586,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                           ),
                           Text(
                             'Contain 1 Number',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               color: CupertinoColors.black,
                               fontSize: 15,
                             ),
@@ -613,7 +610,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                             ),
                             child: Center(
                               child: isPasswordContainSpecialChar
-                                  ?const Icon(
+                                  ? const Icon(
                                       CupertinoIcons.check_mark_circled_solid,
                                       color: CupertinoColors.activeGreen,
                                       size: 18,
@@ -621,19 +618,19 @@ class _SignUpState extends ConsumerState<SignUp> {
                                   : null,
                             ),
                           ),
-                         const SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
                             'Contain 1 Special Character',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                                 color: CupertinoColors.black, fontSize: 15),
                           )
                         ],
                       )
                     ],
                   ),
-                 const SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Consumer(
@@ -657,7 +654,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 children: [
                                   TextSpan(
                                     text: '*',
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       color: CupertinoColors.systemRed,
                                     ),
                                   )
@@ -730,7 +727,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 confirmPasswordError,
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                     color: CupertinoColors.systemRed,
                                     fontSize: 16),
                               ),
@@ -748,7 +745,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       padding: EdgeInsets.zero,
                       child: Text(
                         'Sign Up',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),

@@ -51,7 +51,7 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
         navigationBar: CupertinoNavigationBar(
           middle: Text(
             'MY SOLD ADS',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
         child: SafeArea(
@@ -69,12 +69,12 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     CupertinoButton(
                         child: Text(
                           'Retry',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () async {
                           final x = ref.refresh(connectivityProvider);
@@ -103,12 +103,12 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           CupertinoButton(
                               child: Text(
                                 'Retry',
-                                style: GoogleFonts.roboto(),
+                                style: GoogleFonts.lato(),
                               ),
                               onPressed: () async {
                                 final x = ref.refresh(connectivityProvider);
@@ -150,7 +150,7 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
                                       ),
                                       Text(
                                         'No Sold Ads',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           fontSize: 22,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -207,7 +207,7 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
                                         ),
                                         Text(
                                           'Fetching Content...',
-                                          style: GoogleFonts.roboto(
+                                          style: GoogleFonts.lato(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         )
@@ -234,7 +234,7 @@ class _MySoldAdsState extends ConsumerState<MySoldAds> {
                               ),
                               Text(
                                 'Loading...',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
                                 ),
                               )

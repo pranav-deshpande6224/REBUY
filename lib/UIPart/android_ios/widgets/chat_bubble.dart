@@ -24,9 +24,9 @@ class ChatBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final formattedTime = DateFormat('hh:mm a').format(date);
     final isReplying = repliedText.isNotEmpty;
-    const  Color senderColor = Color(0xFFDCF8C6);
-    const  Color receiverColor = Color(0xFFE5E5E5);
-    const  Color textColor = Colors.black;
+    const Color senderColor = Color(0xFFDCF8C6);
+    const Color receiverColor = Color(0xFFE5E5E5);
+    const Color textColor = Colors.black;
     return Align(
       alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
@@ -40,9 +40,13 @@ class ChatBubble extends StatelessWidget {
             color: isSender ? senderColor : receiverColor,
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(12),
-              topRight: const  Radius.circular(12),
-              bottomLeft: isSender ? const Radius.circular(12) :const Radius.circular(0),
-              bottomRight: isSender ? const Radius.circular(0) :const Radius.circular(12),
+              topRight: const Radius.circular(12),
+              bottomLeft: isSender
+                  ? const Radius.circular(12)
+                  : const Radius.circular(0),
+              bottomRight: isSender
+                  ? const Radius.circular(0)
+                  : const Radius.circular(12),
             ),
           ),
           child: Column(
@@ -69,7 +73,7 @@ class ChatBubble extends StatelessWidget {
                           userName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
                             color: textColor,
@@ -77,7 +81,7 @@ class ChatBubble extends StatelessWidget {
                         ),
                         Text(
                           repliedText,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: textColor,
@@ -93,7 +97,7 @@ class ChatBubble extends StatelessWidget {
               ],
               Text(
                 message,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: textColor,
@@ -105,7 +109,7 @@ class ChatBubble extends StatelessWidget {
                 children: [
                   Text(
                     formattedTime,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Colors.black,

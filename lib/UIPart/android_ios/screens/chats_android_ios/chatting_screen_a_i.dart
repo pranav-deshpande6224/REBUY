@@ -158,7 +158,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                   widget.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -185,7 +185,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                         ),
                         Text(
                           isOnline ? 'online' : _formatLastSeen(lastSeen),
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontSize: 11,
                             color: Colors.black87,
                           ),
@@ -257,7 +257,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                   widget.adTitle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
               const SizedBox(
@@ -266,7 +266,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
               Expanded(
                 child: Text(
                   '₹ ${widget.price.toInt()}',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -348,7 +348,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
           return AlertDialog(
             title: Text(
               'Error',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(text),
             actions: [
@@ -358,7 +358,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                 },
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
             ],
@@ -372,7 +372,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
           return CupertinoAlertDialog(
             title: Text(
               'Error',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(text),
             actions: [
@@ -382,7 +382,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                 },
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
             ],
@@ -419,7 +419,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                   children: [
                     Text(
                       'Something went wrong',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     const SizedBox(
                       height: 10,
@@ -430,7 +430,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                       },
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                     )
                   ],
@@ -554,7 +554,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                     child: Center(
                       child: Text(
                         "Item Sold Out....",
-                        style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                        style: GoogleFonts.lato(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -570,7 +570,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                 },
                 child: Text(
                   'Retry',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
@@ -584,7 +584,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                 },
                 child: Text(
                   'Retry',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
@@ -636,7 +636,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                   widget.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                   stream: FirebaseFirestore.instance
@@ -664,7 +664,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                         ),
                         Text(
                           isOnline ? 'online' : _formatLastSeen(lastSeen),
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                               fontSize: 13,
                               color: CupertinoColors.darkBackgroundGray),
                           maxLines: 1,
@@ -701,11 +701,11 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
               return Center(
                 child: Column(
                   children: [
-                    Text('Something went wrong', style: GoogleFonts.roboto()),
+                    Text('Something went wrong', style: GoogleFonts.lato()),
                     CupertinoButton(
                         child: Text(
                           'Retry',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () {
                           setState(() {});
@@ -744,7 +744,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                                 widget.adTitle,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.roboto(),
+                                style: GoogleFonts.lato(),
                               ),
                             ),
                             const SizedBox(
@@ -753,7 +753,7 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                             Expanded(
                               child: Text(
                                 '₹ ${widget.price.toInt()}',
-                                style: GoogleFonts.roboto(
+                                style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -1036,14 +1036,14 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
               return AlertDialog(
                 title: Text(
                   'Error',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content:
-                    Text('Failed to send message', style: GoogleFonts.roboto()),
+                    Text('Failed to send message', style: GoogleFonts.lato()),
                 actions: [
                   TextButton(
                     child: Text('Okay',
-                        style: GoogleFonts.roboto(color: Colors.blue)),
+                        style: GoogleFonts.lato(color: Colors.blue)),
                     onPressed: () {
                       Navigator.of(ctx).pop();
                     },
@@ -1057,9 +1057,9 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
             context: context,
             builder: (ctx) {
               return CupertinoAlertDialog(
-                title: Text('Error', style: GoogleFonts.roboto()),
+                title: Text('Error', style: GoogleFonts.lato()),
                 content:
-                    Text('Failed to send message', style: GoogleFonts.roboto()),
+                    Text('Failed to send message', style: GoogleFonts.lato()),
                 actions: [
                   CupertinoDialogAction(
                     child: const Text('OK'),
@@ -1160,10 +1160,10 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                           context: context,
                           builder: (context) => AlertDialog(
                             title: Text('No Internet Connection',
-                                style: GoogleFonts.roboto()),
+                                style: GoogleFonts.lato()),
                             content: Text(
                                 'Please check your internet connection and try again.',
-                                style: GoogleFonts.roboto()),
+                                style: GoogleFonts.lato()),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -1171,7 +1171,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                                 },
                                 child: Text(
                                   'Okay',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     color: Colors.blue,
                                   ),
                                 ),
@@ -1241,10 +1241,10 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                           context: context,
                           builder: (context) => CupertinoAlertDialog(
                             title: Text('No Internet Connection',
-                                style: GoogleFonts.roboto()),
+                                style: GoogleFonts.lato()),
                             content: Text(
                                 'Please check your internet connection and try again.',
-                                style: GoogleFonts.roboto()),
+                                style: GoogleFonts.lato()),
                             actions: [
                               CupertinoDialogAction(
                                 onPressed: () {
@@ -1252,7 +1252,7 @@ class _MyWidgetState extends ConsumerState<ChatMessageTextField> {
                                 },
                                 child: Text(
                                   'Okay',
-                                  style: GoogleFonts.roboto(),
+                                  style: GoogleFonts.lato(),
                                 ),
                               ),
                             ],

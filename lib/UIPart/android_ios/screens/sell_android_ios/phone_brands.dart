@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +24,7 @@ class _PhoneBrandsState extends ConsumerState<PhoneBrands> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Text(
         title,
-        style: GoogleFonts.roboto(
+        style: GoogleFonts.lato(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: CupertinoColors.black,
@@ -42,7 +41,7 @@ class _PhoneBrandsState extends ConsumerState<PhoneBrands> {
             CupertinoListTile(
               title: Text(
                 brand,
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               onTap: () {
                 ref.read(brandFilterProvider.notifier).filterByBrand('');
@@ -75,7 +74,7 @@ class _PhoneBrandsState extends ConsumerState<PhoneBrands> {
             }),
         middle: Text(
           'Brand',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: Container(

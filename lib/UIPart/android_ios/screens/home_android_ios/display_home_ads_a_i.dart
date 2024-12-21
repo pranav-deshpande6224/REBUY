@@ -206,12 +206,12 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -246,7 +246,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -266,7 +266,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -382,7 +382,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                 child: Text(
                   textAlign: TextAlign.center,
                   category.categoryTitle,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),
@@ -404,7 +404,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         padding: const EdgeInsets.only(left: 10),
         child: Text(
           text,
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.lato(
             fontWeight: FontWeight.w600,
             fontSize: 20,
           ),
@@ -550,8 +550,8 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          Colors.black.withValues(alpha: 
-                                            0.08,
+                                          Colors.black.withValues(
+                                            alpha: 0.08,
                                           ),
                                           Colors.transparent,
                                         ],
@@ -575,33 +575,30 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                 children: [
                                   Text(
                                     '₹ ${ad.price.toInt()}',
-                                    style: GoogleFonts.roboto(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors
-                                          .green[700], // Cool color for price
+                                    style: GoogleFonts.lato(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: Colors.green[500],
                                     ),
                                   ),
                                   Text(
-                                    ad.adTitle,
+                                    ad.brand.isNotEmpty ? ad.brand : ad.adTitle,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors
-                                          .black87, // Darker color for title
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black87,
                                     ),
                                   ),
                                   Text(
                                     ad.postedBy,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14,
-                                      color: Colors
-                                          .black87, // Subtle color for posted-by text
+                                      color: Colors.brown[400],
                                     ),
                                   ),
                                 ],
@@ -651,7 +648,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
               const SizedBox(height: 10),
               Text(
                 'Fetching Content...',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[700],
@@ -717,7 +714,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
         children: [
           Text(
             'Something went wrong',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           const SizedBox(
             height: 10,
@@ -733,7 +730,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                 )
               : CupertinoButton(
@@ -746,7 +743,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                 )
         ],

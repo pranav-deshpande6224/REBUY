@@ -149,7 +149,7 @@ class _ChatsState extends ConsumerState<Chats> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'Inbox',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -167,12 +167,12 @@ class _ChatsState extends ConsumerState<Chats> {
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     CupertinoButton(
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       onPressed: () async {
                         // To Do Something
@@ -200,12 +200,12 @@ class _ChatsState extends ConsumerState<Chats> {
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           CupertinoButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(),
+                              style: GoogleFonts.lato(),
                             ),
                             onPressed: () async {
                               // To Do Something
@@ -238,7 +238,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                       child: Center(
                                         child: Text(
                                           'Buying',
-                                          style: GoogleFonts.roboto(
+                                          style: GoogleFonts.lato(
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
@@ -248,7 +248,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                       child: Center(
                                           child: Text(
                                         'Selling',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                             fontWeight: FontWeight.bold),
                                       )),
                                     ),
@@ -279,7 +279,6 @@ class _ChatsState extends ConsumerState<Chats> {
                                   );
                                 }
                                 if (snapshot.hasError) {
-                                 
                                   return const Center(
                                     child: Text('Something went wrong'),
                                   );
@@ -291,7 +290,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                             value == 'buying'
                                                 ? 'No Buying Chats'
                                                 : 'No Selling Chats',
-                                            style: GoogleFonts.roboto(),
+                                            style: GoogleFonts.lato(),
                                           ),
                                         )
                                       : ListView.builder(
@@ -483,7 +482,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                                                                 TextOverflow.ellipsis,
                                                                             obj.nameOfContact,
                                                                             style:
-                                                                                GoogleFonts.roboto(fontWeight: FontWeight.bold),
+                                                                                GoogleFonts.lato(fontWeight: FontWeight.bold),
                                                                           ),
                                                                         ),
                                                                         Padding(
@@ -494,7 +493,7 @@ class _ChatsState extends ConsumerState<Chats> {
                                                                               Text(
                                                                             getTime(obj.timeSent),
                                                                             style:
-                                                                                GoogleFonts.roboto(fontWeight: FontWeight.w500),
+                                                                                GoogleFonts.lato(fontWeight: FontWeight.w500),
                                                                           ),
                                                                         ),
                                                                       ],

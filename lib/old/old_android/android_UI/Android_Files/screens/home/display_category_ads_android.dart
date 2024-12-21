@@ -85,12 +85,12 @@ class _DisplayCategoryAdsAndroidState
                   ),
                   Text(
                     'No Internet Connection',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   TextButton(
                     child: Text(
                       'Retry',
-                      style: GoogleFonts.roboto(color: Colors.blue),
+                      style: GoogleFonts.lato(color: Colors.blue),
                     ),
                     onPressed: () async {
                       final x = ref.refresh(connectivityProvider);
@@ -119,12 +119,12 @@ class _DisplayCategoryAdsAndroidState
                         ),
                         Text(
                           'No Internet Connection',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         TextButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(color: Colors.blue),
+                              style: GoogleFonts.lato(color: Colors.blue),
                             ),
                             onPressed: () async {
                               final x = ref.refresh(connectivityProvider);
@@ -163,7 +163,7 @@ class _DisplayCategoryAdsAndroidState
                                           const SizedBox(height: 24),
                                           Text(
                                             'No Ads Found',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.grey[800],
@@ -341,7 +341,7 @@ class _DisplayCategoryAdsAndroidState
                                         const SizedBox(height: 10),
                                         Text(
                                           'Fetching Content...',
-                                          style: GoogleFonts.roboto(
+                                          style: GoogleFonts.lato(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
                                           ),
@@ -376,8 +376,8 @@ class _DisplayCategoryAdsAndroidState
                             ),
                             Text(
                               'Loading...',
-                              style: GoogleFonts.roboto(
-                                  fontWeight: FontWeight.bold),
+                              style:
+                                  GoogleFonts.lato(fontWeight: FontWeight.bold),
                             )
                           ],
                         ),

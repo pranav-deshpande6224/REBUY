@@ -1,12 +1,9 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resell/UIPart/android_ios/model/category.dart';
 import 'package:resell/old/old_ios/ios_ui/IOS_Files/screens/sell/detail_screen.dart';
 import 'package:resell/constants/constants.dart';
-
-
 
 class Sell extends StatefulWidget {
   const Sell({super.key});
@@ -88,7 +85,7 @@ class _SellState extends State<Sell> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'What are you selling?',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -136,7 +133,7 @@ class _SellState extends State<Sell> {
                         FittedBox(
                           child: Text(
                             category.categoryTitle,
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               color: CupertinoColors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,

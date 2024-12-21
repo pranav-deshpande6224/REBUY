@@ -48,17 +48,17 @@ class AdCard extends ConsumerWidget {
                     return CupertinoAlertDialog(
                       title: Text(
                         'Alert',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       content: Text(
                         'Is this Item Sold?',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       actions: [
                         CupertinoDialogAction(
                           child: Text(
                             'No',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           onPressed: () {
                             Navigator.of(ctx).pop();
@@ -66,7 +66,7 @@ class AdCard extends ConsumerWidget {
                         ),
                         CupertinoDialogAction(
                           child: Text('Yes',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: CupertinoColors.destructiveRed,
                               )),
                           onPressed: () {
@@ -86,17 +86,17 @@ class AdCard extends ConsumerWidget {
                     return AlertDialog(
                       title: Text(
                         'Alert',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       content: Text(
                         'Is this Item Sold?',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       actions: [
                         TextButton(
                           child: Text(
                             'No',
-                            style: GoogleFonts.roboto(color: Colors.blue),
+                            style: GoogleFonts.lato(color: Colors.blue),
                           ),
                           onPressed: () {
                             Navigator.of(ctx).pop();
@@ -104,7 +104,7 @@ class AdCard extends ConsumerWidget {
                         ),
                         TextButton(
                           child: Text('Yes',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: Colors.red,
                               )),
                           onPressed: () {
@@ -142,7 +142,7 @@ class AdCard extends ConsumerWidget {
                     ),
                     Text(
                       'Mark this Product as Sold',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -235,14 +235,14 @@ class AdCard extends ConsumerWidget {
                                   ad.adTitle,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontSize: Platform.isIOS ? 18 : 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
                                   '₹ ${ad.price.toInt()}',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontSize: Platform.isIOS ? 20 : 14,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.green[700],
@@ -250,7 +250,7 @@ class AdCard extends ConsumerWidget {
                                 ),
                                 Text(
                                   getDate(ad.timestamp),
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w500,
                                   ),
                                 )

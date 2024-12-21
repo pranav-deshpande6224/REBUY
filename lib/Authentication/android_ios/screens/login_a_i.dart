@@ -90,7 +90,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
         floatingLabelStyle: const TextStyle(color: Colors.blue),
         label: Text(
           'Email',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       validator: (value) {
@@ -123,7 +123,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
               },
               child: Text(
                 !passwordProvider ? 'Show' : 'Hide',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   color: Colors.blue,
                 ),
@@ -150,7 +150,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             floatingLabelStyle: const TextStyle(color: Colors.blue),
             label: Text(
               'Password',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
           ),
           validator: (value) {
@@ -270,17 +270,17 @@ class _LoginAIState extends ConsumerState<LoginAI> {
           return CupertinoAlertDialog(
             title: Text(
               'No Internet Connection',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Please check your internet connection and try again.',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -357,7 +357,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                             },
                             child: Text(
                               'Login',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: Colors.white,
                               ),
                             ),
@@ -409,7 +409,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -464,7 +464,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   emailError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: CupertinoColors.systemRed,
                     fontSize: 16,
                   ),
@@ -496,7 +496,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -568,7 +568,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   passwordError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: CupertinoColors.systemRed,
                     fontSize: 16,
                   ),
@@ -594,7 +594,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             },
             child: Text(
               'Forget Password?',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Colors.blue,
                 fontWeight: FontWeight.w600,
               ),
@@ -618,7 +618,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             },
             child: Text(
               'Forget Password?',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: CupertinoColors.activeBlue,
@@ -646,7 +646,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
               'Or Sign in with',
-              style: GoogleFonts.roboto(fontWeight: FontWeight.w400),
+              style: GoogleFonts.lato(fontWeight: FontWeight.w400),
             ),
           ),
           const Expanded(
@@ -672,7 +672,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Text(
               'Or Sign in with',
-              style: GoogleFonts.roboto(fontWeight: FontWeight.w400),
+              style: GoogleFonts.lato(fontWeight: FontWeight.w400),
             ),
           ),
           const Expanded(
@@ -725,7 +725,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
           },
           label: Text(
             'Sign in With Google',
-            style: GoogleFonts.roboto(color: Colors.black),
+            style: GoogleFonts.lato(color: Colors.black),
           ),
         ),
       );
@@ -745,7 +745,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
               ),
               Text(
                 'Sign in With Google',
-                style: GoogleFonts.roboto(color: CupertinoColors.black),
+                style: GoogleFonts.lato(color: CupertinoColors.black),
               ),
             ],
           ),
@@ -803,7 +803,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
         children: [
           Text(
             'Don\'t have an account?',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           CupertinoButton(
             onPressed: () {
@@ -817,7 +817,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
             },
             child: Text(
               'Sign Up',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -841,7 +841,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
               children: [
                 Text(
                   'Login',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -851,7 +851,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                 ),
                 Text(
                   'Welcome Back',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 20,
                     color: CupertinoColors.activeBlue,
                     fontWeight: FontWeight.w600,
@@ -884,7 +884,7 @@ class _LoginAIState extends ConsumerState<LoginAI> {
                     },
                     child: Text(
                       'Login',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),

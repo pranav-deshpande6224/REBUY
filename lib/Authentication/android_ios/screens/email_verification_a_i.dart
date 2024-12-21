@@ -96,17 +96,17 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                   return AlertDialog(
                     title: Text(
                       "Alert",
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     content: Text(
                       "A New verification link will be sent to your email address ${widget.email}",
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     actions: [
                       TextButton(
                         child: Text(
                           "Okay",
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () {
                           resendEmailLink();
@@ -124,11 +124,11 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                     return AlertDialog(
                       title: Text(
                         'No Internet',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       content: Text(
                         'Please check your internet connection',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       actions: [
                         TextButton(
@@ -137,7 +137,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                           },
                           child: Text(
                             'Okay',
-                            style: GoogleFonts.roboto(color: Colors.blue),
+                            style: GoogleFonts.lato(color: Colors.blue),
                           ),
                         ),
                       ],
@@ -147,7 +147,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
           },
           child: Text(
             'ReSend Email',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               color: Colors.white,
             ),
           ),
@@ -166,16 +166,16 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                 context: context,
                 builder: (ctx) {
                   return CupertinoAlertDialog(
-                    title: Text("Alert", style: GoogleFonts.roboto()),
+                    title: Text("Alert", style: GoogleFonts.lato()),
                     content: Text(
                       "A New verification link will be sent to your email address ${widget.email}",
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     actions: [
                       CupertinoDialogAction(
                         child: Text(
                           "Okay",
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () {
                           resendEmailLink();
@@ -193,17 +193,17 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                   return CupertinoAlertDialog(
                     title: Text(
                       ' Alert',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     content: Text(
                       'No Internet Connection Please check your internet connection and try again',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     actions: [
                       CupertinoDialogAction(
                         child: Text(
                           "Okay",
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         onPressed: () {
                           Navigator.of(ctx).pop();
@@ -217,7 +217,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
           },
           child: Text(
             'Resend Email',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
@@ -266,7 +266,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
               ),
               Text(
                 'An Email link  sent to the mail id',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
                 ),
@@ -279,7 +279,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   widget.email,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 20,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
@@ -293,7 +293,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                 !isVerified
                     ? 'Link is for verification of your Email'
                     : "Email Successfully Verified",
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -356,7 +356,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                     ),
                     Text(
                       'An Email link  sent to the mail id',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),
@@ -369,7 +369,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         widget.email,
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontSize: 20,
                           color: CupertinoColors.activeBlue,
                           fontWeight: FontWeight.bold,
@@ -383,7 +383,7 @@ class _EmailVerificationAIState extends State<EmailVerificationAI> {
                       !isVerified
                           ? 'Link is for verification of your Email'
                           : "Email Successfully Verified",
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 16,
                         color: CupertinoColors.black,
                         fontWeight: FontWeight.w500,

@@ -26,7 +26,7 @@ class AdUploaded extends StatelessWidget {
                     ),
                     Text(
                       'Your Ad Posted Successfully',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -47,7 +47,7 @@ class AdUploaded extends StatelessWidget {
                       color: CupertinoColors.activeBlue,
                       child: Text(
                         'Continue',
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.bold,
                         ),
                       ),

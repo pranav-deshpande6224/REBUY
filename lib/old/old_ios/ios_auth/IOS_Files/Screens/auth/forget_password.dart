@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,11 +68,11 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
               return CupertinoAlertDialog(
                 title: Text(
                   'No Internet',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Please check your internet connection',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   CupertinoDialogAction(
@@ -82,7 +81,7 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                     },
                     child: Text(
                       'Okay',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                   )
                 ],
@@ -121,9 +120,9 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                   child: Container(
                     height: 40,
                     width: 40,
-                    decoration:const BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Constants.white, shape: BoxShape.circle),
-                    child:const Icon(
+                    child: const Icon(
                       CupertinoIcons.back,
                       size: 30,
                       color: CupertinoColors.activeBlue,
@@ -135,7 +134,7 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                 ),
                 Text(
                   'Forget Password',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
                   ),
@@ -164,7 +163,7 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                               children: [
                                 TextSpan(
                                   text: '*',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.bold,
                                     color: CupertinoColors.systemRed,
                                   ),
@@ -217,7 +216,7 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                             padding: const EdgeInsets.only(top: 8),
                             child: Text(
                               emailError,
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 color: CupertinoColors.systemRed,
                                 fontSize: 16,
                               ),
@@ -238,7 +237,7 @@ class _ForgetPasswordState extends ConsumerState<ForgetPassword> {
                     },
                     child: Text(
                       'Submit',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                       ),

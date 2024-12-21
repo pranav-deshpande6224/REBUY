@@ -102,7 +102,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
         SnackBar(
           content: Text(
             'Something went wrong',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
         ),
       );
@@ -113,11 +113,11 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
           return CupertinoAlertDialog(
             title: Text(
               'Alert',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               error,
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
@@ -126,7 +126,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                 },
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
               ),
             ],
@@ -169,7 +169,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
             SnackBar(
               content: Text(
                 'No Internet',
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
             ),
           );
@@ -195,7 +195,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                     ),
                     Text(
                       'Loading...',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     )
                   ],
                 ),
@@ -209,7 +209,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
               return CupertinoAlertDialog(
                 title: Text(
                   'No Internet',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   CupertinoDialogAction(
@@ -218,7 +218,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                     },
                     child: Text(
                       'Okay',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                   )
                 ],
@@ -267,7 +267,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     handler.newUser.user?.displayName ?? '',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 22,
                       fontWeight: FontWeight.w500,
                     ),
@@ -339,7 +339,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                         ),
                         title: Text(
                           obj.title,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -358,10 +358,10 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                                   builder: (ctx) {
                                     return CupertinoAlertDialog(
                                       title: Text('Alert',
-                                          style: GoogleFonts.roboto()),
+                                          style: GoogleFonts.lato()),
                                       content: Text(
                                         'Are you sure want to Logout',
-                                        style: GoogleFonts.roboto(),
+                                        style: GoogleFonts.lato(),
                                       ),
                                       actions: [
                                         CupertinoDialogAction(
@@ -370,7 +370,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                                           },
                                           child: Text(
                                             'No',
-                                            style: GoogleFonts.roboto(),
+                                            style: GoogleFonts.lato(),
                                           ),
                                         ),
                                         CupertinoDialogAction(
@@ -380,7 +380,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                                           },
                                           child: Text(
                                             'Yes',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               color: CupertinoColors.systemRed,
                                             ),
                                           ),
@@ -393,7 +393,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
                             },
                             title: Text(
                               obj.title,
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -437,7 +437,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'My Account',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: content(),
@@ -452,7 +452,7 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
         centerTitle: true,
         title: Text(
           'My Account',
-          style: GoogleFonts.roboto(fontSize: 15, fontWeight: FontWeight.bold),
+          style: GoogleFonts.lato(fontSize: 15, fontWeight: FontWeight.bold),
         ),
       ),
       body: content(),

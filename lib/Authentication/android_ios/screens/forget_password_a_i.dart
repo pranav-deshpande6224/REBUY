@@ -76,17 +76,17 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
           return CupertinoAlertDialog(
             title: Text(
               'No Internet Connection',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             content: Text(
               'Please check your internet connection and try again.',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               CupertinoDialogAction(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 onPressed: () {
                   Navigator.of(ctx).pop();
@@ -183,7 +183,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
       decoration: InputDecoration(
         label: Text(
           'Email',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
         labelStyle: const TextStyle(color: Colors.black),
         floatingLabelStyle: const TextStyle(color: Colors.blue),
@@ -290,7 +290,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
                   children: [
                     TextSpan(
                       text: '*',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontWeight: FontWeight.bold,
                         color: CupertinoColors.systemRed,
                       ),
@@ -346,7 +346,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
                   emailError,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: CupertinoColors.systemRed,
                     fontSize: 16,
                   ),
@@ -387,7 +387,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
           },
           child: Text(
             'Submit',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
@@ -436,7 +436,7 @@ class _ForgetPasswordAIState extends ConsumerState<ForgetPasswordAI> {
                   ),
                   Text(
                     'Forget Password',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                     ),

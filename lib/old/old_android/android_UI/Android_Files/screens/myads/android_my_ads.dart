@@ -59,7 +59,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                     },
                     child: Text(
                       'OK',
-                      style: GoogleFonts.roboto(color: Colors.blue),
+                      style: GoogleFonts.lato(color: Colors.blue),
                     ),
                   ),
                 ],
@@ -121,11 +121,11 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                 return AlertDialog(
                   title: Text(
                     'Alert',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   content: Text(
                     e.toString(),
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                   actions: [
                     TextButton(
@@ -134,7 +134,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                       },
                       child: Text(
                         'Okay',
-                        style: GoogleFonts.roboto(color: Colors.blue),
+                        style: GoogleFonts.lato(color: Colors.blue),
                       ),
                     )
                   ],
@@ -167,7 +167,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
         elevation: 10,
         title: Text(
           'My Ads',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       body: SafeArea(
@@ -185,12 +185,12 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     TextButton(
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(color: Colors.blue),
+                        style: GoogleFonts.lato(color: Colors.blue),
                       ),
                       onPressed: () async {
                         final x = ref.refresh(connectivityProvider);
@@ -220,12 +220,12 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           TextButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(color: Colors.blue),
+                              style: GoogleFonts.lato(color: Colors.blue),
                             ),
                             onPressed: () async {
                               final x = ref.refresh(connectivityProvider);
@@ -264,7 +264,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                                               const SizedBox(height: 24),
                                               Text(
                                                 'No Active Ads',
-                                                style: GoogleFonts.roboto(
+                                                style: GoogleFonts.lato(
                                                   fontSize: 24,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.grey[800],
@@ -274,7 +274,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                                               Text(
                                                 'You don’t have any active ads yet. Sell one now!',
                                                 textAlign: TextAlign.center,
-                                                style: GoogleFonts.roboto(
+                                                style: GoogleFonts.lato(
                                                   fontSize: 16,
                                                   color: Colors.grey[600],
                                                 ),
@@ -314,7 +314,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                                             const SizedBox(height: 10),
                                             Text(
                                               'Fetching Content...',
-                                              style: GoogleFonts.roboto(
+                                              style: GoogleFonts.lato(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.grey[700],
@@ -349,7 +349,7 @@ class _AndroidMyadsState extends ConsumerState<AndroidMyads> {
                                 ),
                                 Text(
                                   'Loading...',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 )

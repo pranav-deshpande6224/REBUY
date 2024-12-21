@@ -47,7 +47,7 @@ class DetailScreenAI extends StatelessWidget {
             ),
             title: Text(
               subCategoryList[index],
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
           );
         },
@@ -89,7 +89,7 @@ class DetailScreenAI extends StatelessWidget {
             },
             title: Text(
               subCategoryList[index],
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
           );
         },
@@ -120,7 +120,7 @@ class DetailScreenAI extends StatelessWidget {
           backgroundColor: Colors.grey[200],
           title: Text(
             categoryName,
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
@@ -132,7 +132,7 @@ class DetailScreenAI extends StatelessWidget {
     if (Platform.isIOS) {
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          middle: Text(categoryName, style: GoogleFonts.roboto()),
+          middle: Text(categoryName, style: GoogleFonts.lato()),
           previousPageTitle: '',
         ),
         child: body(context),

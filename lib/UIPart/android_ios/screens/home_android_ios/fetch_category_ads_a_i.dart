@@ -29,10 +29,10 @@ class FetchCategoryAdsAI extends StatelessWidget {
           elevation: 3,
           backgroundColor: Colors.grey[200],
           title: Text(
-           categoryName==Constants.other? 'Other' : subCategoryName,
+            categoryName == Constants.other ? 'Other' : subCategoryName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
@@ -45,7 +45,7 @@ class FetchCategoryAdsAI extends StatelessWidget {
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
           middle: Text(
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
             subCategoryName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

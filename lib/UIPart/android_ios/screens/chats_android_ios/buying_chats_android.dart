@@ -88,11 +88,11 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
               return AlertDialog(
                 title: Text(
                   'Error',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Something went wrong unable to delete',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   TextButton(
@@ -101,7 +101,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                     },
                     child: Text(
                       'Okay',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                   ),
                 ],
@@ -130,12 +130,12 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(color: Colors.blue),
+              style: GoogleFonts.lato(color: Colors.blue),
             ),
             onPressed: () async {
               final _ = await ref.refresh(connectivityProvider.future);
@@ -173,7 +173,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
         children: [
           Text(
             'Something went wrong',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           const SizedBox(
             height: 5,
@@ -186,7 +186,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
             },
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Colors.blue,
               ),
             ),
@@ -237,7 +237,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                       ),
                                       Text(
                                         'No Buying Chats',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                             color: Colors.blue),
                                       ),
                                     ],
@@ -367,7 +367,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style: GoogleFonts.roboto(
+                                                  style: GoogleFonts.lato(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 16,
                                                   ),
@@ -377,7 +377,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style: GoogleFonts.roboto(
+                                                  style: GoogleFonts.lato(
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 13,
                                                     color: Colors.blue,
@@ -411,7 +411,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                 : Text(
                                                     obj.lastMessage,
                                                     maxLines: 1,
-                                                    style: GoogleFonts.roboto(),
+                                                    style: GoogleFonts.lato(),
                                                     overflow:
                                                         TextOverflow.ellipsis,
                                                   ),
@@ -422,7 +422,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                               children: [
                                                 Text(
                                                   getTime(obj.timeSent),
-                                                  style: GoogleFonts.roboto(
+                                                  style: GoogleFonts.lato(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),

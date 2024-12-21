@@ -76,7 +76,7 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
             ? const SizedBox()
             : Text(
                 error,
-                style: GoogleFonts.roboto(color: Colors.red[400]),
+                style: GoogleFonts.lato(color: Colors.red[400]),
               );
       },
     );
@@ -97,7 +97,7 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
         child: Center(
           child: Text(
             text,
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.lato(
               fontWeight: index == selectedIndex ? FontWeight.bold : null,
               color: index == selectedIndex ? Colors.white : null,
             ),
@@ -195,7 +195,7 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   error,
-                  style: GoogleFonts.roboto(color: Colors.red[400]),
+                  style: GoogleFonts.lato(color: Colors.red[400]),
                 ),
               );
       },
@@ -447,14 +447,14 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
                           ),
                           Text(
                             'Press + Button to add images',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               fontSize: 18,
                               color: Colors.grey,
                             ),
                           ),
                           Text(
                             'Upload Atmost 3 images',
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.lato(
                               fontSize: 18,
                               color: Colors.grey,
                             ),
@@ -736,16 +736,16 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
-            title: Text('Alert', style: GoogleFonts.roboto()),
+            title: Text('Alert', style: GoogleFonts.lato()),
             content: Text(
               'You are Uploading more than 3 images',
-              style: GoogleFonts.roboto(),
+              style: GoogleFonts.lato(),
             ),
             actions: [
               TextButton(
                 child: Text(
                   'Okay',
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.lato(
                     color: Colors.blue,
                   ),
                 ),
@@ -827,12 +827,12 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: Text('Alert', style: GoogleFonts.roboto()),
-          content: Text('Please select atleast 1 image',
-              style: GoogleFonts.roboto()),
+          title: Text('Alert', style: GoogleFonts.lato()),
+          content:
+              Text('Please select atleast 1 image', style: GoogleFonts.lato()),
           actions: [
             TextButton(
-              child: Text('Okay', style: GoogleFonts.roboto()),
+              child: Text('Okay', style: GoogleFonts.lato()),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -938,7 +938,7 @@ class _ProductGetInfoAndroidState extends ConsumerState<ProductGetInfoAndroid> {
         ),
         label: Text(
           'Ad Title',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
         labelStyle: const TextStyle(color: Colors.black),
         floatingLabelStyle: const TextStyle(color: Colors.blue),

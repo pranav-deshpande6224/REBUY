@@ -124,12 +124,12 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -167,7 +167,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -187,7 +187,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -213,7 +213,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
             const SizedBox(height: 16),
             Text(
               'No Ads Found',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.blueGrey[800],
@@ -263,7 +263,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
               const SizedBox(height: 10),
               Text(
                 'Fetching Content...',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
@@ -396,7 +396,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                 children: [
                   Text(
                     '₹ ${ad.price}',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Colors.green[700],
@@ -407,7 +407,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                     ad.adTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 16,
                       color: Colors.black87,
                     ),
@@ -427,7 +427,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                       const SizedBox(width: 4),
                       Text(
                         ad.postedBy,
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
                         ),
@@ -437,7 +437,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                   const SizedBox(height: 4),
                   Text(
                     getDate(ad.timestamp),
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.w500,
                       color: Colors.black87,
                     ),
@@ -634,7 +634,7 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
         children: [
           Text(
             'Something went wrong',
-            style: GoogleFonts.roboto(color: Colors.black),
+            style: GoogleFonts.lato(color: Colors.black),
           ),
           const SizedBox(height: 10),
           Platform.isAndroid
@@ -651,14 +651,13 @@ class _DisplayCategoryAdsAIState extends ConsumerState<DisplayCategoryAdsAI> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
               : CupertinoButton(
                   child: Text(
                     'Retry',
-                    style:
-                        GoogleFonts.roboto(color: CupertinoColors.activeBlue),
+                    style: GoogleFonts.lato(color: CupertinoColors.activeBlue),
                   ),
                   onPressed: () async {
                     final x = ref.refresh(connectivityProvider);

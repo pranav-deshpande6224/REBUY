@@ -70,11 +70,11 @@ class _ProfileState extends ConsumerState<Profile> {
             return CupertinoAlertDialog(
               title: Text(
                 'No Internet',
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               content: Text(
                 'Please check your internet connection and try again',
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               ),
               actions: [
                 CupertinoDialogAction(
@@ -83,7 +83,7 @@ class _ProfileState extends ConsumerState<Profile> {
                   },
                   child: Text(
                     'Okay',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                 )
               ],
@@ -113,7 +113,7 @@ class _ProfileState extends ConsumerState<Profile> {
               ),
               Text(
                 'Loading...',
-                style: GoogleFonts.roboto(),
+                style: GoogleFonts.lato(),
               )
             ],
           ),
@@ -128,7 +128,7 @@ class _ProfileState extends ConsumerState<Profile> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'My Account',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -159,7 +159,7 @@ class _ProfileState extends ConsumerState<Profile> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       handler.newUser.user?.displayName ?? '',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.lato(
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
                       ),
@@ -210,7 +210,7 @@ class _ProfileState extends ConsumerState<Profile> {
                         ),
                         title: Text(
                           obj.title,
-                          style: GoogleFonts.roboto(
+                          style: GoogleFonts.lato(
                             fontWeight: FontWeight.w500,
                           ),
                         ),

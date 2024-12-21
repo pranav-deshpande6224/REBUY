@@ -134,7 +134,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                 ),
                 Text(
                   'No Internet Connection',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 TextButton(
                   onPressed: () async {
@@ -146,7 +146,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(),
+                    style: GoogleFonts.lato(),
                   ),
                 )
               ],
@@ -167,12 +167,12 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                         ),
                         Text(
                           'No Internet Connection',
-                          style: GoogleFonts.roboto(),
+                          style: GoogleFonts.lato(),
                         ),
                         TextButton(
                           child: Text(
                             'Retry',
-                            style: GoogleFonts.roboto(color: Colors.blue),
+                            style: GoogleFonts.lato(color: Colors.blue),
                           ),
                           onPressed: () async {
                             final x = ref.refresh(connectivityProvider);
@@ -200,7 +200,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
                                   'Browse Categories',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
                                   ),
@@ -261,8 +261,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                             TextAlign.center,
                                                         categoryList[index]
                                                             .categoryTitle,
-                                                        style:
-                                                            GoogleFonts.roboto(
+                                                        style: GoogleFonts.lato(
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontSize: 14,
@@ -287,7 +286,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
                                   'Fresh Recomendations',
-                                  style: GoogleFonts.roboto(
+                                  style: GoogleFonts.lato(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
                                   ),
@@ -311,7 +310,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Text(
                                     'Browse Categories',
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
                                     ),
@@ -368,8 +367,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                             TextAlign.center,
                                                         categoryList[index]
                                                             .categoryTitle,
-                                                        style:
-                                                            GoogleFonts.roboto(
+                                                        style: GoogleFonts.lato(
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontSize: 14,
@@ -394,7 +392,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                       const EdgeInsets.only(left: 10, top: 10),
                                   child: Text(
                                     'Fresh Recomendations',
-                                    style: GoogleFonts.roboto(
+                                    style: GoogleFonts.lato(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 20,
                                     ),
@@ -447,7 +445,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                 boxShadow: [
                                                   BoxShadow(
                                                     color: Colors.grey
-                                                        .withValues(alpha:0.3),
+                                                        .withValues(alpha: 0.3),
                                                     blurRadius: 10,
                                                     offset: const Offset(0, 5),
                                                   )
@@ -505,8 +503,8 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                                                   LinearGradient(
                                                                 colors: [
                                                                   Colors.black
-                                                                      .withValues(alpha: 
-                                                                    0.08,
+                                                                      .withValues(
+                                                                    alpha: 0.08,
                                                                   ),
                                                                   Colors
                                                                       .transparent,
@@ -609,7 +607,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                                           ),
                                           Text(
                                             'Fetching Content...',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontWeight: FontWeight.bold,
                                             ),
                                           )
@@ -641,7 +639,7 @@ class _DisplayHomeAndroidState extends ConsumerState<DisplayHomeAndroid> {
                             ),
                             Text(
                               'Loading...',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.lato(
                                 fontWeight: FontWeight.bold,
                               ),
                             )

@@ -106,12 +106,12 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
           ),
           Text(
             'No Internet Connection',
-            style: GoogleFonts.roboto(),
+            style: GoogleFonts.lato(),
           ),
           TextButton(
             child: Text(
               'Retry',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 color: Platform.isAndroid
                     ? Colors.blue
                     : Platform.isIOS
@@ -146,7 +146,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -166,7 +166,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
             ),
             Text(
               'Loading...',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontWeight: FontWeight.bold,
               ),
             )
@@ -182,7 +182,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
       child: Column(
         children: [
           Text('Something went wrong',
-              style: GoogleFonts.roboto(color: Colors.blue)),
+              style: GoogleFonts.lato(color: Colors.blue)),
           const SizedBox(
             height: 10,
           ),
@@ -199,7 +199,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
               : CupertinoButton(
@@ -214,7 +214,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                   },
                   child: Text(
                     'Retry',
-                    style: GoogleFonts.roboto(color: Colors.blue),
+                    style: GoogleFonts.lato(color: Colors.blue),
                   ),
                 )
         ],
@@ -236,7 +236,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
             const SizedBox(height: 24),
             Text(
               'No Favourite Ads',
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.lato(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[800],
@@ -351,7 +351,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                 children: [
                   Text(
                     '₹ ${ad.price}',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Colors.green[700],
@@ -362,7 +362,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                     ad.adTitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontSize: 16,
                       color: Colors.black87,
                     ),
@@ -382,7 +382,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                       const SizedBox(width: 4),
                       Text(
                         ad.postedBy,
-                        style: GoogleFonts.roboto(
+                        style: GoogleFonts.lato(
                           fontWeight: FontWeight.w600,
                           color: Colors.black87,
                         ),
@@ -392,7 +392,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                   const SizedBox(height: 4),
                   Text(
                     getDate(ad.timestamp),
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.w500,
                       color: Colors.black87,
                     ),
@@ -441,7 +441,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
               const SizedBox(height: 10),
               Text(
                 'Fetching Content...',
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[700],
@@ -488,7 +488,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
         backgroundColor: Colors.grey[200],
         title: Text(
           'Your Favourites',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       body: SafeArea(

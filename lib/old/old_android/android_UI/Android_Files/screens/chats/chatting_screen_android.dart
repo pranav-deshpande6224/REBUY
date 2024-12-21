@@ -98,7 +98,7 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
 
   Future<void> sendMessageToDb(
       String message, Item item, MessageReply? messageReply) async {
-   // chatController.text = '';
+    // chatController.text = '';
     ref.read(messageReplyProvider.notifier).update((state) => null);
     ref.read(activeInactiveSendProvider.notifier).reset();
     if (handler.newUser.user != null) {
@@ -214,11 +214,11 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
               return AlertDialog(
                 title: Text(
                   'Error',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Failed to send message',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   TextButton(
@@ -227,7 +227,7 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
                     },
                     child: Text(
                       'Okay',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                   )
                 ],
@@ -241,11 +241,11 @@ class _ChattingScreenAndroidState extends ConsumerState<ChattingScreenAndroid> {
               return CupertinoAlertDialog(
                 title: Text(
                   'Error',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 content: Text(
                   'Failed to send message',
-                  style: GoogleFonts.roboto(),
+                  style: GoogleFonts.lato(),
                 ),
                 actions: [
                   CupertinoDialogAction(

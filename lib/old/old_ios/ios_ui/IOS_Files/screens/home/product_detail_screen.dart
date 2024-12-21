@@ -53,7 +53,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
           Text(
             item.brand,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -72,7 +72,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
           Text(
             item.tabletType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -91,7 +91,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
           Text(
             item.chargerType,
-            style: GoogleFonts.roboto(fontSize: 22),
+            style: GoogleFonts.lato(fontSize: 22),
           ),
         ],
       );
@@ -107,7 +107,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       navigationBar: CupertinoNavigationBar(
         middle: Text(
           'Product Details',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.lato(),
         ),
       ),
       child: SafeArea(
@@ -125,12 +125,12 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     ),
                     Text(
                       'No Internet Connection',
-                      style: GoogleFonts.roboto(),
+                      style: GoogleFonts.lato(),
                     ),
                     CupertinoButton(
                       child: Text(
                         'Retry',
-                        style: GoogleFonts.roboto(),
+                        style: GoogleFonts.lato(),
                       ),
                       onPressed: () async {
                         // To Do Something
@@ -151,19 +151,19 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                         const Icon(
+                          const Icon(
                             CupertinoIcons.wifi_slash,
                             color: CupertinoColors.activeBlue,
                             size: 40,
                           ),
                           Text(
                             'No Internet Connection',
-                            style: GoogleFonts.roboto(),
+                            style: GoogleFonts.lato(),
                           ),
                           CupertinoButton(
                             child: Text(
                               'Retry',
-                              style: GoogleFonts.roboto(),
+                              style: GoogleFonts.lato(),
                             ),
                             onPressed: () async {
                               // To Do Something
@@ -187,20 +187,19 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                              const  CupertinoActivityIndicator(),
-                              const  SizedBox(
+                                const CupertinoActivityIndicator(),
+                                const SizedBox(
                                   height: 10,
                                 ),
                                 Text(
                                   'Loading...',
-                                  style: GoogleFonts.roboto(),
+                                  style: GoogleFonts.lato(),
                                 )
                               ],
                             ),
                           );
                         }
                         if (snapshot.hasError) {
-                         
                           return const Center(
                             child: Text("Something went wrong"),
                           );
@@ -307,7 +306,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ),
                                       Text(
                                         '₹ ${item.price.toInt()}',
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           color: Colors.green[700],
                                           fontSize: 25,
                                           fontWeight: FontWeight.bold,
@@ -318,7 +317,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ),
                                       Text(
                                         item.adTitle,
-                                        style: GoogleFonts.roboto(
+                                        style: GoogleFonts.lato(
                                           fontSize: 20,
                                         ),
                                       ),
@@ -335,7 +334,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ),
                                       Text(
                                         item.adDescription,
-                                        style: GoogleFonts.roboto(fontSize: 22),
+                                        style: GoogleFonts.lato(fontSize: 22),
                                       ),
                                       const SizedBox(
                                         height: 10,
@@ -363,7 +362,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                                     item.userid
                                                 ? 'You'
                                                 : item.postedBy,
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 22,
                                             ),
                                           ),
@@ -378,7 +377,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                         children: [
                                           Text(
                                             'Posted At',
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600,
                                               color: CupertinoColors.activeBlue,
@@ -386,7 +385,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                           ),
                                           Text(
                                             getDate(item.timestamp),
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 20,
                                             ),
@@ -434,7 +433,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                                 }
                                               : null,
                                           child: Text(
-                                            style: GoogleFonts.roboto(
+                                            style: GoogleFonts.lato(
                                               fontWeight: FontWeight.bold,
                                               color: item.isAvailable
                                                   ? CupertinoColors.white
@@ -457,14 +456,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 error: (error, _) => Center(
                   child: Text('Error: $error'),
                 ),
-                loading: () =>const Center(
+                loading: () => const Center(
                   child: CupertinoActivityIndicator(),
                 ),
               );
             }
           },
           error: (error, _) => Center(child: Text('Error: $error')),
-          loading: () =>const Center(child: CupertinoActivityIndicator()),
+          loading: () => const Center(child: CupertinoActivityIndicator()),
         ),
       ),
     );
