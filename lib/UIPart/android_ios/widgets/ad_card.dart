@@ -226,7 +226,7 @@ class AdCard extends ConsumerWidget {
                         Expanded(
                           flex: 7,
                           child: Padding(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.only(left: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -237,23 +237,17 @@ class AdCard extends ConsumerWidget {
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.lato(
                                     fontSize: Platform.isIOS ? 18 : 15,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                                 Text(
                                   '₹ ${ad.price.toInt()}',
                                   style: GoogleFonts.lato(
                                     fontSize: Platform.isIOS ? 20 : 14,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                     color: Colors.green[700],
                                   ),
                                 ),
-                                Text(
-                                  getDate(ad.timestamp),
-                                  style: GoogleFonts.lato(
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
                               ],
                             ),
                           ),

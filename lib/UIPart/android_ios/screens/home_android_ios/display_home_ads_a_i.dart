@@ -493,8 +493,8 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: CupertinoColors.systemGrey4,
-                      width: 1.5,
+                      color: const Color.fromARGB(255, 200, 179, 172),
+                      width: 0.8,
                     ),
                     borderRadius: BorderRadius.circular(15),
                   ),
@@ -588,7 +588,7 @@ class _DisplayHomeAdsAIState extends ConsumerState<DisplayHomeAdsAI> {
                                     style: GoogleFonts.lato(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black87,
+                                      color: Colors.black,
                                     ),
                                   ),
                                   Text(

@@ -47,7 +47,7 @@ class HomeAI extends StatelessWidget {
         backgroundColor: Colors.grey[200],
         title: Image.asset(
           'assets/images/branding6.png',
-          height: 50,
+          height: 30,
           width: 150,
         ),
       ),
@@ -60,7 +60,7 @@ class HomeAI extends StatelessWidget {
       navigationBar: CupertinoNavigationBar(
         middle: Image.asset(
           'assets/images/branding6.png',
-          height: 50,
+          height: 30,
           width: 150,
         ),
       ),
