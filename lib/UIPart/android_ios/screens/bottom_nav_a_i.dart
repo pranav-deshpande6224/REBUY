@@ -135,7 +135,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI>
   }
 
   void getNotifications() {
-    NotificationService().initNotifications();
+    NotificationService().initNotifications(context);
     NotificationService().initLocalNotificationsAndroid(context, ref);
   }
 
