@@ -77,6 +77,9 @@ class _ProfileAIState extends ConsumerState<ProfileAI> {
       ref.read(showCatAdsProvider.notifier).resetState();
       ref.read(favouriteAdsProvider.notifier).resetState();
       ref.read(globalRecIdAdIdProvider.notifier).clearAdId();
+      ref.read(bottomNavIndexProvider.notifier).state = 0;
+      ref.read(topNavIndexProvider.notifier).state = 0;
+      ref.read(chatNotificationProvider.notifier).clearNotificationData();
       if (!signOutContext.mounted) return;
       Navigator.pop(signOutContext);
       moveToLogin();

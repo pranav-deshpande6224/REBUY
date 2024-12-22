@@ -294,7 +294,7 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
           border: Border.all(
-            color: Colors.grey,
+            color: const Color.fromARGB(255, 200, 179, 172),
             width: 1,
           ),
           boxShadow: const [
@@ -352,8 +352,8 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                   Text(
                     '₹ ${ad.price}',
                     style: GoogleFonts.lato(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
                       color: Colors.green[700],
                     ),
                   ),
@@ -377,25 +377,17 @@ class _FavouriteScreenState extends ConsumerState<FavouriteScreen> {
                                 ? CupertinoIcons.person
                                 : null,
                         size: 16,
-                        color: Colors.black87,
+                        color: Colors.brown[400],
                       ),
                       const SizedBox(width: 4),
                       Text(
                         ad.postedBy,
                         style: GoogleFonts.lato(
                           fontWeight: FontWeight.w600,
-                          color: Colors.black87,
+                          color: Colors.brown[400],
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    getDate(ad.timestamp),
-                    style: GoogleFonts.lato(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
                   ),
                 ],
               ),

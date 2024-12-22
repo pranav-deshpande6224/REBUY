@@ -13,7 +13,6 @@ import 'package:resell/UIPart/android_ios/screens/profile_android_ios/profile_a_
 import 'package:resell/UIPart/android_ios/screens/sell_android_ios/sell_a_i.dart';
 import 'package:resell/notifications/notification_service.dart';
 
-
 class BottomNavAI extends ConsumerStatefulWidget {
   const BottomNavAI({super.key});
 
@@ -21,9 +20,9 @@ class BottomNavAI extends ConsumerStatefulWidget {
   ConsumerState<BottomNavAI> createState() => _BottomNavAIState();
 }
 
-class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingObserver {
+class _BottomNavAIState extends ConsumerState<BottomNavAI>
+    with WidgetsBindingObserver {
   late AuthHandler handler;
-  int currentIndex = 0;
   final screens = const [
     HomeAI(),
     ChatsAI(),
@@ -41,9 +40,31 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
     makingOnline();
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       if (message.data['navigate_to'] == 'chats') {
-        setState(() {
-          currentIndex = 1;
-        });
+        ref.read(bottomNavIndexProvider.notifier).state = 1;
+        final String postedBy = message.data['postedBy'];
+        final String adId = message.data['adId'];
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        int index = ref.read(bottomNavIndexProvider);
+        if (index != 1) {
+          ref.read(bottomNavIndexProvider.notifier).state = 1;
+          ref
+              .read(chatNotificationProvider.notifier)
+              .setNotificationData(postedBy, adId);
+          if (postedBy == handler.newUser.user!.uid) {
+            ref.read(topNavIndexProvider.notifier).state = 1;
+          } else {
+            ref.read(topNavIndexProvider.notifier).state = 0;
+          }
+        } else {
+          ref
+              .read(chatNotificationProvider.notifier)
+              .setNotificationData(postedBy, adId);
+          if (postedBy == handler.newUser.user!.uid) {
+            ref.read(topNavIndexProvider.notifier).state = 1;
+          } else {
+            ref.read(topNavIndexProvider.notifier).state = 0;
+          }
+        }
       }
     });
     onforegroundNotification();
@@ -56,10 +77,33 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
         await FirebaseMessaging.instance.getInitialMessage();
     if (message != null) {
       if (message.data['navigate_to'] == 'chats') {
-        setState(() {
-          currentIndex = 1;
+        ref.read(bottomNavIndexProvider.notifier).state = 1;
+        final String postedBy = message.data['postedBy'];
+        final String adId = message.data['adId'];
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        int index = ref.read(bottomNavIndexProvider);
+        if (index != 1) {
+          ref.read(bottomNavIndexProvider.notifier).state = 1;
+          ref
+              .read(chatNotificationProvider.notifier)
+              .setNotificationData(postedBy, adId);
+          if (postedBy == handler.newUser.user!.uid) {
+            ref.read(topNavIndexProvider.notifier).state = 1;
+          } else {
+            ref.read(topNavIndexProvider.notifier).state = 0;
+          }
           message = null;
-        });
+        } else {
+          ref
+              .read(chatNotificationProvider.notifier)
+              .setNotificationData(postedBy, adId);
+          if (postedBy == handler.newUser.user!.uid) {
+            ref.read(topNavIndexProvider.notifier).state = 1;
+          } else {
+            ref.read(topNavIndexProvider.notifier).state = 0;
+          }
+          message = null;
+        }
       }
     }
   }
@@ -69,18 +113,20 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
       (RemoteMessage message) {
         if (message.notification != null) {
           Map<String, dynamic> data = message.data;
-          print(message.data);
-          final msgSentById = data['messageSentById'];
-          final recId_adId = data['recId_adId'];
+          final String msgSentById = data['messageSentById'];
+          final String recId_adId = data['recId_adId'];
+          final String postedBy = data['postedBy'];
+          final String adId = data['adId'];
           final getRecId_adId = ref.read(globalRecIdAdIdProvider);
-          print('the recid_adId from notification is $recId_adId');
-          print('the recid_aid from provider is $getRecId_adId');
-          if (msgSentById != handler.newUser.user!.uid && getRecId_adId
-               != recId_adId) {
+          if (msgSentById != handler.newUser.user!.uid &&
+              getRecId_adId != recId_adId) {
             NotificationService().showNotification(
               title: message.notification!.title ?? 'New Message',
               body: message.notification!.body ?? '',
-              payload: jsonEncode({}),
+              payload: jsonEncode({
+                'postedBy': postedBy,
+                'adId': adId,
+              }),
             );
           }
         }
@@ -90,7 +136,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
 
   void getNotifications() {
     NotificationService().initNotifications();
-    NotificationService().initLocalNotificationsAndroid();
+    NotificationService().initLocalNotificationsAndroid(context, ref);
   }
 
   void makingOnline() async {
@@ -120,6 +166,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
   }
 
   Widget android() {
+    final currentIndex = ref.watch(bottomNavIndexProvider);
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
@@ -131,9 +178,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
         unselectedItemColor: Colors.grey,
         currentIndex: currentIndex,
         onTap: (value) {
-          setState(() {
-            currentIndex = value;
-          });
+          ref.read(bottomNavIndexProvider.notifier).state = value;
         },
         items: const [
           BottomNavigationBarItem(
@@ -220,7 +265,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI> with WidgetsBindingOb
               );
             case 1:
               return CupertinoTabView(
-                builder: (context) => const ChatsAI(),
+                builder: (context) => ChatsAI(),
               );
             case 2:
               return CupertinoTabView(

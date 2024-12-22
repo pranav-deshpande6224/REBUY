@@ -9,12 +9,15 @@ import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
+import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.dart';
 import 'package:resell/UIPart/android_ios/Providers/unread_count.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chatting_screen_a_i.dart';
 
 class BuyingChatsAndroid extends ConsumerStatefulWidget {
-  const BuyingChatsAndroid({super.key});
+  const BuyingChatsAndroid({
+    super.key,
+  });
 
   @override
   ConsumerState<BuyingChatsAndroid> createState() => _BuyingChatsState();
@@ -22,11 +25,19 @@ class BuyingChatsAndroid extends ConsumerStatefulWidget {
 
 class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
   late AuthHandler handler;
-
+  final ScrollController buyingChatsScrollController = ScrollController();
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+  
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    buyingChatsScrollController.dispose();
+    super.dispose();
   }
 
   String getTime(DateTime time) {
@@ -166,6 +177,46 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
     });
   }
 
+  void scrollToTarget(List<Contact> contacts) {
+    final data = ref.read(chatNotificationProvider);
+    String? adId = data['adId'] ?? null;
+    print('ad id in scroll to target $adId');
+    if (adId != null) {
+      final index = contacts.indexWhere((contact) => contact.adId == adId);
+      print('$index that i got');
+      if (index != -1) {
+        if (buyingChatsScrollController.hasClients) {
+          double offset = index * 80;
+          buyingChatsScrollController.animateTo(
+            offset,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
+          Future.delayed(const Duration(milliseconds: 300), () {
+            final contact = contacts[index];
+            ref.read(chatNotificationProvider.notifier).clearNotificationData();
+            adId = null;
+            print("before the material page route ");
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (ctx) => ChattingScreenAI(
+                  name: contact.nameOfContact,
+                  recieverId: contact.contactId,
+                  senderId: handler.newUser.user!.uid,
+                  documentReference: contact.reference,
+                  adImageUrl: contact.adImage,
+                  adTitle: contact.adTitle,
+                  adId: contact.adId,
+                  price: contact.adPrice,
+                ),
+              ),
+            );
+          });
+        }
+      }
+    }
+  }
+
   Widget retryAgain() {
     return Center(
       child: Column(
@@ -211,6 +262,8 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                     if (!hasInternet) {
                       return netIssue();
                     } else {
+                      final notificationData =
+                          ref.watch(chatNotificationProvider);
                       return StreamBuilder(
                         stream: getContactsBuying(),
                         builder: (ctx, snapshot) {
@@ -225,7 +278,14 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                           if (snapshot.hasError) {
                             return retryAgain();
                           }
-                          return snapshot.data!.isEmpty
+                          final contacts = snapshot.data ?? [];
+                          
+                          if ( notificationData['adId']!=null && contacts.isNotEmpty ) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              scrollToTarget(contacts);
+                            });
+                          }
+                          return contacts.isEmpty
                               ? Center(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
@@ -246,6 +306,8 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                               : Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: ListView.separated(
+                                    key: _listKey,
+                                    controller: buyingChatsScrollController,
                                     itemBuilder: (ctx, index) {
                                       final obj = snapshot.data![index];
                                       return GestureDetector(
@@ -325,6 +387,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                             ],
                                           ),
                                           child: ListTile(
+                                            selectedTileColor: Colors.grey[300],
                                             leading: ClipOval(
                                               child: CachedNetworkImage(
                                                 imageUrl: obj.adImage,

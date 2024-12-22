@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:resell/Authentication/Providers/internet_provider.dart';
 import 'package:resell/Authentication/android_ios/handlers/auth_handler.dart';
 import 'package:resell/Authentication/android_ios/screens/login_a_i.dart';
+import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.dart';
 import 'package:resell/UIPart/android_ios/Providers/segmented_control_provider.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/buying_chats_android.dart';
@@ -24,61 +25,76 @@ class ChatsAI extends ConsumerStatefulWidget {
   ConsumerState<ChatsAI> createState() => _ChatsAIState();
 }
 
-class _ChatsAIState extends ConsumerState<ChatsAI> {
+class _ChatsAIState extends ConsumerState<ChatsAI> with SingleTickerProviderStateMixin{
   late AuthHandler handler;
+  late TabController _tabController;
   String ads = 'buying';
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
+    final initialIndex = ref.read(topNavIndexProvider);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: initialIndex);
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   Widget android() {
-    return DefaultTabController(
-      initialIndex: 0,
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 3,
-          backgroundColor: Colors.grey[200],
-          title: Text(
-            'Inbox',
-            style: GoogleFonts.lato(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
+    ref.listen<int>(topNavIndexProvider, (previous, next) {
+      if (_tabController.index != next) {
+        _tabController.animateTo(next);
+      }
+    });
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        elevation: 3,
+        backgroundColor: Colors.grey[200],
+        title: Text(
+          'Inbox',
+          style: GoogleFonts.lato(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: const Column(
-          children: [
-            TabBar(
-              indicatorColor: Colors.blue,
-              tabs: [
-                Tab(
-                  child: Text(
-                    'Buying',
-                    style: TextStyle(color: Colors.blue),
-                  ),
+      ),
+      body: Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            onTap: (value) {
+              ref.read(topNavIndexProvider.notifier).state = value;
+            },
+            indicatorColor: Colors.blue,
+            tabs: const [
+              Tab(
+                child: Text(
+                  'Buying',
+                  style: TextStyle(color: Colors.blue),
                 ),
-                Tab(
-                  child: Text(
-                    'Selling',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                )
+              ),
+              Tab(
+                child: Text(
+                  'Selling',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              )
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                BuyingChatsAndroid(),
+                SellingChatsAndroid(),
               ],
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  BuyingChatsAndroid(),
-                  SellingChatsAndroid(),
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
