@@ -80,7 +80,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI>
         ref.read(bottomNavIndexProvider.notifier).state = 1;
         final String postedBy = message.data['postedBy'];
         final String adId = message.data['adId'];
-        Navigator.of(context).popUntil((route) => route.isFirst);
+        // Navigator.of(context).popUntil((route) => route.isFirst);
         int index = ref.read(bottomNavIndexProvider);
         if (index != 1) {
           ref.read(bottomNavIndexProvider.notifier).state = 1;

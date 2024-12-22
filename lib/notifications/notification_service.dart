@@ -43,7 +43,7 @@ class NotificationService {
   Future<void> initLocalNotificationsAndroid(
       BuildContext context, WidgetRef ref) async {
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('logo9');
+        const AndroidInitializationSettings('n_logo');
     InitializationSettings initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
     await notificationsPlugin.initialize(
@@ -90,7 +90,7 @@ class NotificationService {
       String? payload}) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channel_id', 'channel_name',
-            importance: Importance.max, priority: Priority.high, icon: 'logo9');
+            importance: Importance.max, priority: Priority.high, icon: 'n_logo');
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
     await notificationsPlugin.show(id, title, body, notificationDetails,
