@@ -25,7 +25,8 @@ class ChatsAI extends ConsumerStatefulWidget {
   ConsumerState<ChatsAI> createState() => _ChatsAIState();
 }
 
-class _ChatsAIState extends ConsumerState<ChatsAI> with SingleTickerProviderStateMixin{
+class _ChatsAIState extends ConsumerState<ChatsAI>
+    with SingleTickerProviderStateMixin {
   late AuthHandler handler;
   late TabController _tabController;
   String ads = 'buying';
@@ -33,7 +34,8 @@ class _ChatsAIState extends ConsumerState<ChatsAI> with SingleTickerProviderStat
   void initState() {
     handler = AuthHandler.authHandlerInstance;
     final initialIndex = ref.read(topNavIndexProvider);
-    _tabController = TabController(length: 2, vsync: this, initialIndex: initialIndex);
+    _tabController =
+        TabController(length: 2, vsync: this, initialIndex: initialIndex);
     super.initState();
   }
 
@@ -45,9 +47,7 @@ class _ChatsAIState extends ConsumerState<ChatsAI> with SingleTickerProviderStat
 
   Widget android() {
     ref.listen<int>(topNavIndexProvider, (previous, next) {
-      if (_tabController.index != next) {
-        _tabController.animateTo(next);
-      }
+      _tabController.animateTo(next);
     });
     return Scaffold(
       appBar: AppBar(

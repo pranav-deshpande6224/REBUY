@@ -61,8 +61,6 @@ class NotificationService {
           ref
               .read(chatNotificationProvider.notifier)
               .setNotificationData(postedBy, adId);
-          print('posted by in init noti $postedBy');
-          print('ad id in init noti $adId');
           if (postedBy == authHandler.newUser.user!.uid) {
             print(authHandler.newUser.user!.uid);
             ref.read(topNavIndexProvider.notifier).state = 1;
@@ -73,10 +71,19 @@ class NotificationService {
           ref
               .read(chatNotificationProvider.notifier)
               .setNotificationData(postedBy, adId);
-          if (postedBy == authHandler.newUser.user!.uid) {
-            ref.read(topNavIndexProvider.notifier).state = 1;
+          if (ref.read(globalRecIdAdIdProvider) == null) {
+            if (postedBy == authHandler.newUser.user!.uid) {
+              ref.read(topNavIndexProvider.notifier).state = 1;
+            } else {
+              ref.read(topNavIndexProvider.notifier).state = 0;
+            }
           } else {
-            ref.read(topNavIndexProvider.notifier).state = 0;
+            Navigator.of(context).pop();
+            if (postedBy == authHandler.newUser.user!.uid) {
+              ref.read(topNavIndexProvider.notifier).state = 1;
+            } else {
+              ref.read(topNavIndexProvider.notifier).state = 0;
+            }
           }
         }
       },
@@ -90,7 +97,9 @@ class NotificationService {
       String? payload}) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails('channel_id', 'channel_name',
-            importance: Importance.max, priority: Priority.high, icon: 'n_logo');
+            importance: Importance.max,
+            priority: Priority.high,
+            icon: 'n_logo');
     const NotificationDetails notificationDetails =
         NotificationDetails(android: androidNotificationDetails);
     await notificationsPlugin.show(id, title, body, notificationDetails,
