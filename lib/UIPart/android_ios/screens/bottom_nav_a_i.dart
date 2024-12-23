@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:eraser/eraser.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -154,6 +155,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI>
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
+        Eraser.clearAllAppNotifications();
         await handler.changingUserToOnline();
         break;
       case AppLifecycleState.inactive:

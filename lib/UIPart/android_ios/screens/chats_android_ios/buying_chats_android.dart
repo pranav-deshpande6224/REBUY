@@ -13,6 +13,7 @@ import 'package:resell/UIPart/android_ios/Providers/check_local_notifications.da
 import 'package:resell/UIPart/android_ios/Providers/unread_count.dart';
 import 'package:resell/UIPart/android_ios/model/contact.dart';
 import 'package:resell/UIPart/android_ios/screens/chats_android_ios/chatting_screen_a_i.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BuyingChatsAndroid extends ConsumerStatefulWidget {
   const BuyingChatsAndroid({
@@ -24,20 +25,13 @@ class BuyingChatsAndroid extends ConsumerStatefulWidget {
 }
 
 class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
+  final ItemScrollController _itemScrollController = ItemScrollController();
   late AuthHandler handler;
-  final ScrollController buyingChatsScrollController = ScrollController();
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  
+
   @override
   void initState() {
     handler = AuthHandler.authHandlerInstance;
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    buyingChatsScrollController.dispose();
-    super.dispose();
   }
 
   String getTime(DateTime time) {
@@ -177,42 +171,36 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
     });
   }
 
-  void scrollToTarget(List<Contact> contacts) {
+  void scrollToTarget(List<Contact> contacts) async {
     final data = ref.read(chatNotificationProvider);
     String? adId = data['adId'] ?? null;
-    print('ad id in scroll to target $adId');
     if (adId != null) {
       final index = contacts.indexWhere((contact) => contact.adId == adId);
-      print('$index that i got');
       if (index != -1) {
-        if (buyingChatsScrollController.hasClients) {
-          double offset = index * 80;
-          buyingChatsScrollController.animateTo(
-            offset,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut,
-          );
-          Future.delayed(const Duration(milliseconds: 300), () {
-            final contact = contacts[index];
-            ref.read(chatNotificationProvider.notifier).clearNotificationData();
-            adId = null;
-            print("before the material page route ");
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (ctx) => ChattingScreenAI(
-                  name: contact.nameOfContact,
-                  recieverId: contact.contactId,
-                  senderId: handler.newUser.user!.uid,
-                  documentReference: contact.reference,
-                  adImageUrl: contact.adImage,
-                  adTitle: contact.adTitle,
-                  adId: contact.adId,
-                  price: contact.adPrice,
-                ),
+        await _itemScrollController.scrollTo(
+          index: index,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+        Future.delayed(const Duration(milliseconds: 300), () {
+          final contact = contacts[index];
+          ref.read(chatNotificationProvider.notifier).clearNotificationData();
+          adId = null;
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ChattingScreenAI(
+                name: contact.nameOfContact,
+                recieverId: contact.contactId,
+                senderId: handler.newUser.user!.uid,
+                documentReference: contact.reference,
+                adImageUrl: contact.adImage,
+                adTitle: contact.adTitle,
+                adId: contact.adId,
+                price: contact.adPrice,
               ),
-            );
-          });
-        }
+            ),
+          );
+        });
       }
     }
   }
@@ -279,8 +267,9 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                             return retryAgain();
                           }
                           final contacts = snapshot.data ?? [];
-                          
-                          if ( notificationData['adId']!=null && contacts.isNotEmpty ) {
+
+                          if (notificationData['adId'] != null &&
+                              contacts.isNotEmpty) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               scrollToTarget(contacts);
                             });
@@ -305,9 +294,8 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                 )
                               : Padding(
                                   padding: const EdgeInsets.all(10),
-                                  child: ListView.separated(
-                                    key: _listKey,
-                                    controller: buyingChatsScrollController,
+                                  child: ScrollablePositionedList.separated(
+                                    itemScrollController: _itemScrollController,
                                     itemBuilder: (ctx, index) {
                                       final obj = snapshot.data![index];
                                       return GestureDetector(
@@ -553,7 +541,7 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                                 : snapshot.data! >
                                                                         99
                                                                     ? 14
-                                                                    : 12, // Adjust the font sizes as needed.
+                                                                    : 12,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                           ),
@@ -562,7 +550,6 @@ class _BuyingChatsState extends ConsumerState<BuyingChatsAndroid> {
                                                     }
                                                   },
                                                 )
-                                                // UnreadCountCircle(docIdInsideChat: obj.id,receiverId: obj.contactId,)
                                               ],
                                             ),
                                           ),
