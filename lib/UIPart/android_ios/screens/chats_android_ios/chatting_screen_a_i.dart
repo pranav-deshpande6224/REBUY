@@ -469,17 +469,13 @@ class _ChattingScreenAIState extends ConsumerState<ChattingScreenAI>
                                           message: message.text, isMe: true),
                                     );
                               },
-                              child: AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                                child: ChatBubble(
-                                  message: message.text,
-                                  date: message.timeSent,
-                                  isSender: true,
-                                  isRead: message.isSeen,
-                                  repliedText: message.repliedMessage,
-                                  userName: message.repliedTo,
-                                ),
+                              child: ChatBubble(
+                                message: message.text,
+                                date: message.timeSent,
+                                isSender: true,
+                                isRead: message.isSeen,
+                                repliedText: message.repliedMessage,
+                                userName: message.repliedTo,
                               ),
                             );
                           }
