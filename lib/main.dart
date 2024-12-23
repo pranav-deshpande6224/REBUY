@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:eraser/eraser.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Eraser.clearAllAppNotifications();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);

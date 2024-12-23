@@ -155,7 +155,7 @@ class _BottomNavAIState extends ConsumerState<BottomNavAI>
     super.didChangeAppLifecycleState(state);
     switch (state) {
       case AppLifecycleState.resumed:
-        Eraser.clearAllAppNotifications();
+        await Eraser.clearAllAppNotifications();
         await handler.changingUserToOnline();
         break;
       case AppLifecycleState.inactive:
